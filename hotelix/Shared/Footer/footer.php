@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <footer class="bg-[--primary-color] py-5 px-4 mt-10">
+    <footer class="bg-[--primary-color] py-5 px-4">
         <section class="max-w-7xl mx-auto grid lg:grid-cols-3 md:grid-cols-2 gap-5">
             <!-- ======== footer left content ====== -->
             <div class="">
