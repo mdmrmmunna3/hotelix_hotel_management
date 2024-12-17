@@ -8,6 +8,8 @@
     <!-- tailwind css plugin cdn link (daisyui) -->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css" rel="stylesheet" type="text/css" />
 
+    <!-- ======== font awesome  link ========= -->
+    <script src="https://kit.fontawesome.com/9ce82b2c02.js" crossorigin="anonymous"></script>
     <!-- ========= tailwind css cdn link ======== -->
     <script src="https://cdn.tailwindcss.com"></script>
 
