@@ -8,11 +8,14 @@
 </head>
 
 <body>
-    <div class="swiper mySwiper overflow-hidden w-full  md:h-[500px] lg:h-[600px] h-[300px]">
+    <!-- md:h-[500px] lg:h-[600px] h-[300px] -->
+    <div class="swiper mySwiper overflow-hidden w-full">
         <div class="swiper-wrapper">
             <div class="swiper-slide">
                 <div class="relative overflow-hidden">
-                    <img src="<?php echo './hotelix/assets/banner/banner-1.jpg' ?>" loading="lazy" alt="bannerImg" />
+                    <img class="lg:h-[100%] md:h-[600px] h-[400px] w-full"
+                        src="<?php echo './hotelix/assets/banner/banner-1.jpg' ?>" loading="lazy" alt="bannerImg" />
+                    <div class="absolute inset-0 bg-black opacity-50 h-full w-full"></div>
                     <div
                         class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center leading-relaxed text-white">
                         <p class="md:text-5xl text-3xl titel ">Enjoy Your Stay</p>
@@ -38,7 +41,9 @@
 
             <div class="swiper-slide">
                 <div class="relative overflow-hidden">
-                    <img src="<?php echo './hotelix/assets/banner/banner-2.jpg' ?>" loading="lazy" alt="bannerImg" />
+                    <img class="lg:h-[100%] md:h-[600px] h-[400px] w-full"
+                        src="<?php echo './hotelix/assets/banner/banner-2.jpg' ?>" loading="lazy" alt="bannerImg" />
+                    <div class="absolute inset-0 bg-black opacity-50"></div>
                     <div
                         class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center leading-relaxed text-white">
                         <p class="md:text-5xl text-3xl titel">A memorable stay</p>
@@ -64,7 +69,9 @@
 
             <div class="swiper-slide">
                 <div class="relative overflow-hidden">
-                    <img src="<?php echo './hotelix/assets/banner/banner-3.jpg' ?>" loading="lazy" alt="bannerImg" />
+                    <img class="lg:h-[100%] md:h-[600px] h-[400px] w-full"
+                        src="<?php echo './hotelix/assets/banner/banner-3.jpg' ?>" loading="lazy" alt="bannerImg" />
+                    <div class="absolute inset-0 bg-black opacity-50"></div>
                     <div
                         class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center leading-relaxed text-white">
                         <p class="md:text-5xl text-3xl titel">The budget rooms</p>

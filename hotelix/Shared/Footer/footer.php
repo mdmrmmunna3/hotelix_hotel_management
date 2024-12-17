@@ -28,7 +28,7 @@
                     molestias temporibus
                     ipsam.
                 </p>
-                <div class="readbtn mt-2">
+                <div class="readbtn mt-2 text-center md:text-start">
                     <!-- <a href="#" class="px-5 py-2 border-2 rounded-lg border-blue-500">Read More</a> -->
                     <a href="#"
                         class="relative inline-block px-5 py-2 border-2 rounded-lg border-blue-500 hover:text-white overflow-hidden group">
@@ -78,7 +78,7 @@
         </section>
     </footer>
     <!-- == privacy == -->
-    <div class="grid grid-cols-2  py-3 px-10 bg-gray-800 text-white">
+    <div class="md:grid grid-cols-2 py-3 px-10 bg-gray-800 text-white">
         <div class="flex gap-8">
             <a href=""
                 class=" border-r-2 border-gray-800 hover:border-white rounded-sm transition-all p-2 relative inline-block overflow-hidden group">
