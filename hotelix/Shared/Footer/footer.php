@@ -78,7 +78,7 @@
         </section>
     </footer>
     <!-- == privacy == -->
-    <div class="md:grid grid-cols-2 py-3 px-10 bg-gray-800 text-white">
+    <div class="md:grid grid-cols-2 py-3 md:px-10 px-4 bg-gray-800 text-white">
         <div class="flex gap-8">
             <a href=""
                 class=" border-r-2 border-gray-800 hover:border-white rounded-sm transition-all p-2 relative inline-block overflow-hidden group">
@@ -105,7 +105,7 @@
                 <span class="relative z-10">Contact</span>
             </a>
         </div>
-        <div class="flex items-center justify-end">
+        <div class="flex items-center md:justify-end justify-center">
             <span>Copyright © 2024 Hotelix. All Rights Reserved.</span>
         </div>
     </div>
