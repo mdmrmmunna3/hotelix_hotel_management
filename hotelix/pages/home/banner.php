@@ -117,7 +117,8 @@ $defaultCheckoutDate = date('Y-m-d', strtotime('+1 day')); // Tomorrow's date
                 <!-- ==== Check-in Section ==== -->
                 <div class="form-section flex flex-col items-center md:border-r-2 md:border-gray-300 cursor-pointer"
                     onclick="focusInput('checkin')">
-                    <h4 class="text-lg font-semibold mb-2 text-gray-700 titel_content">CHECK IN &#128197;</h4>
+                    <h4 class="text-lg font-semibold mb-2 text-[--secondary-color] titel_content">CHECK IN &#128197;
+                    </h4>
                     <input type="date" id="checkin" name="checkin" value="<?php echo $defaultCheckinDate; ?>" required
                         class="md:w-[90%] w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 border-blue-500 bg-[--primary-color]">
                 </div>
@@ -125,7 +126,8 @@ $defaultCheckoutDate = date('Y-m-d', strtotime('+1 day')); // Tomorrow's date
                 <!-- ====== Check-out Section ======= -->
                 <div class="form-section flex flex-col items-center md:border-r-2 md:border-gray-300 cursor-pointer"
                     onclick="focusInput('checkout')">
-                    <h4 class="text-lg font-semibold mb-2 text-gray-700 titel_content">CHECK OUT &#128197;</h4>
+                    <h4 class="text-lg font-semibold mb-2 text-[--secondary-color] titel_content">CHECK OUT &#128197;
+                    </h4>
                     <input type="date" id="checkout" name="checkout" value="<?php echo $defaultCheckoutDate; ?>"
                         required
                         class="md:w-[90%] w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 border-blue-500 bg-[--primary-color]">
@@ -133,7 +135,7 @@ $defaultCheckoutDate = date('Y-m-d', strtotime('+1 day')); // Tomorrow's date
 
                 <!-- ====== Guests Section ====== -->
                 <div class="flex flex-col items-center md:border-r-2 md:border-gray-300">
-                    <h4 class="text-lg font-semibold mb-2 text-gray-700 titel_content">GUESTS &#128101;</h4>
+                    <h4 class="text-lg font-semibold mb-2 text-[--secondary-color] titel_content">GUESTS &#128101;</h4>
                     <select name="guests"
                         class="md:w-[90%] w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 titel_content border-blue-500 bg-[--primary-color]">
                         <option value="1">1 Guest</option>

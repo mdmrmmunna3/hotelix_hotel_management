@@ -23,9 +23,9 @@
 
 <body>
     <?php
-    require_once('hotelix/shared/header/header.php');
-    require_once('hotelix/pages/home/home/home.php');
-    require_once("hotelix/shared/footer/footer.php");
+    require_once('hotelix/shared/header.php');
+    require_once('hotelix/pages/home/home.php');
+    require_once("hotelix/shared/footer.php");
 
     ?>
 
