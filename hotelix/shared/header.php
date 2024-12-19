@@ -75,7 +75,7 @@
                         class="p-2 text-white  border-r-2 border-transparent hover:border-[--border-color] rounded-sm transition-all relative inline-block overflow-hidden group">
                         <span
                             class="absolute inset-0 bg-blue-500  translate-x-[-110%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
-                        <a href="./auth/register.php" class="relative z-10">Log In</a>
+                        <a href="./auth/login.php" class="relative z-10">Log In</a>
                     </li>
 
                     <!-- ===== toggle icon ====== -->

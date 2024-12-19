@@ -62,12 +62,4 @@ body {
     font-family: "Crimson Text", serif;
 }
 
-#form_container {
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    background-color: red;
-}
-.inStyle:is(:focus) {
-    border: 2px solid transparent;
-    transition: all 0.1s ease;
-    background: linear-gradient(#121125, #121125) padding-box, linear-gradient(45deg, blue,red) border-box;
-}
+

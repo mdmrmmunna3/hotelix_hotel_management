@@ -36,10 +36,10 @@
 </head>
 
 <body class="">
-    <section class="w-full py-10 bg-gray-200 min-h-[100vh]" id="form_container">
+    <section class="w-full py-10 bg-gray-200 h-[100vh] " id="form_container">
 
         <form action="" method="post" enctype="multipart/form-data"
-            class="max-w-lg md:mx-auto mx-4 bg-white md:p-8 px-4 py-4 rounded-xl shadow-md ">
+            class="max-w-md md:mx-auto mx-4  bg-white p-8 rounded-xl shadow-md ">
             <!-- go to home  -->
             <div class=" flex justify-center items-center gap-2 mb-4">
                 <a href="../index.php"><i class="text-[#079d49] fa-solid fa-arrow-left"></i></a>
@@ -51,53 +51,34 @@
                 <img src="../hotelix/assets/hotel_logo/hotelix.png" alt="Hotelix Logo" class="w-[170px]">
             </div>
 
-            <h2 class="text-2xl font-bold text-center mb-4 uppercase titel_content">Create an Account</h2>
-
-            <!-- === Name Fields ==== -->
-            <div class="grid grid-cols-2 gap-3 mb-4">
-                <input type="text" name="first" id="first" placeholder="First Name"
-                    class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle">
-                <input type="text" name="last" id="last" placeholder="Last Name"
-                    class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle">
-            </div>
+            <h2 class="text-2xl font-bold text-center mb-4 uppercase titel_content">LogIn an Account</h2>
 
             <!-- ==== Email & Mobile Fields ==== -->
-            <div class="grid md:grid-cols-2 gap-3 mb-4">
+            <div class=" mb-4">
                 <input type="email" name="email" id="email" placeholder="Email Address"
-                    class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle">
-                <input type="tel" name="number" id="number" placeholder="Phone Number"
                     class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle">
             </div>
 
             <!-- ==== Password Fields ==== -->
-            <div class="grid grid-cols-2 gap-3 mb-4">
+            <div class="mb-4">
                 <input type="password" name="password" id="password" placeholder="Password"
                     class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle">
-                <input type="password" name="co_pass" id="co_pass" placeholder="Confirm Password"
-                    class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle">
-            </div>
-
-            <!-- ==== Upload Profile Photo ==== -->
-            <div class="mb-4">
-                <label class="block mb-2 text-sm font-medium text-gray-700">Upload Photo</label>
-                <input type="file" name="profile_photo" id="profile_photo"
-                    class="file-input w-full file-input-ghost bg-gray-200 outline-none">
             </div>
 
             <!-- already have account  -->
 
             <div class="flex justify-between mx-2 mb-3 font-medium">
-                <p>Already, have an account?</p>
-                <a href="login.php" class="uppercase titel_content font-medium text-red-500">Log In</a>
+                <p>Do not have an account?</p>
+                <a href="register.php" class="uppercase titel_content font-medium text-red-500">Register</a>
             </div>
 
-            <!-- === Register Button ==== -->
+            <!-- === login Button ==== -->
             <div>
                 <button type="submit" name="registerBtn" id="register"
-                    class="relative flex justify-center items-center w-full h-full py-3  border-2 rounded-lg border-blue-500 hover:text-white overflow-hidden group transition-transform duration-500">
+                    class="relative flex justify-center items-center w-full h-full py-3  border-2 rounded-lg border-blue-500 hover:text-white overflow-hidden group transition-transform duration-700">
                     <span
-                        class="absolute inset-0 bg-blue-500 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500 ease-out"></span>
-                    <span class="relative z-10 uppercase  titel_content">Register</span>
+                        class="absolute inset-0 bg-blue-500 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-700 ease-out"></span>
+                    <span class="relative z-10 uppercase  titel_content">Log In</span>
                 </button>
             </div>
         </form>
