@@ -20,13 +20,6 @@
     <link rel="stylesheet" href="../style.css">
 
     <style>
-        /* .inStyle:is(:focus) {
-            border: 2px solid transparent;
-            transition: all 0.1s ease;
-            background: linear-gradient(#121125, #121125) padding-box, linear-gradient(45deg, blue, red) border-box;
-
-        } */
-
         .inStyle:is(:focus) {
             border: 2px solid transparent;
             border-image: linear-gradient(to right, #3b82f6, #9333ea) 1;
