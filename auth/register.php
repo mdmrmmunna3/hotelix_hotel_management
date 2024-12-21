@@ -13,9 +13,12 @@ if (isset($_POST['registerBtn'])) {
     $gender = $_POST['gender'];
     $address = trim($_POST['address']);
 
-    // var_dump($first_name, $last_name, $email, $phone, $password, $con_password, gender, address);
+    $uploaded_photo = $_FILES['upload_photo'];
+    // $file_size = $uploaded_photo['size'] / 1024;
 
-    // validation filed errors 
+    var_dump($first_name, $last_name, $email, $phone, $password, $con_password, $gender, $address, $uploaded_photo);
+
+    // validation for empty filed errors 
     if (empty($first_name)) {
         $errors['first_name'] = "First name is required.";
     }
@@ -24,22 +27,50 @@ if (isset($_POST['registerBtn'])) {
     }
     if (empty($email)) {
         $errors['email'] = "Email are required.";
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL) || !str_ends_with($email, '@gmail.com') || preg_match('/[A-Z]/', $email)) {
+        $errors['email'] = "Enter valid Email";
     }
     if (empty($phone)) {
         $errors['number'] = "Phone Number is required.";
     }
+
+    // password 
     if (empty($password)) {
         $errors['password'] = "Password is required.";
+    } elseif (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{4,12}$/', $password)) {
+        $errors['password'] = "Password must be 4-12 characters long, with at least one uppercase letter, one lowercase letter, and one special character.";
     }
     if (empty($con_password)) {
         $errors['co_pass'] = "Confirm Password is required.";
     }
+    if ($password !== $con_password) {
+        $errors['co_pass'] = "Password don't match";
+    }
+
     if (empty($gender)) {
         $errors['gender'] = "Gender is required.";
     }
     if (empty($address)) {
         $errors['address'] = "Address is required.";
     }
+
+    // uploaded photo validation 
+    if (empty($errors['upload_photo'])) {
+        if ($uploaded_photo['error'] == UPLOAD_ERR_NO_FILE) {
+            $errors['upload_photo'] = "Photo is required";
+        } else {
+            $allowed_exten = ['jpg', 'jpeg', 'png', 'gif'];
+            $file_size = 400 * 1024;
+            $file_exten = strtolower(pathinfo($uploaded_photo['name'], PATHINFO_EXTENSION));
+
+            if (!in_array($file_exten, $allowed_exten)) {
+                $errors['upload_photo'] = "File must be JPG, JPEG, PNG, or GIF. formate";
+            } elseif ($uploaded_photo['size'] > $file_size) {
+                $errors['upload_photo'] = "file must be maximum 400kb";
+            }
+        }
+    }
+
 
 }
 ?>
@@ -104,12 +135,14 @@ if (isset($_POST['registerBtn'])) {
             <div class="grid grid-cols-2 gap-3 mb-4">
                 <div>
                     <input type="text" name="first_name" id="first_name" placeholder="First Name"
-                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle">
+                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle"
+                        value="<?= isset($first_name) ? htmlspecialchars($first_name) : '' ?>">
                     <small class="text-red-500"><?= $errors['first_name'] ?? '' ?></small>
                 </div>
                 <div>
                     <input type="text" name="last_name" id="last_name" placeholder="Last Name"
-                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle">
+                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle"
+                        value="<?= isset($last_name) ? htmlspecialchars($last_name) : '' ?>">
                     <small class="text-red-500"><?= $errors['last_name'] ?? '' ?></small>
                 </div>
             </div>
@@ -118,12 +151,14 @@ if (isset($_POST['registerBtn'])) {
             <div class="grid md:grid-cols-2 gap-3 mb-4">
                 <div>
                     <input type="email" name="email" id="email" placeholder="Email Address"
-                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle">
+                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle"
+                        value="<?= isset($email) ? htmlspecialchars($email) : '' ?>">
                     <small class="text-red-500"><?= $errors['email'] ?? '' ?></small>
                 </div>
                 <div>
                     <input type="tel" name="number" id="number" placeholder="Phone Number"
-                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle">
+                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle"
+                        value="<?= isset($phone) ? htmlspecialchars($phone) : '' ?>">
                     <small class="text-red-500"><?= $errors['number'] ?? '' ?></small>
                 </div>
             </div>
@@ -132,12 +167,14 @@ if (isset($_POST['registerBtn'])) {
             <div class="grid grid-cols-2 gap-3 mb-4">
                 <div>
                     <input type="password" name="password" id="password" placeholder="Password"
-                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle">
+                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle"
+                        value="<?= isset($password) ? htmlspecialchars($password) : '' ?>">
                     <small class="text-red-500"><?= $errors['password'] ?? '' ?></small>
                 </div>
                 <div>
                     <input type="password" name="co_pass" id="co_pass" placeholder="Confirm Password"
-                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle">
+                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle"
+                        value="<?= isset($con_password) ? htmlspecialchars($con_password) : '' ?>">
                     <small class="text-red-500"><?= $errors['co_pass'] ?? '' ?></small>
                 </div>
             </div>
@@ -146,16 +183,19 @@ if (isset($_POST['registerBtn'])) {
             <div class="grid grid-cols-2 gap-3 mb-4">
                 <div>
                     <select name="gender" id="gender"
-                        class='w-full py-3 px-4 border-2 border-violet-300 rounded-lg focus:outline-none inStyle text-gray-400'>
-                        <option value="">Gender</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
+                        class='w-full py-3 px-4 border-2 border-violet-300 rounded-lg focus:outline-none inStyle text-gray-400'
+                        value="<?= isset($gender) ? htmlspecialchars($gender) : '' ?>">
+                        <option value="" <?= empty($gender) ? 'selected' : '' ?>>Gender</option>
+                        <option value="male" <?= (isset($gender) && $gender === 'male') ? 'selected' : '' ?>>Male</option>
+                        <option value="female" <?= (isset($gender) && $gender === 'female') ? 'selected' : '' ?>>Female
+                        </option>
                     </select>
                     <small class="text-red-500"><?= $errors['gender'] ?? '' ?></small>
                 </div>
                 <div>
                     <textarea name="address" id="address" rows="2"
-                        class=" px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle"></textarea>
+                        class=" px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle"
+                        value="<?= isset($address) ? htmlspecialchars($address) : '' ?>"></textarea>
                     <small class="text-red-500"><?= $errors['address'] ?? '' ?></small>
                 </div>
             </div>
@@ -163,8 +203,9 @@ if (isset($_POST['registerBtn'])) {
             <!-- ==== Upload Profile Photo ==== -->
             <div class="mb-4">
                 <label class="block mb-2 text-sm font-medium text-gray-700">Upload Photo</label>
-                <input type="file" name="profile_photo" id="profile_photo"
+                <input type="file" name="upload_photo" id="upload_photo"
                     class="file-input w-full file-input-ghost bg-gray-200 outline-none">
+                <small class="text-red-500"><?= $errors['upload_photo'] ?? '' ?></small>
             </div>
 
             <!-- already have account  -->
