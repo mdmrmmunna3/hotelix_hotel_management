@@ -1,3 +1,50 @@
+<?php
+require_once('../db_root.php');
+
+$errors = [];
+
+if (isset($_POST['registerBtn'])) {
+    $first_name = trim($_POST['first_name']);
+    $last_name = trim($_POST['last_name']);
+    $email = trim($_POST['email']);
+    $phone = trim($_POST['number']);
+    $password = $_POST['password'];
+    $con_password = $_POST['co_pass'];
+    $gender = $_POST['gender'];
+    $address = trim($_POST['address']);
+
+    // var_dump($first_name, $last_name, $email, $phone, $password, $con_password, gender, address);
+
+    // validation filed errors 
+    if (empty($first_name)) {
+        $errors['first_name'] = "First name is required.";
+    }
+    if (empty($last_name)) {
+        $errors['last_name'] = "Last name is required.";
+    }
+    if (empty($email)) {
+        $errors['email'] = "Email are required.";
+    }
+    if (empty($phone)) {
+        $errors['number'] = "Phone Number is required.";
+    }
+    if (empty($password)) {
+        $errors['password'] = "Password is required.";
+    }
+    if (empty($con_password)) {
+        $errors['co_pass'] = "Confirm Password is required.";
+    }
+    if (empty($gender)) {
+        $errors['gender'] = "Gender is required.";
+    }
+    if (empty($address)) {
+        $errors['address'] = "Address is required.";
+    }
+
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -55,26 +102,62 @@
 
             <!-- === Name Fields ==== -->
             <div class="grid grid-cols-2 gap-3 mb-4">
-                <input type="text" name="first" id="first" placeholder="First Name"
-                    class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle">
-                <input type="text" name="last" id="last" placeholder="Last Name"
-                    class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle">
+                <div>
+                    <input type="text" name="first_name" id="first_name" placeholder="First Name"
+                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle">
+                    <small class="text-red-500"><?= $errors['first_name'] ?? '' ?></small>
+                </div>
+                <div>
+                    <input type="text" name="last_name" id="last_name" placeholder="Last Name"
+                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle">
+                    <small class="text-red-500"><?= $errors['last_name'] ?? '' ?></small>
+                </div>
             </div>
 
             <!-- ==== Email & Mobile Fields ==== -->
             <div class="grid md:grid-cols-2 gap-3 mb-4">
-                <input type="email" name="email" id="email" placeholder="Email Address"
-                    class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle">
-                <input type="tel" name="number" id="number" placeholder="Phone Number"
-                    class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle">
+                <div>
+                    <input type="email" name="email" id="email" placeholder="Email Address"
+                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle">
+                    <small class="text-red-500"><?= $errors['email'] ?? '' ?></small>
+                </div>
+                <div>
+                    <input type="tel" name="number" id="number" placeholder="Phone Number"
+                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle">
+                    <small class="text-red-500"><?= $errors['number'] ?? '' ?></small>
+                </div>
             </div>
 
             <!-- ==== Password Fields ==== -->
             <div class="grid grid-cols-2 gap-3 mb-4">
-                <input type="password" name="password" id="password" placeholder="Password"
-                    class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle">
-                <input type="password" name="co_pass" id="co_pass" placeholder="Confirm Password"
-                    class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle">
+                <div>
+                    <input type="password" name="password" id="password" placeholder="Password"
+                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle">
+                    <small class="text-red-500"><?= $errors['password'] ?? '' ?></small>
+                </div>
+                <div>
+                    <input type="password" name="co_pass" id="co_pass" placeholder="Confirm Password"
+                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle">
+                    <small class="text-red-500"><?= $errors['co_pass'] ?? '' ?></small>
+                </div>
+            </div>
+
+            <!-- ==== gender and address Fields ==== -->
+            <div class="grid grid-cols-2 gap-3 mb-4">
+                <div>
+                    <select name="gender" id="gender"
+                        class='w-full py-3 px-4 border-2 border-violet-300 rounded-lg focus:outline-none inStyle text-gray-400'>
+                        <option value="">Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                    <small class="text-red-500"><?= $errors['gender'] ?? '' ?></small>
+                </div>
+                <div>
+                    <textarea name="address" id="address" rows="2"
+                        class=" px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle"></textarea>
+                    <small class="text-red-500"><?= $errors['address'] ?? '' ?></small>
+                </div>
             </div>
 
             <!-- ==== Upload Profile Photo ==== -->
