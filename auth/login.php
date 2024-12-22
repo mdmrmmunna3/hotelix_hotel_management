@@ -1,3 +1,46 @@
+<?php
+require_once('../db_root.php'); 
+$errors = [];
+if(isset($_POST['loginBtn'])) {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    if (empty($email)) {
+        $errors['email'] = "Email is required.";
+    }
+    if (empty($password)) {
+        $errors['password'] = "Password is required.";
+    }
+
+    if (empty($errors)) {
+        // Prepare query to check for user with the entered email
+        $query = $db_root->prepare("SELECT * FROM users WHERE email = ?");
+        $query->bind_param("s", $email); // 's' means string
+        $query->execute();
+        $result = $query->get_result();
+        
+        // If the user is found
+        if ($result->num_rows > 0) {
+            $user = $result->fetch_assoc();
+            
+            // Now, check if the password matches (use password_verify if password is hashed)
+            if (password_verify($password, $user['password'])) {
+                // If valid, redirect to home page
+                header('Location: ../index.php');
+                exit;
+            } else {
+                // Invalid password
+                $errors['password'] = "Invalid password. Please try again.";
+            }
+        } else {
+            // Email not found
+            $errors['email'] = "No account found with this email.";
+        }
+    }
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -49,13 +92,15 @@
             <!-- ==== Email & Mobile Fields ==== -->
             <div class=" mb-4">
                 <input type="email" name="email" id="email" placeholder="Email Address"
-                    class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle">
+                    class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle" value="<?= isset($email) ? htmlspecialchars($email) : '' ?>">
+                    <small class="text-red-500"><?= $errors['email'] ?? '' ?></small>
             </div>
 
             <!-- ==== Password Fields ==== -->
             <div class="mb-4">
                 <input type="password" name="password" id="password" placeholder="Password"
-                    class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle">
+                    class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle" value="<?= isset($password) ? htmlspecialchars($password) : '' ?>">
+                    <small class="text-red-500"><?= $errors['password'] ?? '' ?></small>
             </div>
 
             <!-- already have account  -->
@@ -67,8 +112,8 @@
 
             <!-- === login Button ==== -->
             <div>
-                <button type="submit" name="registerBtn" id="register"
-                    class="relative flex justify-center items-center w-full h-full py-3  border-2 rounded-lg border-blue-500 hover:text-white overflow-hidden group transition-transform duration-700">
+                <button type="submit" name="loginBtn" id="loginBtn"
+                    class="relative flex justify-center items-center w-full py-3  border-2 rounded-lg border-blue-500 hover:text-white overflow-hidden group transition-transform duration-700">
                     <span
                         class="absolute inset-0 bg-blue-500 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-700 ease-out"></span>
                     <span class="relative z-10 uppercase  titel_content">Log In</span>
@@ -80,4 +125,4 @@
 
 </html>
 
-<!-- Munna45!! , Ismail01!!  -->
+<!-- Munna45!! , Ismail0!!  -->
