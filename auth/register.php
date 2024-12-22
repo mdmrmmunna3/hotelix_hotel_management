@@ -16,7 +16,7 @@ if (isset($_POST['registerBtn'])) {
     $uploaded_photo = $_FILES['upload_photo'];
     // $file_size = $uploaded_photo['size'] / 1024;
 
-    var_dump($first_name, $last_name, $email, $phone, $password, $con_password, $gender, $address, $uploaded_photo);
+    // var_dump($first_name, $last_name, $email, $phone, $password, $con_password, $gender, $address, $uploaded_photo);
 
     // validation for empty filed errors 
     if (empty($first_name)) {
@@ -218,7 +218,7 @@ if (isset($_POST['registerBtn'])) {
             <!-- === Register Button ==== -->
             <div>
                 <button type="submit" name="registerBtn" id="register"
-                    class="relative flex justify-center items-center w-full h-full py-3  border-2 rounded-lg border-blue-500 hover:text-white overflow-hidden group transition-transform duration-500">
+                    class="relative flex justify-center items-center w-full py-3  border-2 rounded-lg border-blue-500 hover:text-white overflow-hidden group transition-transform duration-500">
                     <span
                         class="absolute inset-0 bg-blue-500 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500 ease-out"></span>
                     <span class="relative z-10 uppercase  titel_content">Register</span>

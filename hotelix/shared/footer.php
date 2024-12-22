@@ -106,7 +106,7 @@
             </a>
         </div>
         <div class="flex items-center md:justify-end justify-center">
-            <span>Copyright © 2024 Hotelix. All Rights Reserved.</span>
+            <span>Copyright © <?php echo date('Y'); ?> Hotelix. All Rights Reserved.</span>
         </div>
     </div>
 </body>
