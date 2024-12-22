@@ -6,6 +6,7 @@ $errors = [];
 if (isset($_POST['registerBtn'])) {
     $first_name = trim($_POST['first_name']);
     $last_name = trim($_POST['last_name']);
+    $name = $first_name . " " . $last_name;
     $email = trim($_POST['email']);
     $phone = trim($_POST['number']);
     $password = $_POST['password'];
@@ -71,6 +72,29 @@ if (isset($_POST['registerBtn'])) {
         }
     }
 
+    
+    if(empty($errors)) {
+        // check email already register 
+        $select = "SELECT * FROM users WHERE email = '$email'";
+        $result = mysqli_query($db_root, $select);
+
+        if(mysqli_num_rows($result) > 0) {
+            $errors['email'] = "Email already Register";
+        }
+        else {
+            $hash_password = password_hash($password, PASSWORD_BCRYPT);
+            
+            $insert = "INSERT INTO users (name, email, phone, gender, photo, password) values('$name', '$email', '$phone', '$gender', '$uploaded_photo', '$hash_password')";
+
+            if(mysqli_query($db_root, $insert)) {
+                header('location: login.php');
+                exit();
+            }else {
+                $errors['insert'] = "Errors:" . mysqli_error($db_root);
+            }
+        }
+        
+    }
 
 }
 ?>
