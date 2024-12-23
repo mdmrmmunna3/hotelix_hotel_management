@@ -16,7 +16,7 @@
 
 <body>
 
-    <nav class="bg-[--primary-color] p-4 shadow-md shadow-blue-200 fixed z-20 w-full backdrop-blur-[8px]">
+    <nav class="bg-[--primary-color] p-4 shadow-md shadow-blue-200 fixed z-[1000] w-full backdrop-blur-[8px]">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <!-- ====== Logo or Brand Name ======== -->
             <a href="#" class="cursor-pointer">
@@ -26,7 +26,7 @@
 
             <!-- ======= Navbar links for larger screens ========= -->
             <div class="hidden md:flex space-x-8">
-                <ul class="flex space-x-8">
+                <ul class="flex gap-2 md:gap-6">
                     <li
                         class="p-2 text-white border-r-2  border-transparent hover:border-[--border-color] rounded-sm transition-all relative inline-block overflow-hidden group">
                         <span
@@ -165,11 +165,11 @@
                 </li>
 
                 <li
-                        class="p-2 text-white  border-r-2 border-transparent hover:border-[--border-color] rounded-sm transition-all relative inline-block overflow-hidden group">
-                        <span
-                            class="absolute inset-0 bg-blue-500  translate-x-[-110%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
-                        <a href="./auth/login.php" class="relative z-10">Log In</a>
-                    </li>
+                    class="p-2 text-white  border-r-2 border-transparent hover:border-[--border-color] rounded-sm transition-all relative inline-block overflow-hidden group">
+                    <span
+                        class="absolute inset-0 bg-blue-500  translate-x-[-110%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
+                    <a href="./auth/login.php" class="relative z-10">Log In</a>
+                </li>
 
                 <li>
                     <label class="swap swap-rotate mb-3">
