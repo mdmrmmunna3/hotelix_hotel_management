@@ -16,7 +16,6 @@
 }
 
 .card {
-  /* width: 220px; */
   width: 100%;
   height: 321px;
   border-top-right-radius: 10px;
@@ -69,7 +68,7 @@
   height: 118px;
   display: block;
   position: absolute;
-  background: var(--bg-color);
+  background: #ffffff96;
   border-radius: 50%;
   top: 7px;
   left: 7px;
@@ -90,33 +89,55 @@
 </head>
 
 <body>
-    <section class="grid grid-cols-3">
-        <!-- <div class="relative ">
-            <div class="w-32 h-32 rounded-full border-2 flex justify-center items-center">
-                <img src="<?php echo './hotelix/pages/home/cctv-camera.png' ?>" alt="" class="w-10">
-                <p class="absolute top-4 left-2 text-xl flex justify-between gap-10"><span class="mr-4">------ </span>
-                    <span>24
-                        Hrs
-                        Security</span>
-                </p>
-            </div>
-        </div> -->
-
-       
-<div class="card wallet bg-[--primary-color] flex overflow-hidden flex-col justify-center items-center relative">
-    <div class="overlay w-[118px] h-[130px] absolute rounded-full top-[67px] left-[110px] z-0"></div>
-        <div class="circle w-[131px] h-[131px] flex justify-center items-center relative rounded-full bg-white z-10">
-            <img src="<?php echo './hotelix/pages/home/cctv-camera.png' ?>" alt="" class="w-16">
+    <section class="grid grid-cols-3 gap-5">
+        
+        <div class="card wallet bg-[--primary-color] flex overflow-hidden flex-col justify-center items-center relative">
+            <div class="overlay w-[118px] h-[130px] absolute rounded-full top-[67px] left-[110px] z-0"></div>
+                <div class="circle w-[131px] h-[131px] flex justify-center items-center relative rounded-full bg-white z-10">
+                    <img src="<?php echo './hotelix/assets/services/cctv-camera.png' ?>" alt="security" class="w-16">
+                </div>
+            <p>Wallet</p>
         </div>
-    <p>Wallet</p>
-</div>
 
+        <div class="card wallet bg-[--primary-color] flex overflow-hidden flex-col justify-center items-center relative">
+            <div class="overlay w-[118px] h-[130px] absolute rounded-full top-[67px] left-[110px] z-0"></div>
+                <div class="circle w-[131px] h-[131px] flex justify-center items-center relative rounded-full bg-white z-10">
+                    <img src="<?php echo './hotelix/assets/services/free-wifi.png' ?>" alt="free-wifi" class="w-16">
+                </div>
+            <p>Wallet</p>
+        </div>
 
+        <div class="card wallet bg-[--primary-color] flex overflow-hidden flex-col justify-center items-center relative">
+            <div class="overlay w-[118px] h-[130px] absolute rounded-full top-[67px] left-[110px] z-0"></div>
+                <div class="circle w-[131px] h-[131px] flex justify-center items-center relative rounded-full bg-white z-10">
+                    <img src="<?php echo './hotelix/assets/services/laundry.png' ?>" alt="laundry" class="w-16">
+                </div>
+            <p>Wallet</p>
+        </div>
 
+        <div class="card wallet bg-[--primary-color] flex overflow-hidden flex-col justify-center items-center relative">
+            <div class="overlay w-[118px] h-[130px] absolute rounded-full top-[67px] left-[110px] z-0"></div>
+                <div class="circle w-[131px] h-[131px] flex justify-center items-center relative rounded-full bg-white z-10">
+                    <img src="<?php echo './hotelix/assets/services/room-service.png' ?>" alt="room-service" class="w-16">
+                </div>
+            <p>Wallet</p>
+        </div>
 
+        <div class="card wallet bg-[--primary-color] flex overflow-hidden flex-col justify-center items-center relative">
+            <div class="overlay w-[118px] h-[130px] absolute rounded-full top-[67px] left-[110px] z-0"></div>
+                <div class="circle w-[131px] h-[131px] flex justify-center items-center relative rounded-full bg-white z-10">
+                    <img src="<?php echo './hotelix/assets/services/satisfaction.png' ?>" alt="low-rated" class="w-16">
+                </div>
+            <p>Wallet</p>
+        </div>
 
-
-
+        <div class="card wallet bg-[--primary-color] flex overflow-hidden flex-col justify-center items-center relative">
+            <div class="overlay w-[118px] h-[130px] absolute rounded-full top-[67px] left-[110px] z-0"></div>
+                <div class="circle w-[131px] h-[131px] flex justify-center items-center relative rounded-full bg-white z-10">
+                    <img src="<?php echo './hotelix/assets/services/cloudy-night.png' ?>" alt="night-service" class="w-16">
+                </div>
+            <p>Wallet</p>
+        </div>
 
     </section>
 </body>
