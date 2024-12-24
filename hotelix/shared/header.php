@@ -26,7 +26,7 @@
 
             <!-- ======= Navbar links for larger screens ========= -->
             <div class="hidden md:flex space-x-8">
-                <ul class="flex gap-2 md:gap-6">
+                <ul class="flex gap-2 lg::gap-6 ">
                     <li
                         class="p-2 text-white border-r-2  border-transparent hover:border-[--border-color] rounded-sm transition-all relative inline-block overflow-hidden group">
                         <span

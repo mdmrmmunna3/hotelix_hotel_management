@@ -54,7 +54,7 @@
                             </div>
                         </div>
                         <img src="<?php echo './hotelix/assets/about/sign_white.png' ?>" alt="manager sign"
-                            class="signature w-64 absolute left-10 top-16" stoke="white">
+                            class="signature w-64 absolute left-10 top-[70px]" stoke="white">
                     </div>
                 </div>
                 <div>
@@ -89,3 +89,5 @@
 </body>
 
 </html>
+
+<!-- #ecfdf5  -->
