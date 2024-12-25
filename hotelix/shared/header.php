@@ -22,6 +22,7 @@
             <a href="#" class="cursor-pointer">
                 <img src="<?php echo './hotelix/assets/hotel_logo/hotelix.png'; ?>" alt="Hotelix_logo"
                     class="w-[150px]">
+                <!-- <img src="<?php echo './hotelix/shared/hotelix.png'; ?>" alt="Hotelix_logo" class="w-[150px]"> -->
             </a>
 
             <!-- ======= Navbar links for larger screens ========= -->
@@ -37,7 +38,7 @@
                     <!-- ====== Dropdown Menu ======= -->
                     <li class="relative group ">
 
-                        <a
+                        <a href=""
                             class="p-2 text-white hover:bg-blue-500  border-r-2 border-transparent hover:border-[--border-color] rounded-sm transition-all flex items-center relative z-10">
                             About
                             <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -49,7 +50,7 @@
                         <!-- ======== Dropdown menu items ========== -->
                         <ul
                             class="dropdown-content absolute hidden bg-gray-900 text-white p-2 rounded shadow-lg top-full left-0 mt-0 w-48 group-hover:block">
-                            <li><a href="#"
+                            <li><a href="../hotelix/pages/about_us/about.php"
                                     class="block px-4 py-2 hover:bg-blue-500 border-r-2 border-gray-900 hover:border-white rounded-sm transition-all">About
                                     Hotel</a></li>
                             <li><a href="#"
@@ -203,60 +204,9 @@
     </nav>
 
     <script>
-        // Handle mobile menu toggle
-        const hamburger = document.getElementById('hamburger');
-        const mobileMenu = document.getElementById('mobileMenu');
 
-        hamburger.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-
-        // Handle desktop dropdown hover
-        const dropdownButtons = document.querySelectorAll('.group');
-        dropdownButtons.forEach(dropdown => {
-            dropdown.addEventListener('mouseover', () => {
-                const dropdownContent = dropdown.querySelector('.dropdown-content');
-                dropdownContent.classList.remove('hidden');
-            });
-
-            dropdown.addEventListener('mouseleave', () => {
-                const dropdownContent = dropdown.querySelector('.dropdown-content');
-                dropdownContent.classList.add('hidden');
-            });
-        });
-
-        // Handle mobile dropdown click
-        const mobileDropdownButtons = document.querySelectorAll('#mobileMenu .relative > button');
-        mobileDropdownButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const dropdownContent = button.nextElementSibling;
-                dropdownContent.classList.toggle('hidden');
-            });
-        });
-
-
-        // handle theme toggle 
-        const handleToggleBtn = () => {
-            const darkModeEnabeld = document.body.classList.toggle('dark');
-
-            // set theme in local storage 
-            localStorage.setItem('theme', darkModeEnabeld ? 'dark' : 'light');
-        }
-
-
-        window.addEventListener('DOMContentLoaded', () => {
-            // Check if the theme is saved in localStorage
-            const savedTheme = localStorage.getItem('theme');
-
-            // Apply the saved theme if it exists
-            if (savedTheme === 'dark') {
-                document.body.classList.add('dark');
-            } else {
-                document.body.classList.remove('dark');
-            }
-        });
     </script>
-
+    <script src="main.js"></script>
 </body>
 
 </html>
