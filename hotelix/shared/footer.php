@@ -18,8 +18,8 @@
             <!-- ======== footer left content ====== -->
             <div class="">
                 <div class="footer_logo cursor-pointer flex justify-center md:justify-start">
-                    <img src="<?php echo './hotelix/assets/hotel_logo/hotelix.png'; ?>" alt="Hotelix_logo"
-                        class="w-[150px] ">
+                    <img src="<?php echo '/hotelix_hotel_management/assets/hotel_logo/hotelix.png'; ?>"
+                        alt="Hotelix_logo" class="w-[150px] ">
                 </div>
                 <p class="py-3 md:text-start text-center">Lorem ipsum dolor, sit amet consectetur adipisicing elit.
                     Perferendis
@@ -46,19 +46,24 @@
                 <p class="py-3">SOCIAL MEDIA CHANNELS</p>
                 <div class="social_box flex justify-center items-center gap-2">
                     <a href="">
-                        <img src="<?php echo './hotelix/assets/footer_social_logo/facebook.png' ?>" alt="facebook">
+                        <img src="<?php echo '/hotelix_hotel_management/assets/footer_social_logo/facebook.png' ?>"
+                            alt="facebook">
                     </a>
                     <a href="">
-                        <img src="<?php echo './hotelix/assets/footer_social_logo/youtube.png' ?>" alt="facebook">
+                        <img src="<?php echo '/hotelix_hotel_management/assets/footer_social_logo/youtube.png' ?>"
+                            alt="facebook">
                     </a>
                     <a href="">
-                        <img src="<?php echo './hotelix/assets/footer_social_logo/instagram.png' ?>" alt="facebook">
+                        <img src="<?php echo '/hotelix_hotel_management/assets/footer_social_logo/instagram.png' ?>"
+                            alt="facebook">
                     </a>
                     <a href="">
-                        <img src="<?php echo './hotelix/assets/footer_social_logo/media.png' ?>" alt="facebook">
+                        <img src="<?php echo '/hotelix_hotel_management/assets/footer_social_logo/media.png' ?>"
+                            alt="facebook">
                     </a>
                     <a href="">
-                        <img src="<?php echo './hotelix/assets/footer_social_logo/twitter.png' ?>" alt="facebook">
+                        <img src="<?php echo '/hotelix_hotel_management/assets/footer_social_logo/twitter.png' ?>"
+                            alt="facebook">
                     </a>
                 </div>
             </div>

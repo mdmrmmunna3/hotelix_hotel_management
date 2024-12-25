@@ -17,13 +17,13 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
     <!-- ======= vanila css ====== -->
-    <link rel="stylesheet" href="../../../style.css">
+    <link rel="stylesheet" href="../../style.css">
 </head>
 
 <body>
     <?php
-    require_once('../../shared/header.php');
-    require_once('../../components/banner_hook.php');
+    require_once('../shared/header.php');
+    require_once('../components/banner_hook.php');
 
     $page = 'about'; // Current page identifier
     $banner = $pageBanners[$page];
@@ -32,17 +32,21 @@
     function renderBanner($bannerImage, $title, $subtitle)
     {
         echo "
-    <div class='relative h-[300px] bg-cover bg-center flex items-center justify-center' style='background-image: url($bannerImage);'>
-        <div class='bg-black bg-opacity-50 p-6 text-center rounded-lg'>
-            <h1 class='text-4xl font-bold text-white'>$title</h1>
-            <p class='text-lg text-gray-300 mt-2'>$subtitle</p>
-        </div>
-    </div>";
+            <div class='relative lg:h-[600px] h-[400px] w-full bg-cover bg-center bg-no-repeat ' style='background-image: url($bannerImage);'>
+                <div class='bg-black bg-opacity-60 w-full h-full p-6 text-center rounded-lg flex flex-col items-center justify-center'>
+                    <h1 class='md:text-6xl text-4xl font-bold text-white uppercase titel_content'>$title</h1>
+                    <p class='text-lg text-gray-300 mt-2 font-bold uppercase'>$subtitle</p>
+                </div>
+            </div>";
     }
     renderBanner($banner['bannerImage'], $banner['title'], $banner['subtitle']);
+
+    require_once('home/about.php');
+    require_once('home/services.php');
+    require_once('../shared/footer.php');
     ?>
 
-    <script src="../../../main.js"></script>
+    <script src="../../main.js"></script>
 </body>
 
 </html>

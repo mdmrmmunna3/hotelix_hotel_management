@@ -22,7 +22,7 @@ $defaultCheckoutDate = date('Y-m-d', strtotime('+1 day')); // Tomorrow's date
             <div class="swiper-slide">
                 <div class="relative overflow-hidden">
                     <img class="lg:h-[100%] md:h-[600px] h-[400px] w-full"
-                        src="<?php echo './hotelix/assets/banner/banner-1.jpg' ?>" loading="lazy" alt="bannerImg" />
+                        src="<?php echo 'assets/banner/banner-1.jpg' ?>" loading="lazy" alt="bannerImg" />
                     <div class="absolute inset-0 bg-black opacity-50 h-full w-full"></div>
                     <div
                         class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center leading-relaxed text-white">
@@ -50,7 +50,7 @@ $defaultCheckoutDate = date('Y-m-d', strtotime('+1 day')); // Tomorrow's date
             <div class="swiper-slide">
                 <div class="relative overflow-hidden">
                     <img class="lg:h-[100%] md:h-[600px] h-[400px] w-full"
-                        src="<?php echo './hotelix/assets/banner/banner-2.jpg' ?>" loading="lazy" alt="bannerImg" />
+                        src="<?php echo 'assets/banner/banner-2.jpg' ?>" loading="lazy" alt="bannerImg" />
                     <div class="absolute inset-0 bg-black opacity-50"></div>
                     <div
                         class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center leading-relaxed text-white">
@@ -78,7 +78,7 @@ $defaultCheckoutDate = date('Y-m-d', strtotime('+1 day')); // Tomorrow's date
             <div class="swiper-slide">
                 <div class="relative overflow-hidden">
                     <img class="lg:h-[100%] md:h-[600px] h-[400px] w-full"
-                        src="<?php echo './hotelix/assets/banner/banner-3.jpg' ?>" loading="lazy" alt="bannerImg" />
+                        src="<?php echo 'assets/banner/banner-3.jpg' ?>" loading="lazy" alt="bannerImg" />
                     <div class="absolute inset-0 bg-black opacity-50"></div>
                     <div
                         class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center leading-relaxed text-white">

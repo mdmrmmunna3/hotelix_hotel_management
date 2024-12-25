@@ -21,7 +21,7 @@ dropdownButtons.forEach(dropdown => {
 });
 
 // Handle mobile dropdown click
-const mobileDropdownButtons = document.querySelectorAll('#mobileMenu .relative > button');
+const mobileDropdownButtons = document.querySelectorAll('#mobileMenu .relative > #button');
 mobileDropdownButtons.forEach(button => {
     button.addEventListener('click', () => {
         const dropdownContent = button.nextElementSibling;

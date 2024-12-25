@@ -19,26 +19,25 @@
     <nav class="bg-[--primary-color] p-4 shadow-md shadow-blue-200 fixed z-[1000] w-full backdrop-blur-[8px]">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <!-- ====== Logo or Brand Name ======== -->
-            <a href="#" class="cursor-pointer">
-                <img src="<?php echo './hotelix/assets/hotel_logo/hotelix.png'; ?>" alt="Hotelix_logo"
+            <a href="/hotelix_hotel_management" class="cursor-pointer">
+                <img src="<?php echo '/hotelix_hotel_management/assets/hotel_logo/hotelix.png'; ?>" alt="Hotelix_logo"
                     class="w-[150px]">
-                <!-- <img src="<?php echo './hotelix/shared/hotelix.png'; ?>" alt="Hotelix_logo" class="w-[150px]"> -->
             </a>
 
             <!-- ======= Navbar links for larger screens ========= -->
             <div class="hidden md:flex space-x-8">
-                <ul class="flex gap-2 lg::gap-6 ">
+                <ul class="flex gap-2 lg:gap-6 ">
                     <li
                         class="p-2 text-white border-r-2  border-transparent hover:border-[--border-color] rounded-sm transition-all relative inline-block overflow-hidden group">
                         <span
                             class="absolute inset-0 bg-blue-500 translate-x-[-110%] group-hover:translate-x-0 transition-transform duration-300 ease-out "></span>
-                        <a href="#" class="relative z-10">Home</a>
+                        <a href="/hotelix_hotel_management/index.php" class="relative z-10">Home</a>
                     </li>
 
                     <!-- ====== Dropdown Menu ======= -->
                     <li class="relative group ">
 
-                        <a href=""
+                        <a href="/hotelix_hotel_management/hotelix/pages/about.php"
                             class="p-2 text-white hover:bg-blue-500  border-r-2 border-transparent hover:border-[--border-color] rounded-sm transition-all flex items-center relative z-10">
                             About
                             <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -50,7 +49,7 @@
                         <!-- ======== Dropdown menu items ========== -->
                         <ul
                             class="dropdown-content absolute hidden bg-gray-900 text-white p-2 rounded shadow-lg top-full left-0 mt-0 w-48 group-hover:block">
-                            <li><a href="../hotelix/pages/about_us/about.php"
+                            <li><a href="/hotelix_hotel_management/hotelix/pages/about.php"
                                     class="block px-4 py-2 hover:bg-blue-500 border-r-2 border-gray-900 hover:border-white rounded-sm transition-all">About
                                     Hotel</a></li>
                             <li><a href="#"
@@ -126,24 +125,25 @@
                     class="p-2 text-white border-r-2  border-transparent hover:border-[--border-color] rounded-sm transition-all relative inline-block overflow-hidden group w-full">
                     <span
                         class="absolute inset-0 bg-blue-500  translate-x-[-110%] group-hover:translate-x-0 transition-transform duration-300 ease-out "></span>
-                    <a href="#" class="relative z-10 ">Home</a>
+                    <a href="/hotelix_hotel_management/index.php" class="relative z-10 ">Home</a>
                 </li>
 
                 <!-- ====== Dropdown Menu ======= -->
                 <li class="relative">
-                    <button
-                        class="p-2 text-white w-full  flex justify-between items-center border-r-2 border-transparent hover:border-[--border-color]">
+                    <a href="/hotelix_hotel_management/hotelix/pages/about.php"
+                        class="p-2 text-white w-full flex justify-between items-center border-r-2 border-transparent hover:border-[--border-color]"
+                        id="button">
                         About
                         <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
                             </path>
                         </svg>
-                    </button>
+                    </a>
                     <!-- ======== Dropdown menu items for mobile ========== -->
                     <ul
                         class="dropdown-content hidden bg-gray-900 text-white p-2 rounded shadow-md shadow-blue-400 w-full">
-                        <li><a href="#"
+                        <li><a href="/hotelix_hotel_management/hotelix/pages/about.php"
                                 class="block px-4 py-2 hover:bg-blue-500 border-r-2 border-gray-900 hover:border-white rounded-sm transition-all">About
                                 Hotel</a></li>
                         <li><a href="#"

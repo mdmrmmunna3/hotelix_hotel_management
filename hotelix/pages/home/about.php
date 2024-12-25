@@ -18,12 +18,12 @@
         <div class="md:mx-8 mx-6 py-5">
             <div class="flex justify-center items-center z-0 p-0 gap-10 flex-col lg:flex-row">
                 <div class="lg:w-[350px] md:w-full">
-                    <img src="<?php echo './hotelix/assets/about/about-1.jpg' ?>" alt="about room"
+                    <img src="<?php echo '/hotelix_hotel_management/assets/about/about-1.jpg' ?>" alt="about room"
                         class="w-full md:h-[550px] lg:h-[auto] rounded-md">
                 </div>
                 <div>
                     <div class="relative overflow-hidden">
-                        <img src="<?php echo './hotelix/assets/about/about-2.jpg' ?>" alt="about room"
+                        <img src="<?php echo '/hotelix_hotel_management/assets/about/about-2.jpg' ?>" alt="about room"
                             class="w-[85%] md:w-[270px] h-[228px] rounded-md">
                         <div
                             class="absolute text-6xl w-36 h-36 rounded-full border flex flex-col justify-center items-center bg-blue-300 lg:left-[20%] md:left-[25%] left-[57%] top-[13%] titel_content">
@@ -46,19 +46,20 @@
                         offers</h4>
                     <div class="relative">
                         <div class="my-5 flex items-center gap-5">
-                            <img src="<?php echo './hotelix/assets/about/munna.jpg' ?>" alt="manager pic"
-                                class="w-20 h-20 rounded-full">
+                            <img src="<?php echo '/hotelix_hotel_management/assets/about/munna.jpg' ?>"
+                                alt="manager pic" class="w-20 h-20 rounded-full">
                             <div class="titel_content">
                                 <h2 class="font-semibold text-xl">Md Mustafijur Rahman Munna</h2>
                                 <p>Hotel Manager</p>
                             </div>
                         </div>
-                        <img src="<?php echo './hotelix/assets/about/sign_white.png' ?>" alt="manager sign"
-                            class="signature w-64 absolute left-10 top-[70px]" stoke="white">
+                        <img src="<?php echo '/hotelix_hotel_management/assets/about/sign_white.png' ?>"
+                            alt="manager sign" class="signature w-64 absolute left-10 top-[70px]" stoke="white">
                     </div>
                 </div>
                 <div>
-                    <img src="<?php echo './hotelix/assets/about/about-3.jpg' ?>" alt="about room" class="rounded-md">
+                    <img src="<?php echo '/hotelix_hotel_management/assets/about/about-3.jpg' ?>" alt="about room"
+                        class="rounded-md">
                 </div>
                 <div class="titel_content">
                     <p class=" text-xl">The masterbuilder of human happiness no one dislikes, too avoids

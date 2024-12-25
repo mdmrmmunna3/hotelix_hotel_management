@@ -54,7 +54,7 @@
                                         </div>
                                     </figcaption>
                                 </figure>
-                                <img src="<?php echo './hotelix/assets/logo/quotes.png' ?>" alt="quta"
+                                <img src="<?php echo '/hotelix_hotel_management/assets/logo/quotes.png' ?>" alt="quta"
                                     class="absolute z-0 h-16 left-6 top-6">
                                 </img>
                             </div>
@@ -93,7 +93,7 @@
                                         </div>
                                     </figcaption>
                                 </figure>
-                                <img src="<?php echo './hotelix/assets/logo/quotes.png' ?>" alt="quta"
+                                <img src="<?php echo '/hotelix_hotel_management/assets/logo/quotes.png' ?>" alt="quta"
                                     class="absolute z-0 h-16 left-6 top-6">
                                 </img>
                             </div>
@@ -132,7 +132,7 @@
                                         </div>
                                     </figcaption>
                                 </figure>
-                                <img src="<?php echo './hotelix/assets/logo/quotes.png' ?>" alt="quta"
+                                <img src="<?php echo '/hotelix_hotel_management/assets/logo/quotes.png' ?>" alt="quta"
                                     class="absolute z-0 h-16 left-6 top-6">
                                 </img>
                             </div>
@@ -171,7 +171,7 @@
                                         </div>
                                     </figcaption>
                                 </figure>
-                                <img src="<?php echo './hotelix/assets/logo/quotes.png' ?>" alt="quta"
+                                <img src="<?php echo '/hotelix_hotel_management/assets/logo/quotes.png' ?>" alt="quta"
                                     class="absolute z-0 h-16 left-6 top-6">
                                 </img>
                             </div>
