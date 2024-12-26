@@ -9,6 +9,7 @@ $defaultCheckoutDate = date('Y-m-d', strtotime('+1 day')); // Tomorrow's date
 <html lang="en">
 
 <head>
+    <base href="/hotelix_hotel_management/">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Banner</title>
@@ -44,7 +45,7 @@ $defaultCheckoutDate = date('Y-m-d', strtotime('+1 day')); // Tomorrow's date
                         </div>
                     </div>
                 </div>
-                <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+                <!-- <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div> -->
             </div>
 
             <div class="swiper-slide">
@@ -72,7 +73,7 @@ $defaultCheckoutDate = date('Y-m-d', strtotime('+1 day')); // Tomorrow's date
                         </div>
                     </div>
                 </div>
-                <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+                <!-- <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div> -->
             </div>
 
             <div class="swiper-slide">
@@ -100,7 +101,7 @@ $defaultCheckoutDate = date('Y-m-d', strtotime('+1 day')); // Tomorrow's date
                         </div>
                     </div>
                 </div>
-                <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+                <!-- <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div> -->
             </div>
 
         </div>
