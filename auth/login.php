@@ -1,7 +1,7 @@
 <?php
-require_once('../db_root.php'); 
+require_once('../db_root.php');
 $errors = [];
-if(isset($_POST['loginBtn'])) {
+if (isset($_POST['loginBtn'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
@@ -18,11 +18,11 @@ if(isset($_POST['loginBtn'])) {
         $query->bind_param("s", $email); // 's' means string
         $query->execute();
         $result = $query->get_result();
-        
+
         // If the user is found
         if ($result->num_rows > 0) {
             $user = $result->fetch_assoc();
-            
+
             // Now, check if the password matches (use password_verify if password is hashed)
             if (password_verify($password, $user['password'])) {
                 // If valid, redirect to home page
@@ -45,6 +45,7 @@ if(isset($_POST['loginBtn'])) {
 <html lang="en">
 
 <head>
+    <base href="/hotelix_hotel_management/">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Log In</title>
@@ -78,13 +79,13 @@ if(isset($_POST['loginBtn'])) {
             class="max-w-md md:mx-auto mx-4  bg-white p-8 rounded-xl shadow-md ">
             <!-- go to home  -->
             <div class=" flex justify-center items-center gap-2 mb-4">
-                <a href="../index.php"><i class="text-[#079d49] fa-solid fa-arrow-left"></i></a>
-                <a class="text-black font-medium titel_content" href="../index.php">Go To Home Page</a>
+                <a href="index.php"><i class="text-[#079d49] fa-solid fa-arrow-left"></i></a>
+                <a class="text-black font-medium titel_content" href="index.php">Go To Home Page</a>
             </div>
 
             <!-- logo  -->
             <div class="flex justify-center mb-3">
-                <img src="../hotelix/assets/hotel_logo/hotelix.png" alt="Hotelix Logo" class="w-[170px]">
+                <img src="assets/hotel_logo/hotelix.png" alt="Hotelix Logo" class="w-[170px]">
             </div>
 
             <h2 class="text-2xl font-bold text-center mb-4 uppercase titel_content">LogIn an Account</h2>
@@ -92,22 +93,24 @@ if(isset($_POST['loginBtn'])) {
             <!-- ==== Email & Mobile Fields ==== -->
             <div class=" mb-4">
                 <input type="email" name="email" id="email" placeholder="Email Address"
-                    class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle" value="<?= isset($email) ? htmlspecialchars($email) : '' ?>">
-                    <small class="text-red-500"><?= $errors['email'] ?? '' ?></small>
+                    class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle"
+                    value="<?= isset($email) ? htmlspecialchars($email) : '' ?>">
+                <small class="text-red-500"><?= $errors['email'] ?? '' ?></small>
             </div>
 
             <!-- ==== Password Fields ==== -->
             <div class="mb-4">
                 <input type="password" name="password" id="password" placeholder="Password"
-                    class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle" value="<?= isset($password) ? htmlspecialchars($password) : '' ?>">
-                    <small class="text-red-500"><?= $errors['password'] ?? '' ?></small>
+                    class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle"
+                    value="<?= isset($password) ? htmlspecialchars($password) : '' ?>">
+                <small class="text-red-500"><?= $errors['password'] ?? '' ?></small>
             </div>
 
             <!-- already have account  -->
 
             <div class="flex justify-between mx-2 mb-3 font-medium">
                 <p>Do not have an account?</p>
-                <a href="register.php" class="uppercase titel_content font-medium text-red-500">Register</a>
+                <a href="auth/register.php" class="uppercase titel_content font-medium text-red-500">Register</a>
             </div>
 
             <!-- === login Button ==== -->

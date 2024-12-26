@@ -72,28 +72,27 @@ if (isset($_POST['registerBtn'])) {
         }
     }
 
-    
-    if(empty($errors)) {
+
+    if (empty($errors)) {
         // check email already register 
         $select = "SELECT * FROM users WHERE email = '$email'";
         $result = mysqli_query($db_root, $select);
 
-        if(mysqli_num_rows($result) > 0) {
+        if (mysqli_num_rows($result) > 0) {
             $errors['email'] = "Email already Register";
-        }
-        else {
+        } else {
             $hash_password = password_hash($password, PASSWORD_BCRYPT);
-            
+
             $insert = "INSERT INTO users (name, email, phone, gender, photo, password) values('$name', '$email', '$phone', '$gender', '$uploaded_photo', '$hash_password')";
 
-            if(mysqli_query($db_root, $insert)) {
+            if (mysqli_query($db_root, $insert)) {
                 header('location: login.php');
                 exit();
-            }else {
+            } else {
                 $errors['insert'] = "Errors:" . mysqli_error($db_root);
             }
         }
-        
+
     }
 
 }
@@ -104,6 +103,7 @@ if (isset($_POST['registerBtn'])) {
 <html lang="en">
 
 <head>
+    <base href="/hotelix_hotel_management/">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration</title>
@@ -144,13 +144,13 @@ if (isset($_POST['registerBtn'])) {
             class="max-w-lg md:mx-auto mx-4 bg-white md:p-8 px-4 py-4 rounded-xl shadow-md ">
             <!-- go to home  -->
             <div class=" flex justify-center items-center gap-2 mb-4">
-                <a href="../index.php"><i class="text-[#079d49] fa-solid fa-arrow-left"></i></a>
-                <a class="text-black font-medium titel_content" href="../index.php">Go To Home Page</a>
+                <a href="index.php"><i class="text-[#079d49] fa-solid fa-arrow-left"></i></a>
+                <a class="text-black font-medium titel_content" href="index.php">Go To Home Page</a>
             </div>
 
             <!-- logo  -->
             <div class="flex justify-center mb-3">
-                <img src="../hotelix/assets/hotel_logo/hotelix.png" alt="Hotelix Logo" class="w-[170px]">
+                <img src="assets/hotel_logo/hotelix.png" alt="Hotelix Logo" class="w-[170px]">
             </div>
 
             <h2 class="text-2xl font-bold text-center mb-4 uppercase titel_content">Create an Account</h2>
@@ -236,7 +236,7 @@ if (isset($_POST['registerBtn'])) {
 
             <div class="flex justify-between mx-2 mb-3 font-medium">
                 <p>Already, have an account?</p>
-                <a href="login.php" class="uppercase titel_content font-medium text-red-500">Log In</a>
+                <a href="auth/login.php" class="uppercase titel_content font-medium text-red-500">Log In</a>
             </div>
 
             <!-- === Register Button ==== -->

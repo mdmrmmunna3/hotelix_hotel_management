@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <base href="/hotelix_hotel_management/">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Navbar</title>
@@ -20,8 +21,7 @@
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <!-- ====== Logo or Brand Name ======== -->
             <a href="/hotelix_hotel_management" class="cursor-pointer">
-                <img src="<?php echo '/hotelix_hotel_management/assets/hotel_logo/hotelix.png'; ?>" alt="Hotelix_logo"
-                    class="w-[150px]">
+                <img src="<?php echo 'assets/hotel_logo/hotelix.png'; ?>" alt="Hotelix_logo" class="w-[150px]">
             </a>
 
             <!-- ======= Navbar links for larger screens ========= -->
@@ -31,13 +31,13 @@
                         class="p-2 text-white border-r-2  border-transparent hover:border-[--border-color] rounded-sm transition-all relative inline-block overflow-hidden group">
                         <span
                             class="absolute inset-0 bg-blue-500 translate-x-[-110%] group-hover:translate-x-0 transition-transform duration-300 ease-out "></span>
-                        <a href="/hotelix_hotel_management/index.php" class="relative z-10">Home</a>
+                        <a href="index.php" class="relative z-10">Home</a>
                     </li>
 
                     <!-- ====== Dropdown Menu ======= -->
                     <li class="relative group ">
 
-                        <a href="/hotelix_hotel_management/hotelix/pages/about.php"
+                        <a href="hotelix/pages/about.php"
                             class="p-2 text-white hover:bg-blue-500  border-r-2 border-transparent hover:border-[--border-color] rounded-sm transition-all flex items-center relative z-10">
                             About
                             <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -49,7 +49,7 @@
                         <!-- ======== Dropdown menu items ========== -->
                         <ul
                             class="dropdown-content absolute hidden bg-gray-900 text-white p-2 rounded shadow-lg top-full left-0 mt-0 w-48 group-hover:block">
-                            <li><a href="/hotelix_hotel_management/hotelix/pages/about.php"
+                            <li><a href="hotelix/pages/about.php"
                                     class="block px-4 py-2 hover:bg-blue-500 border-r-2 border-gray-900 hover:border-white rounded-sm transition-all">About
                                     Hotel</a></li>
                             <li><a href="#"
@@ -75,7 +75,7 @@
                         class="p-2 text-white  border-r-2 border-transparent hover:border-[--border-color] rounded-sm transition-all relative inline-block overflow-hidden group">
                         <span
                             class="absolute inset-0 bg-blue-500  translate-x-[-110%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
-                        <a href="./auth/login.php" class="relative z-10">Log In</a>
+                        <a href="auth/login.php" class="relative z-10">Log In</a>
                     </li>
 
                     <!-- ===== toggle icon ====== -->
@@ -125,12 +125,12 @@
                     class="p-2 text-white border-r-2  border-transparent hover:border-[--border-color] rounded-sm transition-all relative inline-block overflow-hidden group w-full">
                     <span
                         class="absolute inset-0 bg-blue-500  translate-x-[-110%] group-hover:translate-x-0 transition-transform duration-300 ease-out "></span>
-                    <a href="/hotelix_hotel_management/index.php" class="relative z-10 ">Home</a>
+                    <a href="index.php" class="relative z-10 ">Home</a>
                 </li>
 
                 <!-- ====== Dropdown Menu ======= -->
                 <li class="relative">
-                    <a href="/hotelix_hotel_management/hotelix/pages/about.php"
+                    <a href="hotelix/pages/about.php"
                         class="p-2 text-white w-full flex justify-between items-center border-r-2 border-transparent hover:border-[--border-color]"
                         id="button">
                         About
@@ -143,7 +143,7 @@
                     <!-- ======== Dropdown menu items for mobile ========== -->
                     <ul
                         class="dropdown-content hidden bg-gray-900 text-white p-2 rounded shadow-md shadow-blue-400 w-full">
-                        <li><a href="/hotelix_hotel_management/hotelix/pages/about.php"
+                        <li><a href="hotelix/pages/about.php"
                                 class="block px-4 py-2 hover:bg-blue-500 border-r-2 border-gray-900 hover:border-white rounded-sm transition-all">About
                                 Hotel</a></li>
                         <li><a href="#"
@@ -169,7 +169,7 @@
                     class="p-2 text-white  border-r-2 border-transparent hover:border-[--border-color] rounded-sm transition-all relative inline-block overflow-hidden group">
                     <span
                         class="absolute inset-0 bg-blue-500  translate-x-[-110%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
-                    <a href="./auth/login.php" class="relative z-10">Log In</a>
+                    <a href="<?php echo 'auth/login.php' ?>" class="relative z-10">Log In</a>
                 </li>
 
                 <li>
