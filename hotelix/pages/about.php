@@ -14,7 +14,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- ======== swiper cdn link css ======= -->
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <!-- <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
     <!-- ======= vanila css ====== -->
     <link rel="stylesheet" href="../../style.css">
@@ -77,28 +78,30 @@
         <p class="titel_content text-center lg:text-5xl md:text-4xl text-2xl py-5 uppercase">Behind our Team</p>
         <!-- Component: team member slider -->
         <!-- Swiper Component -->
-        <div class="swiper-container md:mx-8 mx-4 py-5 overflow-hidden">
+        <div class="swiper swiper-container md:mx-8 mx-4 py-10 relative overflow-hidden">
             <div class="swiper-wrapper">
                 <!-- member Card 1 -->
                 <div
                     class="swiper-slide border rounded-lg border-blue-400 px-6 py-4 relative overflow-hidden slide_main">
-                    <img src="<?php echo '/hotelix_hotel_management/assets/about/munna.jpg' ?>" alt=""
-                        class="h-[300px] w-full rounded-md relative overflow-hidden">
+                    <div class="relative overflow-hidden">
+                        <img src="<?php echo '/hotelix_hotel_management/assets/about/munna.jpg' ?>" alt=""
+                            class="h-[300px] w-full rounded-md relative overflow-hidden">
+                    </div>
                     <div class="social-icons absolute left-1/2">
                         <a href="#"
-                            class="text-white mx-2 text-[25px] hover:text-blue-500 transition-transform duration-300 transform hover:scale-110">
+                            class="mx-2 text-[25px] hover:text-blue-500 transition-transform duration-300 transform hover:scale-110">
                             <i class="fab fa-facebook-f"></i>
                         </a>
                         <a href="#"
-                            class="text-white mx-2 text-[25px] hover:text-blue-500 transition-transform duration-300 transform hover:scale-110">
+                            class="mx-2 text-[25px] hover:text-blue-500 transition-transform duration-300 transform hover:scale-110">
                             <i class="fab fa-twitter"></i>
                         </a>
                         <a href="#"
-                            class="text-white mx-2 text-[25px] hover:text-blue-500 transition-transform duration-300 transform hover:scale-110">
+                            class="mx-2 text-[25px] hover:text-blue-500 transition-transform duration-300 transform hover:scale-110">
                             <i class="fab fa-instagram"></i>
                         </a>
                         <a href="#"
-                            class="text-white mx-2 text-[25px] hover:text-blue-500 transition-transform duration-300 transform hover:scale-110">
+                            class="mx-2 text-[25px] hover:text-blue-500 transition-transform duration-300 transform hover:scale-110">
                             <i class="fab fa-linkedin"></i>
                         </a>
                     </div>
@@ -109,13 +112,101 @@
                     </div>
                 </div>
 
+                <!-- member Card 2 -->
+                <div
+                    class="swiper-slide border rounded-lg border-blue-400 px-6 py-4 relative overflow-hidden slide_main">
+                    <div class="relative overflow-hidden">
+                        <img src="<?php echo '/hotelix_hotel_management/assets/about/munna.jpg' ?>" alt=""
+                            class="h-[300px] w-full rounded-md relative overflow-hidden">
+                    </div>
+                    <div class="social-icons absolute left-1/2">
+                        <a href="#"
+                            class=" mx-2 text-[25px] hover:text-blue-500 transition-transform duration-300 transform hover:scale-110">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#"
+                            class=" mx-2 text-[25px] hover:text-blue-500 transition-transform duration-300 transform hover:scale-110">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#"
+                            class=" mx-2 text-[25px] hover:text-blue-500 transition-transform duration-300 transform hover:scale-110">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#"
+                            class=" mx-2 text-[25px] hover:text-blue-500 transition-transform duration-300 transform hover:scale-110">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </div>
 
+                    <div class="pt-10 pb-4 text-center">
+                        <h3 class="font-semibold text-xl">Md Mustafijur Rahman Munna</h3>
+                        <p class="text-gray-400 font-semibold">Hotel Manager</p>
+                    </div>
+                </div>
 
+                <!-- member Card 3 -->
+                <div
+                    class="swiper-slide border rounded-lg border-blue-400 px-6 py-4 relative overflow-hidden slide_main">
+                    <div class="relative overflow-hidden">
+                        <img src="<?php echo '/hotelix_hotel_management/assets/about/munna.jpg' ?>" alt=""
+                            class="h-[300px] w-full rounded-md relative overflow-hidden">
+                    </div>
+                    <div class="social-icons absolute left-1/2">
+                        <a href="#"
+                            class=" mx-2 text-[25px] hover:text-blue-500 transition-transform duration-300 transform hover:scale-110">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#"
+                            class=" mx-2 text-[25px] hover:text-blue-500 transition-transform duration-300 transform hover:scale-110">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#"
+                            class=" mx-2 text-[25px] hover:text-blue-500 transition-transform duration-300 transform hover:scale-110">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#"
+                            class=" mx-2 text-[25px] hover:text-blue-500 transition-transform duration-300 transform hover:scale-110">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </div>
 
+                    <div class="pt-10 pb-4 text-center">
+                        <h3 class="font-semibold text-xl">Md Mustafijur Rahman Munna</h3>
+                        <p class="text-gray-400 font-semibold">Hotel Manager</p>
+                    </div>
+                </div>
 
+                <!-- member Card 4 -->
+                <div
+                    class="swiper-slide border rounded-lg border-blue-400 px-6 py-4 relative overflow-hidden slide_main">
+                    <div class="relative overflow-hidden">
+                        <img src="<?php echo '/hotelix_hotel_management/assets/about/munna.jpg' ?>" alt=""
+                            class="h-[300px] w-full rounded-md relative overflow-hidden">
+                    </div>
+                    <div class="social-icons absolute left-1/2">
+                        <a href="#"
+                            class=" mx-2 text-[25px] hover:text-blue-500 transition-transform duration-300 transform hover:scale-110">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#"
+                            class=" mx-2 text-[25px] hover:text-blue-500 transition-transform duration-300 transform hover:scale-110">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#"
+                            class=" mx-2 text-[25px] hover:text-blue-500 transition-transform duration-300 transform hover:scale-110">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#"
+                            class=" mx-2 text-[25px] hover:text-blue-500 transition-transform duration-300 transform hover:scale-110">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </div>
 
-
-
+                    <div class="pt-10 pb-4 text-center">
+                        <h3 class="font-semibold text-xl">Md Mustafijur Rahman Munna</h3>
+                        <p class="text-gray-400 font-semibold">Hotel Manager</p>
+                    </div>
+                </div>
 
             </div>
 
@@ -130,7 +221,8 @@
     ?>
 
     <!-- Swiper JS -->
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <!-- <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <!-- Initialize Swiper -->
     <script>
         const swiper = new Swiper('.swiper-container', {
@@ -138,9 +230,10 @@
             spaceBetween: 20,
             loop: true,
             autoplay: {
-                delay: 2500,
+                delay: 4000,
                 disableOnInteraction: false,
             },
+            speed: 3000,
             breakpoints: {
                 1024: {
                     slidesPerView: 3,
