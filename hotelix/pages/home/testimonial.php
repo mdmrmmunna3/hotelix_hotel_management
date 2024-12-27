@@ -189,6 +189,8 @@
                         class="block w-2 h-2 transition-colors duration-300 rounded-full opacity-70 ring-1 ring-slate-700 bg-white/20 focus:outline-none"></span></button>
                 <button class="p-4 group" data-glide-dir="=2" aria-label="goto slide 3"><span
                         class="block w-2 h-2 transition-colors duration-300 rounded-full opacity-70 ring-1 ring-slate-700 bg-white/20 focus:outline-none"></span></button>
+                <button class="p-4 group" data-glide-dir="=2" aria-label="goto slide 3"><span
+                        class="block w-2 h-2 transition-colors duration-300 rounded-full opacity-70 ring-1 ring-slate-700 bg-white/20 focus:outline-none"></span></button>
             </div>
         </div>
     </section>

@@ -52,7 +52,7 @@
                             <li><a href="hotelix/pages/about.php"
                                     class="block px-4 py-2 hover:bg-blue-500 border-r-2 border-gray-900 hover:border-white rounded-sm transition-all">About
                                     Hotel</a></li>
-                            <li><a href="#"
+                            <li><a href="hotelix/pages/about.php"
                                     class="block px-4 py-2 hover:bg-blue-500 border-r-2 border-gray-900 hover:border-white rounded-sm transition-all">Our
                                     Team</a></li>
                         </ul>
@@ -62,7 +62,7 @@
                         class="p-2 text-white  border-r-2 border-transparent hover:border-[--border-color] rounded-sm transition-all relative inline-block overflow-hidden group">
                         <span
                             class="absolute inset-0 bg-blue-500  translate-x-[-110%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
-                        <a href="#" class="relative z-10">Gallery</a>
+                        <a href="hotelix/pages/gallery.php" class="relative z-10">Gallery</a>
                     </li>
                     <li
                         class="p-2 text-white  border-r-2 border-transparent hover:border-[--border-color] rounded-sm transition-all relative inline-block overflow-hidden group">
@@ -146,7 +146,7 @@
                         <li><a href="hotelix/pages/about.php"
                                 class="block px-4 py-2 hover:bg-blue-500 border-r-2 border-gray-900 hover:border-white rounded-sm transition-all">About
                                 Hotel</a></li>
-                        <li><a href="#"
+                        <li><a href="hotelix/pages/about.php"
                                 class="block px-4 py-2 hover:bg-blue-500 border-r-2 border-gray-900 hover:border-white rounded-sm transition-all">Our
                                 Team</a></li>
                     </ul>
@@ -156,7 +156,7 @@
                     class="p-2 text-white border-r-2  border-transparent hover:border-[--border-color] rounded-sm transition-all relative inline-block overflow-hidden group w-full">
                     <span
                         class="absolute inset-0 bg-blue-500  translate-x-[-110%] group-hover:translate-x-0 transition-transform duration-300 ease-out "></span>
-                    <a href="#" class="relative z-10 ">Gallery</a>
+                    <a href="hotelix/pages/gallery.php" class="relative z-10 ">Gallery</a>
                 </li>
                 <li
                     class="p-2 text-white border-r-2  border-transparent hover:border-[--border-color] rounded-sm transition-all relative inline-block overflow-hidden group w-full">

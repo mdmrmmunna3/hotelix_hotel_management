@@ -28,7 +28,7 @@
                             class="w-[85%] md:w-[270px] h-[228px] rounded-md">
                         <div
                             class="absolute text-6xl w-36 h-36 rounded-full border flex flex-col justify-center items-center bg-blue-300 lg:left-[20%] md:left-[25%] left-[57%] top-[13%] titel_content">
-                            15+ <span class="text-3xl">Years</span></div>
+                            17+ <span class="text-3xl">Years</span></div>
                     </div>
                     <h3 class="titel md:text-4xl text-3xl py-4">Our Hotel</h3>
                     <p class=" lg:text-6xl md:text-5xl text-4xl titel_content uppercase">
