@@ -19,21 +19,25 @@
     <!-- ======= vanila css ====== -->
     <link rel="stylesheet" href="style.css">
     <!-- box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; -->
+     <style>
+        .slide_main {
+            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        }
+     </style>
 </head>
 <body>
     <section>
-        <!-- Component: Side navigation menu with user profile and alert message -->
-        <!-- Mobile trigger -->
-        <button title="Side navigation" type="button" class="fixed z-40 self-center order-10 visible block w-10 h-10 bg-white rounded opacity-100 lg:hidden left-6 top-6" aria-haspopup="menu" aria-label="Side navigation" aria-expanded="false" aria-controls="nav-menu-1">
-            <div class="absolute w-6 transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
-                <span aria-hidden="true" class="absolute block h-0.5 w-9/12 -translate-y-2 transform rounded-full bg-slate-700 transition-all duration-300"></span>
-                <span aria-hidden="true" class="absolute block h-0.5 w-6 transform rounded-full bg-slate-900 transition duration-300"></span>
-                <span aria-hidden="true" class="absolute block h-0.5 w-1/2 origin-top-left translate-y-2 transform rounded-full bg-slate-900 transition-all duration-300"></span>
-            </div>
-        </button>
+       
+    <button title="Side navigation" type="button" class="fixed z-40 self-center order-10 visible block w-10 h-10 bg-white rounded opacity-100 lg:hidden right-6 top-6" aria-haspopup="menu" aria-label="Side navigation" aria-expanded="false" aria-controls="nav-menu-1">
+        <div class="absolute w-6 transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+            <span aria-hidden="true" class="absolute block h-0.5 w-9/12 -translate-y-2 transform rounded-full bg-slate-700 transition-all duration-300"></span>
+            <span aria-hidden="true" class="absolute block h-0.5 w-6 transform rounded-full bg-slate-900 transition duration-300"></span>
+            <span aria-hidden="true" class="absolute block h-0.5 w-1/2 origin-top-left translate-y-2 transform rounded-full bg-slate-900 transition-all duration-300"></span>
+        </div>
+    </button>
 
-    <!-- Side Navigation -->
-        <aside id="nav-menu-1" aria-label="Side navigation" class="fixed top-0 bottom-0 left-0 z-40 flex flex-col transition-transform -translate-x-full bg-white border-r w-72 sm:translate-x-0 ">
+  
+        <aside id="nav-menu-1" aria-label="Side navigation" class="fixed top-0 bottom-0 left-0 z-40 flex flex-col transition-transform -translate-x-full bg-white border-r w-72 sm:translate-x-0 overflow-y-auto slide_main">
             <div class="flex flex-col items-center gap-4 p-6 border-b ">
                 <div class="shrink-0">
                 <a href="#" class="relative flex items-center justify-center w-16 h-16 text-white rounded-full">
@@ -46,7 +50,7 @@
                 <p class="w-full text-sm truncate text-slate-500">Hotel Manager</p>
                 </div>
             </div>
-            <nav aria-label="side navigation" class="flex-1 overflow-auto divide-y divide-slate-100">
+            <nav aria-label="side navigation" class="flex-1">
                 <div>
                 <ul class="flex flex-col flex-1 gap-1 py-3">
                     <li class="px-3">
@@ -183,27 +187,43 @@
             </footer>
         </aside>
 
-    <!-- Backdrop -->
+  
         <div class="fixed top-0 bottom-0 left-0 right-0 z-30 transition-colors bg-slate-900/20 sm:hidden"></div>
-    <!-- End Side navigation menu with user profile and alert message -->
+   
     </section>
 
 
         <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const dropdownToggles = document.querySelectorAll('[data-collapse-toggle]');
-
-            dropdownToggles.forEach(toggle => {
-                const menuId = toggle.getAttribute('aria-controls');
-                const dropdownMenu = document.getElementById(menuId);
-
-                toggle.addEventListener('click', () => {
-                    dropdownMenu.classList.toggle('hidden');
-                });
-            });
+        
+        document.querySelectorAll('[data-collapse-toggle]').forEach((toggle) => {
+        toggle.addEventListener('click', (e) => {
+            const target = document.getElementById(toggle.getAttribute('aria-controls'));
+            target.classList.toggle('hidden');
+        });
         });
 
+        // Select the mobile menu button, the menu itself, and the backdrop
+    const menuButton = document.querySelector('button[aria-controls="nav-menu-1"]');
+    const sideMenu = document.getElementById('nav-menu-1');
+    const backdrop = document.querySelector('.fixed.bg-slate-900');
 
+    // Event listener to toggle the side menu visibility on button click
+    menuButton.addEventListener('click', () => {
+        const isMenuOpen = sideMenu.classList.contains('translate-x-0');
+        
+        // Toggle the side menu and backdrop visibility
+        sideMenu.classList.toggle('-translate-x-full', isMenuOpen);
+        sideMenu.classList.toggle('translate-x-0', !isMenuOpen);
+        backdrop.classList.toggle('hidden', isMenuOpen);
+    });
+
+    // Close the side menu when clicking on the backdrop
+    backdrop.addEventListener('click', () => {
+        sideMenu.classList.add('-translate-x-full');
+        sideMenu.classList.remove('translate-x-0');
+        backdrop.classList.add('hidden');
+    });
+         
         </script>
 
 </body>

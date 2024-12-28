@@ -92,3 +92,15 @@
 </html>
 
 <!-- #ecfdf5  -->
+<!-- // document.addEventListener('DOMContentLoaded', () => {
+        //     const dropdownToggles = document.querySelectorAll('[data-collapse-toggle]');
+
+        //     dropdownToggles.forEach(toggle => {
+        //         const menuId = toggle.getAttribute('aria-controls');
+        //         const dropdownMenu = document.getElementById(menuId);
+
+        //         toggle.addEventListener('click', () => {
+        //             dropdownMenu.classList.toggle('hidden');
+        //         });
+        //     });
+        // }); -->
