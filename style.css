@@ -11,15 +11,15 @@
 */
 
 /* toggle theme start  */
-root {
-    --primary-color: #fff;
+:root {
+    --primary-color: white;
     --secondary-color: #121c22;
     --border-color: #4320dd;
 }
 
 .dark {
     --primary-color: #111827;
-    --secondary-color: #ffffff;
+    --secondary-color: white;
     --border-color: #ffffff;
 }
 
@@ -61,5 +61,3 @@ body {
 .titel_content {
     font-family: "Crimson Text", serif;
 }
-
-

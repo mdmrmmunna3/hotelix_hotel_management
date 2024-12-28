@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <h3>Hello Hotel!</h3>
+    <h3 class="h-[250px] flex justify-start items-end">Hello Hotel!</h3>
 </body>
 
 </html>
