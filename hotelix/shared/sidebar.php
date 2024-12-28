@@ -36,15 +36,14 @@
             <nav class="titel_content">
                 <!-- dashboard  -->
                 <a href="main_dashboard.php?page=dashboard"
-                    class="block py-3 px-4 rounded transition-colors hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 text-lg sidebar-link
-                <?php echo (isset($_GET['page']) && $_GET['page'] == 'dashboard') || !isset($_GET['page']) ? 'bg-emerald-300' : ''; ?>" data-page="dashboard">
+                    class="block py-3 px-4 rounded transition-colors hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 text-lg ajax-link
+                <?php echo (isset($_GET['page']) && $_GET['page'] == 'dashboard') || !isset($_GET['page']) ? 'bg-emerald-300' : ''; ?>">
                     Dashboard
                 </a>
 
                 <!-- hotel  -->
-                <a href="main_dashboard.php?page=hotel" class="block py-3 px-4 rounded transition-colors hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 text-lg sidebar-link
-                <?php echo (isset($_GET['page']) && $_GET['page'] == 'hotel') ? 'bg-emerald-300' : ''; ?>"
-                    data-page="hotel">
+                <a href="main_dashboard.php?page=hotel" class="block py-3 px-4 rounded transition-colors hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 text-lg ajax-link
+                <?php echo (isset($_GET['page']) && $_GET['page'] == 'hotel') ? 'bg-emerald-300' : ''; ?>">
                     Hotels
                 </a>
 
