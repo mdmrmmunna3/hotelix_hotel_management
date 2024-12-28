@@ -77,7 +77,7 @@
             <div class="relative overflow-hidden">
                 <img src="<?php echo 'assets/about/munna.jpg' ?>" alt="about room" class="w-full h-[350px] rounded-md">
                 <div
-                    class="absolute bottom-0 bg-black bg-opacity-35 w-full h-full flex flex-col items-center justify-end pb-11">
+                    class="absolute bottom-0 bg-black bg-opacity-35 w-full h-full flex flex-col items-center justify-end pb-11 text-white">
                     <h5 class="titel_content text-xl">Md Mustafijur Rahman Munna</h5>
                     <p class="titel_content uppercase"><span>Hotel Manager</span></p>
                 </div>
@@ -86,7 +86,7 @@
             <div class="relative overflow-hidden block md:hidden lg:block">
                 <img src="<?php echo 'assets/about/munna.jpg' ?>" alt="about room" class="w-full h-[350px] rounded-md">
                 <div
-                    class="absolute bottom-0 bg-black bg-opacity-35 w-full h-full flex flex-col items-center justify-end pb-11">
+                    class="absolute bottom-0 bg-black bg-opacity-35 w-full h-full flex flex-col items-center justify-end pb-11 text-white">
                     <h5 class="titel_content text-xl">Md Masud Rana</h5>
                     <p class="titel_content uppercase"><span>RECEPTIONIST</span></p>
                 </div>
@@ -134,44 +134,64 @@
                         <div class="masonry">
                             <!-- Image Items -->
                             <div class="masonry-item bg-gray-800 rounded-lg shadow-lg p-4">
-                                <img src="<?php echo 'assets/about/munna.jpg' ?>" alt="about room"
+                                <img src="<?php echo 'assets/gallery/gallery1.jpg' ?>" alt="about room"
                                     class="w-full lg:h-[350px] h-[300px] rounded-md">
                                 <p class="mt-2 text-sm">Caption or description for Image 1</p>
                             </div>
                             <div class="masonry-item bg-gray-800 rounded-lg shadow-lg p-4">
-                                <img src="<?php echo 'assets/about/munna.jpg' ?>" alt="about room"
+                                <img src="<?php echo 'assets/gallery/gallery2.jpg' ?>" alt="about room"
                                     class="w-full h-[300px] rounded-md">
                                 <p class="mt-2 text-sm">Caption or description for Image 2</p>
                             </div>
                             <div class="masonry-item bg-gray-800 rounded-lg shadow-lg p-4">
-                                <img src="<?php echo 'assets/about/munna.jpg' ?>" alt="about room"
+                                <img src="<?php echo 'assets/gallery/gallery3.jpg' ?>" alt="about room"
                                     class="w-full md:h-[250px] h-[300px] rounded-md">
                                 <p class="mt-2 text-sm">Caption or description for Image 3</p>
                             </div>
                             <div class="masonry-item bg-gray-800 rounded-lg shadow-lg p-4">
-                                <img src="<?php echo 'assets/about/munna.jpg' ?>" alt="about room"
+                                <img src="<?php echo 'assets/gallery/gallery4.jpg' ?>" alt="about room"
                                     class="w-full lg:h-[450px] md:h-[350px] h-[300px] rounded-md">
                                 <p class="mt-2 text-sm">Caption or description for Image 4</p>
                             </div>
                             <div class="masonry-item bg-gray-800 rounded-lg shadow-lg p-4">
-                                <img src="<?php echo 'assets/about/munna.jpg' ?>" alt="about room"
-                                    class="w-full md:h-[350px] h-[300px] rounded-md">
+                                <img src="<?php echo 'assets/gallery/gallery5.jpg' ?>" alt="about room"
+                                    class="w-full md:h-[400px] h-[300px] rounded-md">
                                 <p class="mt-2 text-sm">Caption or description for Image 5</p>
                             </div>
                             <div class="masonry-item bg-gray-800 rounded-lg shadow-lg p-4">
-                                <img src="<?php echo 'assets/about/munna.jpg' ?>" alt="about room"
+                                <img src="<?php echo 'assets/gallery/gallery6.jpg' ?>" alt="about room"
                                     class="w-full md:h-[350px] h-[300px] rounded-md">
                                 <p class="mt-2 text-sm">Caption or description for Image 6</p>
                             </div>
                             <div class="masonry-item bg-gray-800 rounded-lg shadow-lg p-4">
-                                <img src="<?php echo 'assets/about/munna.jpg' ?>" alt="about room"
+                                <img src="<?php echo 'assets/gallery/gallery7.jpg' ?>" alt="about room"
                                     class="w-full lg:h-[300px] md:h-[250px] h-[300px] rounded-md">
                                 <p class="mt-2 text-sm">Caption or description for Image 7</p>
                             </div>
                             <div class="masonry-item bg-gray-800 rounded-lg shadow-lg p-4">
-                                <img src="<?php echo 'assets/about/munna.jpg' ?>" alt="about room"
+                                <img src="<?php echo 'assets/gallery/gallery8.jpg' ?>" alt="about room"
                                     class="w-full md:h-[250px] h-[300px] rounded-md">
                                 <p class="mt-2 text-sm">Caption or description for Image 8</p>
+                            </div>
+                            <div class="masonry-item bg-gray-800 rounded-lg shadow-lg p-4">
+                                <img src="<?php echo 'assets/gallery/gallery9.jpg' ?>" alt="about room"
+                                    class="w-full md:h-[250px] h-[300px] rounded-md">
+                                <p class="mt-2 text-sm">Caption or description for Image 9</p>
+                            </div>
+                            <div class="masonry-item bg-gray-800 rounded-lg shadow-lg p-4">
+                                <img src="<?php echo 'assets/gallery/gallery10.jpg' ?>" alt="about room"
+                                    class="w-full md:h-[450px] h-[300px] rounded-md">
+                                <p class="mt-2 text-sm">Caption or description for Image 10</p>
+                            </div>
+                            <div class="masonry-item bg-gray-800 rounded-lg shadow-lg p-4">
+                                <img src="<?php echo 'assets/gallery/gallery11.jpg' ?>" alt="about room"
+                                    class="w-full md:h-[320px] h-[300px] rounded-md">
+                                <p class="mt-2 text-sm">Caption or description for Image 11</p>
+                            </div>
+                            <div class="masonry-item bg-gray-800 rounded-lg shadow-lg p-4">
+                                <img src="<?php echo 'assets/gallery/gallery12.jpg' ?>" alt="about room"
+                                    class="w-full md:h-[320px] h-[300px] rounded-md">
+                                <p class="mt-2 text-sm">Caption or description for Image 12</p>
                             </div>
                         </div>
                     </div>
@@ -180,31 +200,89 @@
                 <!-- 2nd tab panel -->
                 <div class="tab-panel hidden px-6 py-4" id="tab-panel-2" aria-hidden="true" role="tabpanel"
                     tabindex="-1">
-                    <p>
-                        One must be entirely sensitive to the structure of the material that one is handling. One must
-                        yield to it in tiny details of execution, perhaps the handling of the surface or grain, and one
-                        must master it as a whole.
-                    </p>
+                    <div class="grid lg:grid-cols-3 md:grid-cols-2 gap-5">
+                            <!-- Image Items -->
+                            
+                            <div class="masonry-item bg-gray-800 rounded-lg shadow-lg p-4">
+                                <img src="<?php echo 'assets/gallery/gallery9.jpg' ?>" alt="about room"
+                                    class="w-full h-[300px] rounded-md">
+                                <p class="mt-2 text-sm">Caption or description for Image 9</p>
+                            </div>
+                            <div class="masonry-item bg-gray-800 rounded-lg shadow-lg p-4">
+                                <img src="<?php echo 'assets/gallery/gallery10.jpg' ?>" alt="about room"
+                                    class="w-full h-[300px] rounded-md">
+                                <p class="mt-2 text-sm">Caption or description for Image 10</p>
+                            </div>
+                            <div class="masonry-item bg-gray-800 rounded-lg shadow-lg p-4">
+                                <img src="<?php echo 'assets/gallery/gallery11.jpg' ?>" alt="about room"
+                                    class="w-full h-[300px] rounded-md">
+                                <p class="mt-2 text-sm">Caption or description for Image 11</p>
+                            </div>
+                            <div class="masonry-item bg-gray-800 rounded-lg shadow-lg p-4">
+                                <img src="<?php echo 'assets/gallery/gallery12.jpg' ?>" alt="about room"
+                                    class="w-full h-[300px] rounded-md">
+                                <p class="mt-2 text-sm">Caption or description for Image 12</p>
+                            </div>
+                        </div>
                 </div>
 
                 <!-- 3rd tab panel -->
                 <div class="tab-panel hidden px-6 py-4" id="tab-panel-3" aria-hidden="true" role="tabpanel"
                     tabindex="-1">
-                    <p>
-                        Even though there is no certainty that the expected results of our work will manifest, we have
-                        to remain committed to our work and duties; because, even if the results are slated to arrive,
-                        they cannot do so without the performance of work.
-                    </p>
+                    <div class="grid lg:grid-cols-3 md:grid-cols-2 gap-5">
+                            <!-- Image Items -->
+                            <div class="masonry-item bg-gray-800 rounded-lg shadow-lg p-4">
+                                <img src="<?php echo 'assets/gallery/gallery1.jpg' ?>" alt="about room"
+                                    class="w-full h-[300px] rounded-md">
+                                <p class="mt-2 text-sm">Caption or description for Image 1</p>
+                            </div>
+                            <div class="masonry-item bg-gray-800 rounded-lg shadow-lg p-4">
+                                <img src="<?php echo 'assets/gallery/gallery2.jpg' ?>" alt="about room"
+                                    class="w-full h-[300px] rounded-md">
+                                <p class="mt-2 text-sm">Caption or description for Image 2</p>
+                            </div>
+                            <div class="masonry-item bg-gray-800 rounded-lg shadow-lg p-4">
+                                <img src="<?php echo 'assets/gallery/gallery3.jpg' ?>" alt="about room"
+                                    class="w-full h-[300px] rounded-md">
+                                <p class="mt-2 text-sm">Caption or description for Image 3</p>
+                            </div>
+                            <div class="masonry-item bg-gray-800 rounded-lg shadow-lg p-4">
+                                <img src="<?php echo 'assets/gallery/gallery4.jpg' ?>" alt="about room"
+                                    class="w-full h-[300px] rounded-md">
+                                <p class="mt-2 text-sm">Caption or description for Image 4</p>
+                            </div>
+                            
+                        </div>
                 </div>
 
                 <!-- 4th tab panel -->
                 <div class="tab-panel hidden px-6 py-4" id="tab-panel-4" aria-hidden="true" role="tabpanel"
                     tabindex="-1">
-                    <p>
-                        Even though there is no certainty that the expected results of our work will manifest, we have
-                        to remain committed to our work and duties; because, even if the results are slated to arrive,
-                        they cannot do so without the performance of work.
-                    </p>
+                    <div class="grid lg:grid-cols-3 md:grid-cols-2 gap-5">
+                            <!-- Image Items -->
+                            
+                            <div class="masonry-item bg-gray-800 rounded-lg shadow-lg p-4">
+                                <img src="<?php echo 'assets/gallery/gallery5.jpg' ?>" alt="about room"
+                                    class="w-full h-[300px] rounded-md">
+                                <p class="mt-2 text-sm">Caption or description for Image 5</p>
+                            </div>
+                            <div class="masonry-item bg-gray-800 rounded-lg shadow-lg p-4">
+                                <img src="<?php echo 'assets/gallery/gallery6.jpg' ?>" alt="about room"
+                                    class="w-full h-[300px] rounded-md">
+                                <p class="mt-2 text-sm">Caption or description for Image 6</p>
+                            </div>
+                            <div class="masonry-item bg-gray-800 rounded-lg shadow-lg p-4">
+                                <img src="<?php echo 'assets/gallery/gallery7.jpg' ?>" alt="about room"
+                                    class="w-full h-[300px] rounded-md">
+                                <p class="mt-2 text-sm">Caption or description for Image 7</p>
+                            </div>
+                            <div class="masonry-item bg-gray-800 rounded-lg shadow-lg p-4">
+                                <img src="<?php echo 'assets/gallery/gallery8.jpg' ?>" alt="about room"
+                                    class="w-full h-[300px] rounded-md">
+                                <p class="mt-2 text-sm">Caption or description for Image 8</p>
+                            </div>
+                            
+                        </div>
                 </div>
             </div>
         </section>
