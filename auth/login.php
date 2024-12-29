@@ -1,5 +1,7 @@
 <?php
 require_once('../db_root.php');
+session_start(); // Make sure to start the session to store session variables
+
 $errors = [];
 if (isset($_POST['loginBtn'])) {
     $email = $_POST['email'];
@@ -25,8 +27,19 @@ if (isset($_POST['loginBtn'])) {
 
             // Now, check if the password matches (use password_verify if password is hashed)
             if (password_verify($password, $user['password'])) {
-                // If valid, redirect to home page
-                header('Location: ../index.php');
+                // Store user details in session
+                $_SESSION['user'] = $user;  // Store the user data in session
+                $_SESSION['isLoggedIn'] = true;
+                
+                // Check user role or if email is admin
+                if ($user['role'] == 'admin') {
+                    // Redirect to admin dashboard
+                    header('Location: ../main_dashboard.php?page=dashboard');
+                } else {
+                    $loginSuccess = false; 
+                    // Redirect to user dashboard
+                    header('Location: ../user_dashboard.php');
+                }
                 exit;
             } else {
                 // Invalid password
@@ -39,6 +52,7 @@ if (isset($_POST['loginBtn'])) {
     }
 }
 ?>
+
 
 
 <!DOCTYPE html>

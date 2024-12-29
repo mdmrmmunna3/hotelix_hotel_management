@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <base href="/hotelix_hotel_management/">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard | sidebar</title>
@@ -145,7 +146,7 @@
 
                 <!-- logout  -->
                 <footer class="p-3 border-t border-slate-200">
-                    <a href="#" class="flex items-center gap-3 p-3 transition-colors rounded hover:text-emerald-500 ">
+                    <a href="auth/logout.php" class="flex items-center gap-3 p-3 transition-colors rounded hover:text-emerald-500 ">
                         <div class="flex items-center self-center">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="w-6 h-6" aria-label="Dashboard icon"
@@ -164,7 +165,7 @@
         </div>
 
         <!-- Mobile Sidebar -->
-        <div class="lg:hidden p-4 bg-[--primary-color] fixed z-30 inset-y-0 left-0 transform -translate-x-full transition-transform duration-300 ease-in-out sidebar_main pt-16 backdrop:blur-[8px"
+        <div class="lg:hidden h-full p-4 bg-[--primary-color] fixed z-30 inset-y-0 left-0 transform -translate-x-full transition-transform duration-300 ease-in-out sidebar_main pt-16 backdrop:blur-[8px"
             id="mobile-sidebar">
             <button onclick="toggleSidebar()" class=" absolute top-4 right-4">✕</button>
             <div class="flex flex-col items-center gap-4 p-6 border-b ">
@@ -224,12 +225,12 @@
 
                 <!-- Room Facilities  -->
                 <div class="block py-3 px-4 rounded transition-colors hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50"
-                    aria-controls="dropdown-room-facilities" data-collapse-toggle="dropdown-room-facilities">
+                    aria-controls="dropdown-room-facilities2" data-collapse-toggle="dropdown-room-facilities2">
                     <div class="flex justify-between items-center text-lg">
                         <span> Room Facilities</span> <span><i class="fa-solid fa-angle-down"></i></span>
                     </div>
                 </div>
-                <ul id="dropdown-room-facilities" class="hidden py-2 space-y-2">
+                <ul id="dropdown-room-facilities2" class="hidden py-2 space-y-2">
                     <li><a href="#"
                             class="flex items-center w-full p-2 text-lg font-normal transition duration-75 rounded-lg group hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 pl-11 ajax-link focus:text-emerald-500">Facilities
                             List</a></li>
@@ -243,12 +244,12 @@
 
                 <!-- housekepping  -->
                 <div class="block py-3 px-4 rounded transition-colors hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50"
-                    aria-controls="dropdown-housekeeping" data-collapse-toggle="dropdown-housekeeping">
+                    aria-controls="dropdown-housekeeping2" data-collapse-toggle="dropdown-housekeeping2">
                     <div class="flex justify-between items-center text-lg">
                         <span>Housekeeping</span> <span><i class="fa-solid fa-angle-down"></i></span>
                     </div>
                 </div>
-                <ul id="dropdown-housekeeping" class="hidden py-2 space-y-2">
+                <ul id="dropdown-housekeeping2" class="hidden py-2 space-y-2">
                     <li><a href="#"
                             class="flex items-center w-full p-2 text-lg font-normal transition duration-75 rounded-lg group hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 pl-11 ajax-link focus:text-emerald-500">Assign
                             Room</a></li>
@@ -256,12 +257,12 @@
 
                 <!-- room settings  -->
                 <div class="block py-3 px-4 rounded transition-colors hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50"
-                    aria-controls="dropdown-rooms-setting" data-collapse-toggle="dropdown-rooms-setting">
+                    aria-controls="dropdown-rooms-setting2" data-collapse-toggle="dropdown-rooms-setting2">
                     <div class="flex justify-between items-center text-lg">
                         <span> Rooms Settings</span> <span><i class="fa-solid fa-angle-down"></i></span>
                     </div>
                 </div>
-                <ul id="dropdown-rooms-setting" class="hidden py-2 space-y-2">
+                <ul id="dropdown-rooms-setting2" class="hidden py-2 space-y-2">
                     <li><a href="#"
                             class="flex items-center w-full p-2 text-lg font-normal transition duration-75 rounded-lg group hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 pl-11 ajax-link focus:text-emerald-500">Bed
                             List</a></li>
@@ -275,20 +276,20 @@
 
                 <!-- report  -->
                 <div class="block py-3 px-4 rounded transition-colors hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50"
-                    aria-controls="dropdown-reports" data-collapse-toggle="dropdown-reports">
+                    aria-controls="dropdown-reports2" data-collapse-toggle="dropdown-reports2">
                     <div class="flex justify-between items-center text-lg">
                         <span> Reports</span> <span><i class="fa-solid fa-angle-down"></i></span>
                     </div>
                 </div>
-                <ul id="dropdown-reports" class="hidden py-2 space-y-2">
+                <ul id="dropdown-reports2" class="hidden py-2 space-y-2">
                     <li><a href="#"
-                            class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 pl-11">Booking
+                            class="flex items-center w-full p-2 text-base font-normal transition duration-75 rounded-lg group hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 pl-11">Booking
                             Reports</a></li>
                     <li><a href="#"
-                            class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 pl-11">Purchase
+                            class="flex items-center w-full p-2 text-base font-normal transition duration-75 rounded-lg group hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 pl-11">Purchase
                             Reports</a></li>
                     <li><a href="#"
-                            class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 pl-11">Stock
+                            class="flex items-center w-full p-2 text-base font-normal transition duration-75 rounded-lg group hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 pl-11">Stock
                             Reports</a></li>
                 </ul>
 

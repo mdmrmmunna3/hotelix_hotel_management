@@ -17,7 +17,7 @@
     <div class="bg-[--primary-color] p-4 flex items-center justify-between fixed z-30 w-full topbar">
         <div class="flex items-center">
             <button onclick="toggleSidebar()" class=" lg:hidden mr-4">☰</button>
-            <img src="assets/hotel_logo/hotelix.png" alt="Hotelix Logo" class="w-[130px]">
+            <a href=""><img src="assets/hotel_logo/hotelix.png" alt="Hotelix Logo" class="w-[130px]"></a>
         </div>
         <input type="text" placeholder="Search..." class="hidden sm:block bg-gray-700 text-white px-4 py-2 rounded" />
         <div class="flex items-center space-x-4">
