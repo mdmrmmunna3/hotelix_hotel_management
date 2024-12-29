@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 
 <head>
     <base href="/hotelix_hotel_management/">
@@ -19,7 +19,7 @@
             <button onclick="toggleSidebar()" class=" lg:hidden mr-4">☰</button>
             <a href=""><img src="assets/hotel_logo/hotelix.png" alt="Hotelix Logo" class="w-[130px]"></a>
         </div>
-        <input type="text" placeholder="Search..." class="hidden sm:block bg-gray-700 text-white px-4 py-2 rounded" />
+        <input type="text" placeholder="Search..." class="hidden sm:block  text-white px-4 py-2 rounded" />
         <div class="flex items-center space-x-4">
             <!-- ===== toggle icon ====== -->
             <label class="swap swap-rotate">

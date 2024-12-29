@@ -29,6 +29,7 @@ if (isset($_POST['loginBtn'])) {
             if (password_verify($password, $user['password'])) {
                 // Store user details in session
                 $_SESSION['user'] = $user;  // Store the user data in session
+                $_SESSION['user_id'] = $user;  // Store the user id in session
                 $_SESSION['isLoggedIn'] = true;
 
                 // Check user role or if email is admin

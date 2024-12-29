@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,7 +32,7 @@
                 </div>
                 <div class="flex flex-col gap-0 min-h-[2rem] items-start justify-center w-full min-w-0 text-center">
                     <h4 class="w-full text-base truncate text-slate-700">Md Mustafijur Rahman Munna</h4>
-                    <p class="w-full text-sm truncate text-slate-500">Hotel Manager</p>
+                    <p class="w-full text-sm truncate text-slate-500"></p>
                 </div>
             </div>
 
@@ -38,19 +40,19 @@
             <nav class="titel_content">
                 <!-- dashboard  -->
                 <a href="main_dashboard.php?page=dashboard"
-                    class="block py-3 px-4 rounded transition-colors hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 text-lg ajax-link focus:text-emerald-500 ">
+                    class="block py-3 px-4 rounded transition-colors hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 text-lg ajax-link focus:text-emerald-500 "> <i class="fa-solid fa-house-chimney"></i>
                     Dashboard
                 </a>
 
                 <!-- hotel  -->
                 <a href="main_dashboard.php?page=hotel"
-                    class="block py-3 px-4 rounded transition-colors hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 text-lg ajax-link focus:text-emerald-500">
+                    class="block py-3 px-4 rounded transition-colors hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 text-lg ajax-link focus:text-emerald-500"> <i class="fa-solid fa-hotel"></i>
                     Hotels
                 </a>
 
                 <!-- transition  -->
                 <a href="main_dashboard.php?page=hotel"
-                    class="block py-3 px-4 rounded transition-colors hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 text-lg ajax-link focus:text-emerald-500">
+                    class="block py-3 px-4 rounded transition-colors hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 text-lg ajax-link focus:text-emerald-500"> <i class="fa-solid fa-money-check-dollar"></i>
                     Transaction
                 </a>
 
@@ -58,7 +60,7 @@
                 <div class="block py-3 px-4 rounded transition-colors hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50"
                     aria-controls="dropdown-room-book" data-collapse-toggle="dropdown-room-book">
                     <div class="flex justify-between items-center text-lg">
-                        <span> Room Book</span> <span><i class="fa-solid fa-angle-down"></i></span>
+                        <span> <i class="fa-solid fa-people-roof"></i> Room Book</span> <span><i class="fa-solid fa-angle-down"></i></span>
                     </div>
                 </div>
                 <ul id="dropdown-room-book" class="hidden py-2 space-y-2 ">
@@ -77,7 +79,7 @@
                 <div class="block py-3 px-4 rounded transition-colors hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50"
                     aria-controls="dropdown-room-facilities" data-collapse-toggle="dropdown-room-facilities">
                     <div class="flex justify-between items-center text-lg">
-                        <span> Room Facilities</span> <span><i class="fa-solid fa-angle-down"></i></span>
+                        <span> <i class="fa-solid fa-person-booth"></i> Room Facilities</span> <span><i class="fa-solid fa-angle-down"></i></span>
                     </div>
                 </div>
                 <ul id="dropdown-room-facilities" class="hidden py-2 space-y-2">
@@ -96,7 +98,7 @@
                 <div class="block py-3 px-4 rounded transition-colors hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50"
                     aria-controls="dropdown-housekeeping" data-collapse-toggle="dropdown-housekeeping">
                     <div class="flex justify-between items-center text-lg">
-                        <span>Housekeeping</span> <span><i class="fa-solid fa-angle-down"></i></span>
+                        <span><i class="fa-solid fa-broom-ball"></i> Housekeeping</span> <span><i class="fa-solid fa-angle-down"></i></span>
                     </div>
                 </div>
                 <ul id="dropdown-housekeeping" class="hidden py-2 space-y-2">
@@ -109,7 +111,7 @@
                 <div class="block py-3 px-4 rounded transition-colors hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50"
                     aria-controls="dropdown-rooms-setting" data-collapse-toggle="dropdown-rooms-setting">
                     <div class="flex justify-between items-center text-lg">
-                        <span> Rooms Settings</span> <span><i class="fa-solid fa-angle-down"></i></span>
+                        <span><i class="fa-solid fa-gears"></i> Rooms Settings</span> <span><i class="fa-solid fa-angle-down"></i></span>
                     </div>
                 </div>
                 <ul id="dropdown-rooms-setting" class="hidden py-2 space-y-2">
@@ -128,7 +130,7 @@
                 <div class="block py-3 px-4 rounded transition-colors hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50"
                     aria-controls="dropdown-reports" data-collapse-toggle="dropdown-reports">
                     <div class="flex justify-between items-center text-lg">
-                        <span> Reports</span> <span><i class="fa-solid fa-angle-down"></i></span>
+                        <span><i class="fa-solid fa-receipt"></i> Reports</span> <span><i class="fa-solid fa-angle-down"></i></span>
                     </div>
                 </div>
                 <ul id="dropdown-reports" class="hidden py-2 space-y-2">
@@ -148,12 +150,7 @@
                 <footer class="p-3 border-t border-slate-200">
                     <a href="auth/logout.php" class="flex items-center gap-3 p-3 transition-colors rounded hover:text-emerald-500 ">
                         <div class="flex items-center self-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor" class="w-6 h-6" aria-label="Dashboard icon"
-                                role="graphics-symbol">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M11.25 9l-3 3m0 0l3 3m-3-3h7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
+                        <i class="fa-solid fa-share-from-square"></i>
                         </div>
                         <div
                             class="flex flex-col items-start justify-center flex-1 w-full gap-0 overflow-hidden text-lg font-medium truncate">
@@ -188,19 +185,19 @@
             <nav class="titel_content">
                 <!-- dashboard  -->
                 <a href="main_dashboard.php?page=dashboard"
-                    class="block py-3 px-4 rounded transition-colors hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 text-lg ajax-link focus:text-emerald-500">
+                    class="block py-3 px-4 rounded transition-colors hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 text-lg ajax-link focus:text-emerald-500"> <i class="fa-solid fa-house-chimney"></i>
                     Dashboard
                 </a>
 
                 <!-- hotel  -->
                 <a href="main_dashboard.php?page=hotel"
-                    class="block py-3 px-4 rounded transition-colors hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 text-lg ajax-link focus:text-emerald-500">
+                    class="block py-3 px-4 rounded transition-colors hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 text-lg ajax-link focus:text-emerald-500"> <i class="fa-solid fa-hotel"></i>
                     Hotels
                 </a>
 
                 <!-- transition  -->
                 <a href="main_dashboard.php?page=hotel"
-                    class="block py-3 px-4 rounded transition-colors hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 text-lg ajax-link focus:text-emerald-500">
+                    class="block py-3 px-4 rounded transition-colors hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 text-lg ajax-link focus:text-emerald-500"> <i class="fa-solid fa-money-check-dollar"></i>
                     Transaction
                 </a>
 
@@ -208,7 +205,7 @@
                 <div class="block py-3 px-4 rounded transition-colors hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50"
                     aria-controls="dropdown-room-book2" data-collapse-toggle="dropdown-room-book2">
                     <div class="flex justify-between items-center text-lg">
-                        <span> Room Book</span> <span><i class="fa-solid fa-angle-down"></i></span>
+                        <span><i class="fa-solid fa-people-roof"></i> Room Book</span> <span><i class="fa-solid fa-angle-down"></i></span>
                     </div>
                 </div>
                 <ul id="dropdown-room-book2" class="hidden py-2 space-y-2 ">
@@ -227,7 +224,7 @@
                 <div class="block py-3 px-4 rounded transition-colors hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50"
                     aria-controls="dropdown-room-facilities2" data-collapse-toggle="dropdown-room-facilities2">
                     <div class="flex justify-between items-center text-lg">
-                        <span> Room Facilities</span> <span><i class="fa-solid fa-angle-down"></i></span>
+                        <span><i class="fa-solid fa-person-booth"></i> Room Facilities</span> <span><i class="fa-solid fa-angle-down"></i></span>
                     </div>
                 </div>
                 <ul id="dropdown-room-facilities2" class="hidden py-2 space-y-2">
@@ -246,7 +243,7 @@
                 <div class="block py-3 px-4 rounded transition-colors hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50"
                     aria-controls="dropdown-housekeeping2" data-collapse-toggle="dropdown-housekeeping2">
                     <div class="flex justify-between items-center text-lg">
-                        <span>Housekeeping</span> <span><i class="fa-solid fa-angle-down"></i></span>
+                        <span><i class="fa-solid fa-broom-ball"></i> Housekeeping</span> <span><i class="fa-solid fa-angle-down"></i></span>
                     </div>
                 </div>
                 <ul id="dropdown-housekeeping2" class="hidden py-2 space-y-2">
@@ -259,7 +256,7 @@
                 <div class="block py-3 px-4 rounded transition-colors hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50"
                     aria-controls="dropdown-rooms-setting2" data-collapse-toggle="dropdown-rooms-setting2">
                     <div class="flex justify-between items-center text-lg">
-                        <span> Rooms Settings</span> <span><i class="fa-solid fa-angle-down"></i></span>
+                        <span><i class="fa-solid fa-gears"></i> Rooms Settings</span> <span><i class="fa-solid fa-angle-down"></i></span>
                     </div>
                 </div>
                 <ul id="dropdown-rooms-setting2" class="hidden py-2 space-y-2">
@@ -278,7 +275,7 @@
                 <div class="block py-3 px-4 rounded transition-colors hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50"
                     aria-controls="dropdown-reports2" data-collapse-toggle="dropdown-reports2">
                     <div class="flex justify-between items-center text-lg">
-                        <span> Reports</span> <span><i class="fa-solid fa-angle-down"></i></span>
+                        <span><i class="fa-solid fa-receipt"></i> Reports</span> <span><i class="fa-solid fa-angle-down"></i></span>
                     </div>
                 </div>
                 <ul id="dropdown-reports2" class="hidden py-2 space-y-2">
@@ -298,12 +295,7 @@
                 <footer class="p-3 border-t border-slate-200">
                     <a href="#" class="flex items-center gap-3 p-3 transition-colors rounded hover:text-emerald-500 ">
                         <div class="flex items-center self-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor" class="w-6 h-6" aria-label="Dashboard icon"
-                                role="graphics-symbol">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M11.25 9l-3 3m0 0l3 3m-3-3h7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
+                        <i class="fa-solid fa-share-from-square"></i>
                         </div>
                         <div
                             class="flex flex-col items-start justify-center flex-1 w-full gap-0 overflow-hidden text-lg font-medium truncate">
