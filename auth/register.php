@@ -13,13 +13,10 @@ if (isset($_POST['registerBtn'])) {
     $con_password = $_POST['co_pass'];
     $gender = $_POST['gender'];
     $address = trim($_POST['address']);
-
     $uploaded_photo = $_FILES['upload_photo'];
-    // $file_size = $uploaded_photo['size'] / 1024;
+    $default_role = 'user'; // Default role
 
-    // var_dump($first_name, $last_name, $email, $phone, $password, $con_password, $gender, $address, $uploaded_photo);
-
-    // validation for empty filed errors 
+    // Validate inputs
     if (empty($first_name)) {
         $errors['first_name'] = "First name is required.";
     }
@@ -27,15 +24,13 @@ if (isset($_POST['registerBtn'])) {
         $errors['last_name'] = "Last name is required.";
     }
     if (empty($email)) {
-        $errors['email'] = "Email are required.";
-    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL) || !str_ends_with($email, '@gmail.com') || preg_match('/[A-Z]/', $email)) {
-        $errors['email'] = "Enter valid Email";
+        $errors['email'] = "Email is required.";
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL) || !str_ends_with($email, '@gmail.com')) {
+        $errors['email'] = "Enter a valid Gmail address.";
     }
     if (empty($phone)) {
         $errors['number'] = "Phone Number is required.";
     }
-
-    // password 
     if (empty($password)) {
         $errors['password'] = "Password is required.";
     } elseif (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{4,12}$/', $password)) {
@@ -45,58 +40,66 @@ if (isset($_POST['registerBtn'])) {
         $errors['co_pass'] = "Confirm Password is required.";
     }
     if ($password !== $con_password) {
-        $errors['co_pass'] = "Password don't match";
+        $errors['co_pass'] = "Passwords do not match.";
     }
-
-    if (empty($gender)) {
-        $errors['gender'] = "Gender is required.";
+    $allowed_genders = ['male', 'female', 'other'];
+    if (!in_array($gender, $allowed_genders)) {
+        $errors['gender'] = "Invalid gender value.";
     }
     if (empty($address)) {
         $errors['address'] = "Address is required.";
     }
 
-    // uploaded photo validation 
-    if (empty($errors['upload_photo'])) {
-        if ($uploaded_photo['error'] == UPLOAD_ERR_NO_FILE) {
-            $errors['upload_photo'] = "Photo is required";
-        } else {
-            $allowed_exten = ['jpg', 'jpeg', 'png', 'gif'];
-            $file_size = 400 * 1024;
-            $file_exten = strtolower(pathinfo($uploaded_photo['name'], PATHINFO_EXTENSION));
+    // Validate uploaded photo
+    if ($uploaded_photo['error'] === UPLOAD_ERR_NO_FILE) {
+        $errors['upload_photo'] = "Photo is required.";
+    } else {
+        $allowed_exten = ['jpg', 'jpeg', 'png', 'gif'];
+        $allowed_mime_types = ['image/jpeg', 'image/png', 'image/gif'];
+        $file_size_limit = 400 * 1024; // 400 KB
+        $file_exten = strtolower(pathinfo($uploaded_photo['name'], PATHINFO_EXTENSION));
+        $mime_type = mime_content_type($uploaded_photo['tmp_name']);
 
-            if (!in_array($file_exten, $allowed_exten)) {
-                $errors['upload_photo'] = "File must be JPG, JPEG, PNG, or GIF. formate";
-            } elseif ($uploaded_photo['size'] > $file_size) {
-                $errors['upload_photo'] = "file must be maximum 400kb";
-            }
+        if (!in_array($file_exten, $allowed_exten) || !in_array($mime_type, $allowed_mime_types)) {
+            $errors['upload_photo'] = "Invalid file format. Only JPG, PNG, or GIF are allowed.";
+        } elseif ($uploaded_photo['size'] > $file_size_limit) {
+            $errors['upload_photo'] = "File size must not exceed 400 KB.";
+        }
+
+        $photo_content = @file_get_contents($uploaded_photo['tmp_name']);
+        if ($photo_content === false) {
+            $errors['upload_photo'] = "Error reading the uploaded file.";
         }
     }
-
 
     if (empty($errors)) {
-        // check email already register 
-        $select = "SELECT * FROM users WHERE email = '$email'";
-        $result = mysqli_query($db_root, $select);
-
-        if (mysqli_num_rows($result) > 0) {
-            $errors['email'] = "Email already Register";
+        // Check if email is already registered
+        $stmt = $db_root->prepare("SELECT id FROM users WHERE email = ?");
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            $errors['email'] = "Email is already registered.";
         } else {
+            // Hash the password
             $hash_password = password_hash($password, PASSWORD_BCRYPT);
 
-            $insert = "INSERT INTO users (name, email, phone, gender, photo, password) values('$name', '$email', '$phone', '$gender', '$uploaded_photo', '$hash_password')";
+            // Insert user data into the database
+            $insert = $db_root->prepare("INSERT INTO users (name, email, role, phone, gender, photo, mime_type, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+            $insert->bind_param("ssssssss", $name, $email, $default_role, $phone, $gender, $photo_content, $mime_type, $hash_password);
 
-            if (mysqli_query($db_root, $insert)) {
-                header('location: login.php');
+            if ($insert->execute()) {
+                header("Location: login.php");
                 exit();
             } else {
-                $errors['insert'] = "Errors:" . mysqli_error($db_root);
+                $errors['insert'] = "Error: " . $insert->error;
             }
         }
-
     }
-
 }
 ?>
+
+
 
 
 <!DOCTYPE html>

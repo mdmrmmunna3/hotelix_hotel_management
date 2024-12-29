@@ -1,6 +1,6 @@
 <?php
-require_once('../db_root.php');
 session_start(); // Make sure to start the session to store session variables
+require_once('../db_root.php');
 
 $errors = [];
 if (isset($_POST['loginBtn'])) {
@@ -24,12 +24,13 @@ if (isset($_POST['loginBtn'])) {
         // If the user is found
         if ($result->num_rows > 0) {
             $user = $result->fetch_assoc();
+            // var_dump($user);
 
             // Now, check if the password matches (use password_verify if password is hashed)
             if (password_verify($password, $user['password'])) {
                 // Store user details in session
                 $_SESSION['user'] = $user;  // Store the user data in session
-                $_SESSION['user_id'] = $user;  // Store the user id in session
+                $_SESSION['user_id'] = $user['id'];  // Store the user id in session
                 $_SESSION['isLoggedIn'] = true;
 
                 // Check user role or if email is admin
@@ -37,7 +38,7 @@ if (isset($_POST['loginBtn'])) {
                     // Redirect to admin dashboard
                     header('Location: ../main_dashboard.php?page=dashboard');
                 } else {
-                    $loginSuccess = false; 
+                    $loginSuccess = false;
                     // Redirect to user dashboard
                     header('Location: ../user_dashboard.php?page=dashboard');
                 }
