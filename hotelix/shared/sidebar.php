@@ -42,7 +42,7 @@ if ($result->num_rows > 0) {
 
 <body>
     <section>
-        <div class=" p-4 h-full hidden bg-[--primary-color] lg:block w-64 mt-18 sidebar_main pt-16">
+        <div class=" p-4 h-full hidden bg-[--primary-color] lg:block w-72 mt-18 sidebar_main pt-16">
             <div class="flex flex-col items-center gap-4 p-6 border-b ">
                 <div class="shrink-0">
                     <a href="#" class="relative flex items-center justify-center w-16 h-16 text-white rounded-full ">
@@ -67,23 +67,12 @@ if ($result->num_rows > 0) {
                     <i class="fa-solid fa-house-chimney"></i>
                     Dashboard
                 </a>
-                <!-- hotel  -->
-                <a href="main_dashboard.php?page=hotel"
-                    class="block py-3 px-4 rounded transition-colors hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 text-lg ajax-link focus:text-emerald-500">
-                    <i class="fa-solid fa-hotel"></i>
-                    Hotels
-                </a>
-                <!-- transition  -->
-                <a href="main_dashboard.php?page=hotel"
-                    class="block py-3 px-4 rounded transition-colors hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 text-lg ajax-link focus:text-emerald-500">
-                    <i class="fa-solid fa-money-check-dollar"></i>
-                    Transaction
-                </a>
+
                 <!-- room book  -->
                 <div class="block py-3 px-4 rounded transition-colors hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50"
                     aria-controls="dropdown-room-book" data-collapse-toggle="dropdown-room-book">
                     <div class="flex justify-between items-center text-lg">
-                        <span> <i class="fa-solid fa-people-roof"></i> Room Book</span> <span><i
+                        <span> <i class="fa-solid fa-people-roof"></i> Booking Management</span> <span><i
                                 class="fa-solid fa-angle-down"></i></span>
                     </div>
                 </div>
@@ -94,10 +83,40 @@ if ($result->num_rows > 0) {
                     <li><a href="#"
                             class="flex items-center w-full p-2 text-lg font-normal  transition duration-75 rounded-lg group hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 pl-11 ajax-link focus:text-emerald-500">Room
                             Checkout</a></li>
+
+                </ul>
+                <!-- room settings  -->
+                <div class="block py-3 px-4 rounded transition-colors hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50"
+                    aria-controls="dropdown-rooms-setting" data-collapse-toggle="dropdown-rooms-setting">
+                    <div class="flex justify-between items-center text-lg">
+                        <span><i class="fa-solid fa-gears"></i> Room Management</span> <span><i
+                                class="fa-solid fa-angle-down"></i></span>
+                    </div>
+                </div>
+                <ul id="dropdown-rooms-setting" class="hidden py-2 space-y-2">
+                    <li><a href="#"
+                            class="flex items-center w-full p-2 text-lg font-normal  transition duration-75 rounded-lg group hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 pl-11 ajax-link focus:text-emerald-500">Update
+                            Room
+                        </a></li>
+                    <li><a href="#"
+                            class="flex items-center w-full p-2 text-lg font-normal  transition duration-75 rounded-lg group hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 pl-11 ajax-link focus:text-emerald-500">Bed
+                            List</a></li>
                     <li><a href="#"
                             class="flex items-center w-full p-2 text-lg font-normal  transition duration-75 rounded-lg group hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 pl-11 ajax-link focus:text-emerald-500">Room
                             Status</a></li>
+                    <li><a href="#"
+                            class="flex items-center w-full p-2 text-lg font-normal  transition duration-75 rounded-lg group hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 pl-11 ajax-link focus:text-emerald-500">Floor
+                            Plan List</a></li>
+                    <li><a href="#"
+                            class="flex items-center w-full p-2 text-lg font-normal  transition duration-75 rounded-lg group hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 pl-11 ajax-link focus:text-emerald-500">Room
+                            Images</a></li>
                 </ul>
+                <!-- transition  -->
+                <a href="main_dashboard.php?page=hotel"
+                    class="block py-3 px-4 rounded transition-colors hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 text-lg ajax-link focus:text-emerald-500">
+                    <i class="fa-solid fa-money-check-dollar"></i>
+                    Transaction
+                </a>
                 <!-- Room Facilities  -->
                 <div class="block py-3 px-4 rounded transition-colors hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50"
                     aria-controls="dropdown-room-facilities" data-collapse-toggle="dropdown-room-facilities">
@@ -130,25 +149,7 @@ if ($result->num_rows > 0) {
                             class="flex items-center w-full p-2 text-lg font-normal  transition duration-75 rounded-lg group hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 pl-11 ajax-link focus:text-emerald-500">Assign
                             Room</a></li>
                 </ul>
-                <!-- room settings  -->
-                <div class="block py-3 px-4 rounded transition-colors hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50"
-                    aria-controls="dropdown-rooms-setting" data-collapse-toggle="dropdown-rooms-setting">
-                    <div class="flex justify-between items-center text-lg">
-                        <span><i class="fa-solid fa-gears"></i> Rooms Settings</span> <span><i
-                                class="fa-solid fa-angle-down"></i></span>
-                    </div>
-                </div>
-                <ul id="dropdown-rooms-setting" class="hidden py-2 space-y-2">
-                    <li><a href="#"
-                            class="flex items-center w-full p-2 text-lg font-normal  transition duration-75 rounded-lg group hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 pl-11 ajax-link focus:text-emerald-500">Bed
-                            List</a></li>
-                    <li><a href="#"
-                            class="flex items-center w-full p-2 text-lg font-normal  transition duration-75 rounded-lg group hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 pl-11 ajax-link focus:text-emerald-500">Floor
-                            Plan List</a></li>
-                    <li><a href="#"
-                            class="flex items-center w-full p-2 text-lg font-normal  transition duration-75 rounded-lg group hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 pl-11 ajax-link focus:text-emerald-500">Room
-                            Images</a></li>
-                </ul>
+
                 <!-- report  -->
                 <div class="block py-3 px-4 rounded transition-colors hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50"
                     aria-controls="dropdown-reports" data-collapse-toggle="dropdown-reports">
