@@ -32,7 +32,7 @@
         <div class="flex">
             <?php 
             
-            require_once 'hotelix/shared/sidebar.php';  ?>
+            require_once 'hotelix/shared/user_sidebar.php';  ?>
             <main class="flex-1 p-6">
 
                 <?php

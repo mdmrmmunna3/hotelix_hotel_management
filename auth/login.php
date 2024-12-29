@@ -30,7 +30,7 @@ if (isset($_POST['loginBtn'])) {
                 // Store user details in session
                 $_SESSION['user'] = $user;  // Store the user data in session
                 $_SESSION['isLoggedIn'] = true;
-                
+
                 // Check user role or if email is admin
                 if ($user['role'] == 'admin') {
                     // Redirect to admin dashboard
@@ -38,7 +38,7 @@ if (isset($_POST['loginBtn'])) {
                 } else {
                     $loginSuccess = false; 
                     // Redirect to user dashboard
-                    header('Location: ../user_dashboard.php');
+                    header('Location: ../user_dashboard.php?page=dashboard');
                 }
                 exit;
             } else {

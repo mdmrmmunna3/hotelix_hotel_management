@@ -87,7 +87,7 @@ $userRole = $isLoggedIn ? $_SESSION['user']['role'] : null;
                         <?php if ($userRole == 'admin'): ?>
                             <a href="main_dashboard.php?page=dashboard" class="relative z-10">Dashboard</a>
                         <?php else: ?>
-                            <a href="hotelix/pages/user_dashboard.php" class="relative z-10">Dashboard</a>
+                            <a href="user_dashboard.php?page=dashboardp" class="relative z-10">Dashboard</a>
                         <?php endif; ?>
                     </li>
                 <?php else: ?>
