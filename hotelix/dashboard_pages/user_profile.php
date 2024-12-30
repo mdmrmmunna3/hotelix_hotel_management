@@ -67,6 +67,7 @@ if (isset($_POST['updateBtn'])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -76,6 +77,7 @@ if (isset($_POST['updateBtn'])) {
             box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
             border: 1px solid #60a5fa;
         }
+
         .inStyle:is(:focus) {
             border: 2px solid transparent;
             border-image: linear-gradient(to right, #3b82f6, #9333ea) 1;
@@ -83,8 +85,9 @@ if (isset($_POST['updateBtn'])) {
         }
     </style>
 </head>
+
 <body>
-    <section class="pt-16">
+    <section class="pt-20">
 
         <form action="" method="post" enctype="multipart/form-data"
             class=" mx-4  md:p-8 px-4 py-4 rounded-xl main_form ">
@@ -97,12 +100,12 @@ if (isset($_POST['updateBtn'])) {
             <div class="grid md:grid-cols-2 gap-3 mb-4">
                 <div>
                     <input type="text" name="name" id="name" placeholder=" Name"
-                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle"
+                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle text-black"
                         value="<?php echo htmlspecialchars($user['name']); ?>">
                 </div>
                 <div>
                     <input type="email" name="email" id="email" placeholder="Email Address"
-                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle"
+                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle text-black"
                         value="<?php echo htmlspecialchars($user['email']); ?>">
                     <small class="text-red-500"><?= $errors['email'] ?? '' ?></small>
                 </div>
@@ -111,17 +114,18 @@ if (isset($_POST['updateBtn'])) {
             <div class="grid md:grid-cols-2 gap-3 mb-4">
                 <div>
                     <input type="tel" name="number" id="number" placeholder="Phone Number"
-                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle"
+                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle text-black"
                         value="<?php echo htmlspecialchars($user['phone']); ?>">
                 </div>
                 <!-- ==== Upload Profile Photo ==== -->
-           <div class="mb-4">
-                <input type="file" name="upload_photo" id="upload_photo"
-                    class="file-input w-full file-input-ghost bg-gray-200 outline-none" value="<?php echo htmlspecialchars($user['mime_type']); ?>">
-                <small class="text-red-500"><?= $errors['upload_photo'] ?? '' ?></small>
+                <div class="mb-4">
+                    <input type="file" name="upload_photo" id="upload_photo"
+                        class="file-input w-full file-input-ghost bg-gray-200 outline-none text-black"
+                        value="<?php echo htmlspecialchars($user['mime_type']); ?>">
+                    <small class="text-red-500"><?= $errors['upload_photo'] ?? '' ?></small>
+                </div>
             </div>
-            </div>
-           
+
             <!-- === update Button ==== -->
             <div>
                 <button type="submit" name="updateBtn" id="update"
@@ -134,4 +138,5 @@ if (isset($_POST['updateBtn'])) {
         </form>
     </section>
 </body>
+
 </html>

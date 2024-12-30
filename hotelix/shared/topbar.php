@@ -13,12 +13,12 @@
 </head>
 
 <body>
-    <div class="bg-[--primary-color] p-4 flex items-center justify-between  w-full topbar">
+    <div class="bg-[--primary-color] p-4 flex items-center justify-between fixed z-30  w-full topbar">
         <div class="flex items-center">
             <button onclick="toggleSidebar()" class="lg:hidden mr-4">☰</button>
             <a href=""><img src="assets/hotel_logo/hotelix.png" alt="Hotelix Logo" class="w-[130px]"></a>
         </div>
-        
+
         <!-- <input type="text" placeholder="Search..." class="hidden sm:block text-white px-4 py-2 rounded" /> -->
         <div class="flex items-center space-x-4">
             <label class="swap swap-rotate">
@@ -34,8 +34,8 @@
             </label>
             <!-- go to home  -->
             <div class="flex items-center justify-center gap-2 ">
-                    <a href="index.php"><i class="text-[#079d49] fa-solid fa-arrow-left"></i></a>
-                    <a class=" font-medium titel_content" href="index.php">Home</a>
+                <a href="index.php"><i class="text-[#079d49] fa-solid fa-arrow-left"></i></a>
+                <a class=" font-medium titel_content" href="index.php">Home</a>
             </div>
             <button class="bg-gray-700 p-2 rounded">🔔</button>
         </div>

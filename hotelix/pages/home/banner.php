@@ -148,7 +148,7 @@ $defaultCheckoutDate = date('Y-m-d', strtotime('+1 day')); // Tomorrow's date
 
                 <!-- ===== Check Availability Button ====== -->
                 <div class="check-availability flex flex-col items-center justify-center">
-                    <a href="#"
+                    <a href="hotelix/pages/room.php"
                         class="relative flex justify-center items-center w-full h-full py-2 md:py-0 border-2 rounded-lg border-blue-500 hover:text-white overflow-hidden group">
                         <span
                             class="absolute inset-0 bg-blue-500 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>

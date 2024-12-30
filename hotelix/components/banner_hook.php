@@ -8,7 +8,12 @@ $pageBanners = [
     'gallery' => [
         'bannerImage' => '/hotelix_hotel_management/assets/gallery/gallery_banner.jpg', // Replace with actual path
         'title' => 'Gallery',
-        'subtitle' => 'Home > Gallery',
+        'subtitle' => '<a href="/hotelix_hotel_management/index.php">Home</a>  <i class="fa-solid fa-hand-point-left text-white mx-2"></i> Gallery',
+    ],
+    'Rooms' => [
+        'bannerImage' => '/hotelix_hotel_management/assets/gallery/gallery1.jpg', // Replace with actual path
+        'title' => 'Rooms',
+        'subtitle' => '<a href="/hotelix_hotel_management/index.php">Home</a>  <i class="fa-solid fa-hand-point-left text-white mx-2"></i> Rooms',
     ],
 
 ];
