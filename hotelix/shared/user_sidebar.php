@@ -43,7 +43,7 @@ if ($result->num_rows > 0) {
 
 <body>
     <section>
-        <div class=" p-4 h-full hidden bg-[--primary-color] lg:block w-64 mt-18 sidebar_main pt-16">
+        <div class=" p-4 h-screen hidden bg-[--primary-color] lg:block w-64 mt-18 sidebar_main pt-16">
             <div class="flex flex-col items-center gap-4 p-6 border-b ">
                 <div class="shrink-0">
                     <a href="#" class="relative flex items-center justify-center w-16 h-16 rounded-full ">
@@ -71,7 +71,7 @@ if ($result->num_rows > 0) {
                 </a>
 
                 <!-- profile  -->
-                <a href="main_dashboard.php?page=user_profile"
+                <a href="user_dashboard.php?page=user_profile"
                     class="block py-3 px-4 rounded transition-colors hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 text-lg ajax-link focus:text-emerald-500">
                     <i class="fa-solid fa-user-large"></i>
                     Update Profile
