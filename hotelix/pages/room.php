@@ -84,14 +84,14 @@
                             <p class='titel_content text-xl line-clamp-1'><i class='fa-regular fa-file-lines me-1'></i>: <span>$room_descrip</span></p>
                         </div>
                         <p class='titel_content text-xl'><span class='font-semibold'>Price</span>
-                        $<span>$price</span>
+                        $<span>$price</span> <span>Per Night</span>
                         </p>
 
                         <a href='#'
-                        class='relative inline-block px-5 py-2 mt-2 text-center border-2 rounded-lg border-blue-500 hover:text-white overflow-hidden group'>
+                        class='relative inline-block px-5 py-2 mt-2 text-center border-2 rounded-lg border-blue-500 hover:text-white overflow-hidden group uppercase'>
                         <span
                             class='absolute inset-0 bg-blue-500 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-out'></span>
-                        <span class='relative z-10'>Read More</span>
+                        <span class='relative z-10'>Book Room</span>
                     </a>
                     </div>
                 </div>";
