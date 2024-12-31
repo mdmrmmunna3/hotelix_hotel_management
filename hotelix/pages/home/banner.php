@@ -1,8 +1,11 @@
 <?php
-$defaultCheckinDate = date('Y-m-d'); // Today's date
-$defaultCheckoutDate = date('Y-m-d', strtotime('+1 day')); // Tomorrow's date
+session_start(); // Start the session
 
-// Check if dates are already selected, if not, use the default values
+// Set default check-in and check-out dates
+$defaultCheckinDate = date('Y-m-d');
+$defaultCheckoutDate = date('Y-m-d', strtotime('+1 day'));
+
+// Store dates in session if they are posted
 $checkinDate = isset($_POST['checkin']) && !empty($_POST['checkin']) ? $_POST['checkin'] : $defaultCheckinDate;
 $checkoutDate = isset($_POST['checkout']) && !empty($_POST['checkout']) ? $_POST['checkout'] : $defaultCheckoutDate;
 ?>
@@ -114,30 +117,31 @@ $checkoutDate = isset($_POST['checkout']) && !empty($_POST['checkout']) ? $_POST
 
     <!-- ======== check out form ====== -->
     <div>
-        <form method="POST" action="hotelix/dashboard_pages/room_booking.php" class="md:mx-8 mx-5 my-2">
+        <form method="POST" action="hotelix/pages/room.php" class="md:mx-8 mx-5 my-2">
             <div
                 class="form-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 p-6 rounded-lg shadow-md shadow-blue-100">
 
-                <!-- ==== Check-in Section ==== -->
+                <!-- Check-in Date -->
                 <div class="form-section flex flex-col items-center md:border-r-2 md:border-gray-300 cursor-pointer"
                     onclick="focusInput('checkin')">
                     <h4 class="text-lg font-semibold mb-2 text-[--secondary-color] titel_content">CHECK IN &#128197;
                     </h4>
-                    <input type="date" id="checkin" name="checkin" value="<?php echo $checkinDate; ?>" required
+                    <input type="date" id="checkin" name="checkin" value="<?php echo $checkinDate ?>" required
                         min="<?php echo date('Y-m-d'); ?>"
                         class="md:w-[90%] w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 border-blue-500 bg-[--primary-color]">
                 </div>
 
-                <!-- ====== Check-out Section ======= -->
+                <!-- Check-out Date -->
                 <div class="form-section flex flex-col items-center md:border-r-2 md:border-gray-300 cursor-pointer"
                     onclick="focusInput('checkout')">
                     <h4 class="text-lg font-semibold mb-2 text-[--secondary-color] titel_content">CHECK OUT &#128197;
                     </h4>
-                    <input type="date" id="checkout" name="checkout" value="<?php echo $checkoutDate; ?>" required
+                    <input type="date" id="checkout" name="checkout" value="<?php echo $checkoutDate ?>" required
+                        min="<?php echo date('Y-m-d', strtotime('+1 day')); ?>"
                         class="md:w-[90%] w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 border-blue-500 bg-[--primary-color]">
                 </div>
 
-                <!-- ====== Guests Section ====== -->
+                <!-- Guests Section -->
                 <div class="flex flex-col items-center md:border-r-2 md:border-gray-300">
                     <h4 class="text-lg font-semibold mb-2 text-[--secondary-color] titel_content">GUESTS &#128101;</h4>
                     <select name="guests"
@@ -149,7 +153,7 @@ $checkoutDate = isset($_POST['checkout']) && !empty($_POST['checkout']) ? $_POST
                     </select>
                 </div>
 
-                <!-- ===== Check Availability Button ====== -->
+                <!-- Check Availability Button -->
                 <div class="check-availability flex flex-col items-center justify-center">
                     <button type="submit"
                         class="relative flex justify-center items-center w-full h-full py-2 md:py-0 border-2 rounded-lg border-blue-500 hover:text-white overflow-hidden group">

@@ -222,7 +222,8 @@ if (isset($_POST['registerBtn'])) {
                 <div>
                     <textarea name="address" id="address" rows="2"
                         class=" px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle"
-                        value="<?= isset($address) ? htmlspecialchars($address) : '' ?>"></textarea>
+                        value="<?= isset($address) ? htmlspecialchars($address) : '' ?>"
+                        placeholder="Address"></textarea>
                     <small class="text-red-500"><?= $errors['address'] ?? '' ?></small>
                 </div>
             </div>
