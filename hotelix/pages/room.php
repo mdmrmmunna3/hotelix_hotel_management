@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <base href="/hotelix_hotel_management/">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>hotelix || Room</title>
@@ -18,7 +19,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
     <!-- ======= vanila css ====== -->
-    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -87,7 +88,7 @@
                         $<span>$price</span> <span>Per Night</span>
                         </p>
 
-                        <a href='#'
+                        <a href='hotelix/dashboard_pages/room_booking.php'
                         class='relative inline-block px-5 py-2 mt-2 text-center border-2 rounded-lg border-blue-500 hover:text-white overflow-hidden group uppercase'>
                         <span
                             class='absolute inset-0 bg-blue-500 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-out'></span>
@@ -104,7 +105,13 @@
 
     require_once('../shared/footer.php');
     ?>
-
+    <?php
+    session_start(); // Start the session
+    
+    // Get dates from session, if they exist
+    $checkinDate = isset($_SESSION['checkin']) ? $_SESSION['checkin'] : date('Y-m-d');
+    $checkoutDate = isset($_SESSION['checkout']) ? $_SESSION['checkout'] : date('Y-m-d', strtotime('+1 day'));
+    ?>
 </body>
 
 </html>

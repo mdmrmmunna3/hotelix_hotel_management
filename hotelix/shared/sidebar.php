@@ -1,22 +1,17 @@
 <?php
-// Ensure no whitespace before this line
 ob_start();
 session_start();
-
 if (!isset($_SESSION['user_id'])) {
     header("Location: auth/login.php"); // Redirect to login page
     exit;
 }
-
-include 'db_root.php';
-
+require_once 'db_root.php';
 $userId = $_SESSION['user_id'];
 $sql = "SELECT * FROM users WHERE id = ?";
 $stmt = $db_root->prepare($sql);
 $stmt->bind_param("i", $userId);
 $stmt->execute();
 $result = $stmt->get_result();
-
 if ($result->num_rows > 0) {
     $user = $result->fetch_assoc();
 } else {
@@ -67,7 +62,6 @@ if ($result->num_rows > 0) {
                     <i class="fa-solid fa-house-chimney"></i>
                     Dashboard
                 </a>
-
                 <!-- room book  -->
                 <div class="block py-3 px-4 rounded transition-colors hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50"
                     aria-controls="dropdown-room-book" data-collapse-toggle="dropdown-room-book">
@@ -83,7 +77,6 @@ if ($result->num_rows > 0) {
                     <li><a href="#"
                             class="flex items-center w-full p-2 text-lg font-normal  transition duration-75 rounded-lg group hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 pl-11 ajax-link focus:text-emerald-500">Room
                             Checkout</a></li>
-
                 </ul>
                 <!-- room settings  -->
                 <div class="block py-3 px-4 rounded transition-colors hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50"
@@ -149,7 +142,6 @@ if ($result->num_rows > 0) {
                             class="flex items-center w-full p-2 text-lg font-normal  transition duration-75 rounded-lg group hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 pl-11 ajax-link focus:text-emerald-500">Assign
                             Room</a></li>
                 </ul>
-
                 <!-- report  -->
                 <div class="block py-3 px-4 rounded transition-colors hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50"
                     aria-controls="dropdown-reports" data-collapse-toggle="dropdown-reports">
