@@ -62,6 +62,12 @@ if ($result->num_rows > 0) {
                     <i class="fa-solid fa-house-chimney"></i>
                     Dashboard
                 </a>
+                <!-- manageUser  -->
+                <a href="main_dashboard.php?page=manage_user"
+                    class="block py-3 px-4 rounded transition-colors hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 text-lg ajax-link focus:text-emerald-500 ">
+                    <i class="fa-solid fa-users"></i>
+                    Manage Users
+                </a>
                 <!-- room book  -->
                 <div class="block py-3 px-4 rounded transition-colors hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50"
                     aria-controls="dropdown-room-book" data-collapse-toggle="dropdown-room-book">

@@ -41,9 +41,11 @@ if (isset($_POST['updateBtn'])) {
         if ($uploaded_photo['error'] === UPLOAD_ERR_NO_FILE) {
             // If no new photo was uploaded, exclude photo and mime_type from the query
             $updateInfo = "UPDATE users SET name = '$name', email = '$email', phone = '$phone' WHERE id = '$userId'";
+            header('location:user_dashboard.php?page=user_profile');
         } else {
             // If a photo was uploaded, include photo and mime_type in the query
             $updateInfo = "UPDATE users SET name = '$name', email = '$email', phone = '$phone', photo = ?, mime_type = ? WHERE id = '$userId'";
+            header('location:user_dashboard.php?page=user_profile');
         }
 
         // Prepare the SQL statement to avoid direct input in the query (for security)

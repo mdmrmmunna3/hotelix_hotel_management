@@ -30,6 +30,7 @@ renderBanner($banner['bannerImage'], $banner['title'], $banner['subtitle']);
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="stylesheet" href="style.css">
+    
 </head>
 
 <body>
@@ -74,50 +75,56 @@ renderBanner($banner['bannerImage'], $banner['title'], $banner['subtitle']);
         ?>
 
         <div class="grid md:grid-cols-2">
-
-        </div>
-        <!-- Booking Confirmation -->
-        <h2>Booking Confirmation</h2>
-        Check-in Date: <?=  htmlspecialchars($checkinDate); ?>
-        <p>Check-out Date: <?=  htmlspecialchars($checkoutDate); ?></p>
-
-        <!-- Booking Form -->
-        <form action="" method="post" enctype="multipart/form-data" class="mx-4 md:p-8 px-4 py-4 rounded-xl main_form">
-            <div class="flex justify-center mb-3">
-                <img src="assets/hotel_logo/hotelix.png" alt="Hotelix Logo" class="w-[170px]">
-            </div>
-            <h2 class="text-2xl font-bold text-center mb-4 uppercase titel_content">Booking</h2>
-
-            <!-- Name & Email Fields -->
-            <div class="grid md:grid-cols-2 gap-3 mb-4">
-                <div>
-                    <input type="text" name="name" id="name" placeholder=" Name" class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle text-black" value="<?php echo htmlspecialchars($user['name']); ?>">
-                </div>
-                <div>
-                    <input type="email" name="email" id="email" placeholder="Email Address" class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle text-black" value="<?php echo htmlspecialchars($user['email']); ?>">
-                    <small class="text-red-500"><?= $errors['email'] ?? '' ?></small>
-                </div>
-            </div>
-
-            <!-- Phone Number & Profile Photo Fields -->
-            <div class="grid md:grid-cols-2 gap-3 mb-4">
-                <div>
-                    <input type="tel" name="number" id="number" placeholder="Phone Number" class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle text-black" value="<?php echo htmlspecialchars($user['phone']); ?>">
-                </div>
-                <div class="mb-4">
-                    <input type="file" name="upload_photo" id="upload_photo" class="file-input w-full file-input-ghost bg-gray-200 outline-none text-black" value="<?php echo htmlspecialchars($user['mime_type']); ?>">
-                    <small class="text-red-500"><?= $errors['upload_photo'] ?? '' ?></small>
-                </div>
-            </div>
-
-            <!-- Submit Button -->
             <div>
-                <button type="submit" name="updateBtn" id="update" class="relative flex justify-center items-center w-full py-3 border-2 rounded-lg border-blue-500 hover:text-white overflow-hidden group transition-transform duration-500">
-                    <span class="absolute inset-0 bg-blue-500 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500 ease-out"></span>
-                    <span class="relative z-10 uppercase titel_content">CheckOut</span>
-                </button>
+                <!-- Booking Confirmation -->
+            <h2>Booking Confirmation</h2>
+                <p>Check-in Date: <?=  htmlspecialchars($checkinDate); ?></p>
+                <p>Check-out Date: <?=  htmlspecialchars($checkoutDate); ?></p>
             </div>
-        </form>
+
+            <div>
+                <!-- Booking Form -->
+                <form action="" method="post" enctype="multipart/form-data" class="mx-4 md:p-8 px-4 py-4 rounded-xl main_form">
+                    <div class="flex justify-center mb-3">
+                        <img src="assets/hotel_logo/hotelix.png" alt="Hotelix Logo" class="w-[170px]">
+                    </div>
+                    <h2 class="text-2xl font-bold text-center mb-4 uppercase titel_content">Booking</h2>
+
+                <!-- Name & Email Fields -->
+                <div class="grid md:grid-cols-2 gap-3 mb-4">
+                    <div>
+                        <input type="text" name="name" id="name" placeholder=" Name" class="py-2 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle text-black" value="<?php echo htmlspecialchars($user['name']); ?>">
+                    </div>
+                    <div>
+                        <input type="email" name="email" id="email" placeholder="Email Address" class="py-2 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle text-black" value="<?php echo htmlspecialchars($user['email']); ?>" disabled>
+                        <small class="text-red-500"><?= $errors['email'] ?? '' ?></small>
+                    </div>
+                </div>
+
+                <!-- Phone Number & Profile Photo Fields -->
+                <div class="grid md:grid-cols-2 gap-3 mb-4">
+                    <div>
+                        <input type="tel" name="number" id="number" placeholder="Phone Number" class="py-2 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle text-black" value="<?php echo htmlspecialchars($user['phone']); ?>">
+                    </div>
+                    <div class="mb-4">
+                        <input type="file" name="upload_photo" id="upload_photo" class="file-input w-full file-input-ghost bg-gray-200 outline-none text-black" value="<?php echo htmlspecialchars($user['mime_type']); ?>">
+                        <small class="text-red-500"><?= $errors['upload_photo'] ?? '' ?></small>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                    <div>
+                    <button type="submit" name="updateBtn" id="update" class="relative flex justify-center items-center w-full py-3 border-2 rounded-lg border-blue-500 hover:text-white overflow-hidden group transition-transform duration-500">
+                        <span class="absolute inset-0 bg-blue-500 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500 ease-out"></span>
+                        <span class="relative z-10 uppercase titel_content">CheckOut</span>
+                    </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+
+       
     </section>
 
 </body>
