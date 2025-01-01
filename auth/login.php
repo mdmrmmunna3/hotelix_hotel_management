@@ -1,8 +1,16 @@
 <?php
-session_start(); // Make sure to start the session to store session variables
-require_once('../db_root.php');
+session_start(); // Start the session
+
+// Check if the user is already logged in, and if so, redirect them to their intended page
+if (isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn'] === true) {
+    // Redirect to the page that was saved in the session or default to the user dashboard
+    $redirectTo = $_SESSION['redirectTo'] ?? 'user_dashboard.php?page=dashboard';
+    header("Location: $redirectTo");
+    exit;
+}
 
 $errors = [];
+
 if (isset($_POST['loginBtn'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
@@ -15,32 +23,33 @@ if (isset($_POST['loginBtn'])) {
     }
 
     if (empty($errors)) {
-        // Prepare query to check for user with the entered email
+        // Database query to verify the email and password
+        require_once('../db_root.php');
         $query = $db_root->prepare("SELECT * FROM users WHERE email = ?");
-        $query->bind_param("s", $email); // 's' means string
+        $query->bind_param("s", $email);
         $query->execute();
         $result = $query->get_result();
 
-        // If the user is found
         if ($result->num_rows > 0) {
             $user = $result->fetch_assoc();
-            // var_dump($user);
 
-            // Now, check if the password matches (use password_verify if password is hashed)
+            // Check if password is correct using password_verify
             if (password_verify($password, $user['password'])) {
                 // Store user details in session
-                $_SESSION['user'] = $user;  // Store the user data in session
-                $_SESSION['user_id'] = $user['id'];  // Store the user id in session
+                $_SESSION['user'] = $user;
+                $_SESSION['user_id'] = $user['id'];
                 $_SESSION['isLoggedIn'] = true;
 
-                // Check user role or if email is admin
+                // Determine the role and redirect
                 if ($user['role'] == 'admin') {
-                    // Redirect to admin dashboard
+                    // Redirect to admin dashboard if the user is an admin
                     header('Location: ../main_dashboard.php?page=dashboard');
                 } else {
-                    $loginSuccess = false;
-                    // Redirect to user dashboard
-                    header('Location: ../user_dashboard.php?page=dashboard');
+                    // Redirect to user dashboard if the user is a regular user
+                    $redirectTo = $_SESSION['redirectTo'] ?? '../user_dashboard.php?page=dashboard';
+                    unset($_SESSION['redirectTo']); // Clear the redirect URL after use
+                    header("Location: $redirectTo");
+                    exit;
                 }
                 exit;
             } else {
@@ -54,6 +63,7 @@ if (isset($_POST['loginBtn'])) {
     }
 }
 ?>
+
 
 
 
