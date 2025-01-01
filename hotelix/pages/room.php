@@ -144,8 +144,8 @@
             </p>
 
             <form method='POST' action='hotelix/dashboard_pages/room_booking.php'>
-                <input type='hidden' name='checkin' value='<?php echo $checkinDate; ?>'>
-                <input type='hidden' name='checkout' value='<?php echo $checkoutDate; ?>'>
+                <input type='hidden' name='checkin' value=$checkinDate>
+                <input type='hidden' name='checkout' value=$checkoutDate>
                 <button type='submit' class='relative inline-block px-5 py-2 mt-2 text-center border-2 rounded-lg border-blue-500 hover:text-white overflow-hidden group uppercase'>
                     <span class='absolute inset-0 bg-blue-500 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-out'></span>
                     <span class='relative z-10'>Book Room</span>

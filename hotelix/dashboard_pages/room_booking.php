@@ -78,8 +78,8 @@ renderBanner($banner['bannerImage'], $banner['title'], $banner['subtitle']);
         </div>
         <!-- Booking Confirmation -->
         <h2>Booking Confirmation</h2>
-        <p>Check-in Date: <?php echo htmlspecialchars($checkinDate); ?></p>
-        <p>Check-out Date: <?php echo htmlspecialchars($checkoutDate); ?></p>
+        Check-in Date: <?=  htmlspecialchars($checkinDate); ?>
+        <p>Check-out Date: <?=  htmlspecialchars($checkoutDate); ?></p>
 
         <!-- Booking Form -->
         <form action="" method="post" enctype="multipart/form-data" class="mx-4 md:p-8 px-4 py-4 rounded-xl main_form">
