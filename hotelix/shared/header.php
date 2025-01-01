@@ -1,6 +1,5 @@
 <?php
-session_start(); // Ensure the session is started
-
+session_start();
 $isLoggedIn = isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn'] === true;
 $userRole = $isLoggedIn ? $_SESSION['user']['role'] : null;
 ?>
@@ -79,33 +78,39 @@ $userRole = $isLoggedIn ? $_SESSION['user']['role'] : null;
                     </li>
 
 
-                <!-- Conditional display for login status -->
-                <?php if ($isLoggedIn): ?>
-    <!-- User is logged in -->
-            <li class="p-2 hover:text-white border-r-2 border-transparent hover:border-[--border-color] rounded-sm transition-all relative inline-block overflow-hidden group">
-                <span class="absolute inset-0 bg-blue-500 translate-x-[-110%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
-                
-                <?php if ($userRole == 'admin'): ?>
-                    <!-- Admin Dashboard Link -->
-                    <a href="main_dashboard.php?page=dashboard" class="relative z-10">Dashboard</a>
-                <?php else: ?>
-                    <!-- User Dashboard Link -->
-                    <a href="user_dashboard.php?page=dashboardp" class="relative z-10">Dashboard</a>
-                <?php endif; ?>
-            </li>
+                    <!-- Conditional display for login status -->
+                    <?php if ($isLoggedIn): ?>
+                        <!-- User is logged in -->
+                        <li
+                            class="p-2 hover:text-white border-r-2 border-transparent hover:border-[--border-color] rounded-sm transition-all relative inline-block overflow-hidden group">
+                            <span
+                                class="absolute inset-0 bg-blue-500 translate-x-[-110%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
 
-                <!-- Log Out Link -->
-                <li class="p-2 hover:text-white border-r-2 border-transparent hover:border-[--border-color] rounded-sm transition-all relative inline-block overflow-hidden group">
-                    <span class="absolute inset-0 bg-blue-500 translate-x-[-110%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
-                    <a href="auth/logout.php" class="relative z-10">Log Out</a>
-                </li>
-                <?php else: ?>
-                    <!-- User is not logged in -->
-                    <li class="p-2 hover:text-white border-r-2 border-transparent hover:border-[--border-color] rounded-sm transition-all relative inline-block overflow-hidden group">
-                        <span class="absolute inset-0 bg-blue-500 translate-x-[-110%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
-                        <a href="auth/login.php" class="relative z-10">Log In</a>
-                    </li>
-                <?php endif; ?>
+                            <?php if ($userRole == 'admin'): ?>
+                                <!-- Admin Dashboard Link -->
+                                <a href="main_dashboard.php?page=dashboard" class="relative z-10">Dashboard</a>
+                            <?php else: ?>
+                                <!-- User Dashboard Link -->
+                                <a href="user_dashboard.php?page=dashboardp" class="relative z-10">Dashboard</a>
+                            <?php endif; ?>
+                        </li>
+
+                        <!-- Log Out Link -->
+                        <li
+                            class="p-2 hover:text-white border-r-2 border-transparent hover:border-[--border-color] rounded-sm transition-all relative inline-block overflow-hidden group">
+                            <span
+                                class="absolute inset-0 bg-blue-500 translate-x-[-110%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
+                            <a href="auth/logout.php" class="relative z-10">Log Out</a>
+                        </li>
+                    <?php else: ?>
+                        <!-- User is not logged in -->
+                        <li
+                            class="p-2 hover:text-white border-r-2 border-transparent hover:border-[--border-color] rounded-sm transition-all relative inline-block overflow-hidden group">
+                            <span
+                                class="absolute inset-0 bg-blue-500 translate-x-[-110%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
+                            <a href="auth/login.php" class="relative z-10">Log In</a>
+                        </li>
+                    <?php endif; ?>
                     <!-- ===== toggle icon ====== -->
                     <label class="swap swap-rotate">
                         <!-- ===== this hidden checkbox controls the state ===== -->
@@ -194,31 +199,37 @@ $userRole = $isLoggedIn ? $_SESSION['user']['role'] : null;
                 </li>
 
                 <?php if ($isLoggedIn): ?>
-    <!-- User is logged in -->
-    <li class="p-2 hover:text-white border-r-2 border-transparent hover:border-[--border-color] rounded-sm transition-all relative inline-block overflow-hidden group w-full">
-        <span class="absolute inset-0 bg-blue-500 translate-x-[-110%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
-        
-        <?php if ($userRole == 'admin'): ?>
-            <!-- Admin Dashboard Link -->
-            <a href="main_dashboard.php?page=dashboard" class="relative z-10">Dashboard</a>
-        <?php else: ?>
-            <!-- User Dashboard Link -->
-            <a href="user_dashboard.php?page=dashboardp" class="relative z-10">Dashboard</a>
-        <?php endif; ?>
-    </li>
+                    <!-- User is logged in -->
+                    <li
+                        class="p-2 hover:text-white border-r-2 border-transparent hover:border-[--border-color] rounded-sm transition-all relative inline-block overflow-hidden group w-full">
+                        <span
+                            class="absolute inset-0 bg-blue-500 translate-x-[-110%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
 
-    <!-- Log Out Link -->
-    <li class="p-2 hover:text-white border-r-2 border-transparent hover:border-[--border-color] rounded-sm transition-all relative inline-block overflow-hidden group">
-        <span class="absolute inset-0 bg-blue-500 translate-x-[-110%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
-        <a href="auth/logout.php" class="relative z-10">Log Out</a>
-    </li>
-<?php else: ?>
-    <!-- User is not logged in -->
-    <li class="p-2 hover:text-white border-r-2 border-transparent hover:border-[--border-color] rounded-sm transition-all relative inline-block overflow-hidden group">
-        <span class="absolute inset-0 bg-blue-500 translate-x-[-110%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
-        <a href="auth/login.php" class="relative z-10">Log In</a>
-    </li>
-<?php endif; ?>
+                        <?php if ($userRole == 'admin'): ?>
+                            <!-- Admin Dashboard Link -->
+                            <a href="main_dashboard.php?page=dashboard" class="relative z-10">Dashboard</a>
+                        <?php else: ?>
+                            <!-- User Dashboard Link -->
+                            <a href="user_dashboard.php?page=dashboardp" class="relative z-10">Dashboard</a>
+                        <?php endif; ?>
+                    </li>
+
+                    <!-- Log Out Link -->
+                    <li
+                        class="p-2 hover:text-white border-r-2 border-transparent hover:border-[--border-color] rounded-sm transition-all relative inline-block overflow-hidden group">
+                        <span
+                            class="absolute inset-0 bg-blue-500 translate-x-[-110%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
+                        <a href="auth/logout.php" class="relative z-10">Log Out</a>
+                    </li>
+                <?php else: ?>
+                    <!-- User is not logged in -->
+                    <li
+                        class="p-2 hover:text-white border-r-2 border-transparent hover:border-[--border-color] rounded-sm transition-all relative inline-block overflow-hidden group">
+                        <span
+                            class="absolute inset-0 bg-blue-500 translate-x-[-110%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
+                        <a href="auth/login.php" class="relative z-10">Log In</a>
+                    </li>
+                <?php endif; ?>
 
 
                 <li>
@@ -253,11 +264,3 @@ $userRole = $isLoggedIn ? $_SESSION['user']['role'] : null;
 </body>
 
 </html>
-
-<!-- <li
-                        class="p-2 text-white  border-r-2 border-transparent hover:border-[--border-color] rounded-sm transition-all relative inline-block overflow-hidden group">
-                        <span
-                            class="absolute inset-0 bg-blue-500  translate-x-[-110%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
-                        
-                        <a href="auth/login.php" class="relative z-10">Log In</a>
-                    </li> -->

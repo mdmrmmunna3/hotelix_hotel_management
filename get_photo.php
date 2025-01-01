@@ -32,3 +32,6 @@ if (isset($_GET['id'])) {
     http_response_code(400); // Bad Request
     echo "Invalid request.";
 }
+
+
+?>

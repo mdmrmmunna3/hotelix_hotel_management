@@ -18,7 +18,7 @@
         <?php require_once 'hotelix/shared/topbar.php'; ?>
         <div class="flex">
             <?php require_once 'hotelix/shared/sidebar.php'; ?>
-            <main class="flex-1 p-6">
+            <main class="flex-1 p-6 h-screen">
                 <?php
                 $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
                 $file = "hotelix/dashboard_pages/{$page}.php";

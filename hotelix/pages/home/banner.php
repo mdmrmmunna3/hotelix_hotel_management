@@ -1,5 +1,4 @@
 <?php
-session_start(); // Start the session
 
 // Set default check-in and check-out dates
 $defaultCheckinDate = date('Y-m-d');
