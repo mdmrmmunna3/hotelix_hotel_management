@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <div class="bg-[--primary-color] p-4 flex items-center justify-between fixed z-30  w-full topbar">
+    <div class="bg-[--primary-color] p-4 flex items-center justify-between   w-full topbar">
         <div class="flex items-center">
             <button onclick="toggleSidebar()" class="lg:hidden mr-4">☰</button>
             <a href=""><img src="assets/hotel_logo/hotelix.png" alt="Hotelix Logo" class="md:w-[130px] w-[100px]"></a>

@@ -76,7 +76,7 @@ if (isset($_POST['loginBtn'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Log In</title>
     <!-- Tailwind CSS plugin CDN link (DaisyUI) -->
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/daisyui/dist/full.min.css" rel="stylesheet" type="text/css" />
 
     <!-- Font Awesome link -->
     <script src="https://kit.fontawesome.com/9ce82b2c02.js" crossorigin="anonymous"></script>
@@ -84,7 +84,7 @@ if (isset($_POST['loginBtn'])) {
     <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- Swiper CDN link CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../style.css">
