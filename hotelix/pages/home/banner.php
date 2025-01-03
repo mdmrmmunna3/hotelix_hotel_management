@@ -125,8 +125,8 @@ $checkoutDate = isset($_POST['checkout']) && !empty($_POST['checkout']) ? $_POST
                     onclick="focusInput('checkin')">
                     <h4 class="text-lg font-semibold mb-2 text-[--secondary-color] titel_content">CHECK IN &#128197;
                     </h4>
-                    <input type="date" id="checkin" name="checkin" value="<?php echo $checkinDate ?>" required
-                        min="<?php echo date('Y-m-d'); ?>"
+                    <input type="date" id="checkin" name="checkin" value="<?php echo htmlspecialchars($checkinDate); ?>"
+                        required min="<?php echo date('Y-m-d'); ?>"
                         class="md:w-[90%] w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 border-blue-500 bg-[--primary-color]">
                 </div>
 
@@ -135,7 +135,8 @@ $checkoutDate = isset($_POST['checkout']) && !empty($_POST['checkout']) ? $_POST
                     onclick="focusInput('checkout')">
                     <h4 class="text-lg font-semibold mb-2 text-[--secondary-color] titel_content">CHECK OUT &#128197;
                     </h4>
-                    <input type="date" id="checkout" name="checkout" value="<?php echo $checkoutDate ?>" required
+                    <input type="date" id="checkout" name="checkout"
+                        value="<?php echo htmlspecialchars($checkoutDate); ?>" required
                         min="<?php echo date('Y-m-d', strtotime('+1 day')); ?>"
                         class="md:w-[90%] w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 border-blue-500 bg-[--primary-color]">
                 </div>
