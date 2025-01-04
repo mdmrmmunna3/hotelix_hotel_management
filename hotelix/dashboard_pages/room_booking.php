@@ -45,7 +45,7 @@ renderBanner($banner['bannerImage'], $banner['title'], $banner['subtitle']);
                 $_SESSION['checkout'] = $_POST['checkout'];
                 $_SESSION['room_id'] = $_POST['room_id'];
                 $_SESSION['room_type'] = $_POST['room_type'];
-                $_SESSION['price'] = $_POST['price'];
+                $room_price = (float)$_POST['room_price'];
             }
             header("Location: ../../auth/login.php");
             exit;
@@ -91,9 +91,24 @@ renderBanner($banner['bannerImage'], $banner['title'], $banner['subtitle']);
         // Calculate the number of nights
         $checkinDateTimestamp = strtotime($checkinDate);
         $checkoutDateTimestamp = strtotime($checkoutDate);
+
+        if ($checkinDateTimestamp === false || $checkoutDateTimestamp === false) {
+            die('Invalid check-in or check-out date.');
+        }
+
         $nights = ($checkoutDateTimestamp - $checkinDateTimestamp) / (60 * 60 * 24);
-        // Calculate the amount based on room price and nights
+
+        if ($nights <= 0) {
+            die('Check-out date must be after check-in date.');
+        }
+
+
+        if ($room_price <= 0) {
+            die('Invalid room price.');
+        }
+
         $amount = $nights * $room_price;
+
 
         // Handle form submission to store booking details
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkoutBtn'])) {
@@ -104,9 +119,9 @@ renderBanner($banner['bannerImage'], $banner['title'], $banner['subtitle']);
                           VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
             $stmtInsert = $db_root->prepare($sqlInsert);
-            $stmtInsert->bind_param("iissdsss", $userId, $room_id, $room_type, $checkinDate, $checkoutDate, $booking_status, $payment_status, $amount);
+            $stmtInsert->bind_param("iisssssd", $userId, $room_id, $room_type, $checkinDate, $checkoutDate, $booking_status, $payment_status, $amount);
             if ($stmtInsert->execute()) {
-                header('location: main_dashboard.php?page=manage_user');
+                header('location: ../../user_dashboard.php?page=dashboard');
             } else {
                 echo "<p class='text-red-500'>Error: " . $stmtInsert->error . "</p>";
             }
@@ -123,6 +138,7 @@ renderBanner($banner['bannerImage'], $banner['title'], $banner['subtitle']);
                 <p>Check-out Date: <?= htmlspecialchars($room_id); ?></p>
                 <p>Check-out Date: <?= htmlspecialchars($room_type); ?></p>
                 <p>Check-out Date: <?= htmlspecialchars($room_price); ?></p>
+                <p>Check-out Date: <?= htmlspecialchars($amount); ?></p>
             </div>
 
             <div>
@@ -157,33 +173,33 @@ renderBanner($banner['bannerImage'], $banner['title'], $banner['subtitle']);
                                 value="<?php echo htmlspecialchars($user['phone']); ?>">
                         </div>
                         <div>
-                            <input type="hidden" name="number" id="number" placeholder="Phone Number"
+                            <input type="hidden" name="room_id" id="room_id" placeholder="Phone Number"
                                 class="py-2 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle text-black"
                                 value="<?php echo htmlspecialchars($room_id) ?>">
                         </div>
                     </div>
                     <div class="grid md:grid-cols-2 gap-3 mb-4">
                         <div>
-                            <input type="text" name="number" id="number" placeholder=""
+                            <input type="text" name="room_type" id="room_type" placeholder=""
                                 class="py-2 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle text-black"
-                                value="<?php echo htmlspecialchars($room_type) ?>" disabled>
+                                value="<?php echo htmlspecialchars($room_type) ?>" readonly>
                         </div>
                         <div>
-                            <input type="text" name="number" id="number" placeholder=""
+                            <input type="hidden" name="price" id="price" placeholder=""
                                 class="py-2 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle text-black"
-                                value="<?= number_format($amount, 2); ?>" disabled>
+                                value="<?= $room_price ?>" readonly>
                         </div>
                     </div>
                     <div class="grid md:grid-cols-2 gap-3 mb-4">
                         <div>
-                            <input type="text" name="number" id="number" placeholder=""
+                            <input type="text" name="checkin" id="checkin" placeholder=""
                                 class="py-2 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle text-black"
-                                value="<?php echo htmlspecialchars($checkinDate) ?>" disabled>
+                                value="<?php echo htmlspecialchars($checkinDate) ?>" readonly>
                         </div>
                         <div>
-                            <input type="text" name="number" id="number" placeholder=""
+                            <input type="text" name="checkout" id="checkout" placeholder=""
                                 class="py-2 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle text-black"
-                                value="<?php echo htmlspecialchars($checkoutDate) ?>" disabled>
+                                value="<?php echo htmlspecialchars($checkoutDate) ?>" readonly>
                         </div>
                     </div>
                     <!-- Submit Button -->
