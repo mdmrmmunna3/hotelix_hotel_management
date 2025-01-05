@@ -64,6 +64,7 @@
             $room_image = $row['room_photo'];
             $image_mime = $row['room_mime_type'];
             $view = $row['view'];
+            $room_number = $row['room_number'];
 
             echo "
     <div class='card border border-blue-500 w-full shadow-xl'>
@@ -93,6 +94,7 @@
             <form method='POST' action='hotelix/dashboard_pages/room_booking.php'>
                 <input type='hidden' name='room_id' value='$id'>
                 <input type='hidden' name='room_type' value=$room_type>
+                <input type='hidden' name='room_number' value=$room_number>
                 <input type='hidden' name='price' value=$price>
                 <input type='hidden' name='status' value=$status>
                 <input type='hidden' name='checkin' value=$checkinDate>

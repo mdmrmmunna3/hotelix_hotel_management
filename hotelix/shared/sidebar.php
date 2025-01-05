@@ -94,6 +94,10 @@ if ($result->num_rows > 0) {
                 </div>
                 <ul id="dropdown-rooms-setting" class="hidden py-2 space-y-2">
                     <li><a href="#"
+                            class="flex items-center w-full p-2 text-lg font-normal  transition duration-75 rounded-lg group hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 pl-11 ajax-link focus:text-emerald-500">ADD
+                            Room
+                        </a></li>
+                    <li><a href="#"
                             class="flex items-center w-full p-2 text-lg font-normal  transition duration-75 rounded-lg group hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 pl-11 ajax-link focus:text-emerald-500">Update
                             Room
                         </a></li>

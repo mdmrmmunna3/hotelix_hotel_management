@@ -36,7 +36,7 @@
             $('.ajax-link').on('click', function (e) {
                 e.preventDefault();
                 const url = $(this).attr('href');
-                $('main').html('<div class="text-center py-10"><span>Loading...</span></div>');
+                $('main').html('<div class="text-center py-10 flex justify-center items-center h-screen"><span class="loading loading-ring  w-20"></span></div>');
                 $.get(url, function (data) {
                     const content = $(data).find('main').html();
                     $('main').html(content);

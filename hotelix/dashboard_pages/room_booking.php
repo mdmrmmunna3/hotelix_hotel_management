@@ -9,7 +9,7 @@ function renderBanner($bannerImage, $title, $subtitle)
 {
     echo "
     <div class='relative lg:h-[600px] h-[400px] w-full bg-cover bg-center bg-no-repeat' style='background-image: url($bannerImage);'>
-        <div class='bg-black bg-opacity-60 w-full h-full p-6 text-center rounded-lg flex flex-col items-center justify-center'>
+        <div class='bg-black bg-opacity-60 w-full h-full p-6 text-center flex flex-col items-center justify-center'>
             <h1 class='md:text-6xl text-4xl font-bold text-white uppercase titel_content'>$title</h1>
             <p class='text-lg text-gray-300 mt-2 font-bold uppercase'>$subtitle</p>
         </div>
@@ -30,7 +30,11 @@ renderBanner($banner['bannerImage'], $banner['title'], $banner['subtitle']);
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
     <link rel="stylesheet" href="style.css">
-
+    <style>
+        .card {
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        }
+    </style>
 </head>
 
 <body>
@@ -45,7 +49,8 @@ renderBanner($banner['bannerImage'], $banner['title'], $banner['subtitle']);
                 $_SESSION['checkout'] = $_POST['checkout'];
                 $_SESSION['room_id'] = $_POST['room_id'];
                 $_SESSION['room_type'] = $_POST['room_type'];
-                $room_price = (float)$_POST['room_price'];
+                $_SESSION['room_number'] = $_POST['room_number'];
+                $room_price = (float) $_POST['room_price'];
             }
             header("Location: ../../auth/login.php");
             exit;
@@ -79,13 +84,17 @@ renderBanner($banner['bannerImage'], $banner['title'], $banner['subtitle']);
             $_SESSION['room_type'] = '';  // Set a default value if not set
         }
         if (!isset($_SESSION['price'])) {
-            $_SESSION['price'] = '';  // Set a default value if not set
+            $_SESSION['price'] = '';
+        }
+        if (!isset($_SESSION['room_number'])) {
+            $_SESSION['room_number'] = '';
         }
 
         $checkinDate = isset($_POST['checkin']) ? $_POST['checkin'] : $_SESSION['checkin'];
         $checkoutDate = isset($_POST['checkout']) ? $_POST['checkout'] : $_SESSION['checkout'];
         $room_id = isset($_POST['room_id']) ? $_POST['room_id'] : $_SESSION['room_id'];
         $room_type = isset($_POST['room_type']) ? $_POST['room_type'] : $_SESSION['room_type'];
+        $room_number = isset($_POST['room_number']) ? $_POST['room_number'] : $_SESSION['room_number'];
         $room_price = isset($_POST['price']) ? $_POST['price'] : $_SESSION['price'];
 
         // Calculate the number of nights
@@ -112,14 +121,13 @@ renderBanner($banner['bannerImage'], $banner['title'], $banner['subtitle']);
 
         // Handle form submission to store booking details
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkoutBtn'])) {
-            $booking_status = 'pending';
             $payment_status = 'pending';
 
-            $sqlInsert = "INSERT INTO bookings (user_id, room_id, room_type, checkin_date, checkout_date, booking_status, payment_status,amount)
-                          VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            $sqlInsert = "INSERT INTO bookings (user_id, room_id, room_type, checkin_date, checkout_date, payment_status,amount)
+                          VALUES (?, ?, ?, ?, ?, ?, ?)";
 
             $stmtInsert = $db_root->prepare($sqlInsert);
-            $stmtInsert->bind_param("iisssssd", $userId, $room_id, $room_type, $checkinDate, $checkoutDate, $booking_status, $payment_status, $amount);
+            $stmtInsert->bind_param("iissssd", $userId, $room_id, $room_type, $checkinDate, $checkoutDate, $payment_status, $amount);
             if ($stmtInsert->execute()) {
                 header('location: ../../user_dashboard.php?page=dashboard');
             } else {
@@ -129,97 +137,105 @@ renderBanner($banner['bannerImage'], $banner['title'], $banner['subtitle']);
 
         ?>
 
-        <div class="grid md:grid-cols-2">
-            <div>
-                <!-- Booking Confirmation -->
-                <h2>Booking Confirmation</h2>
-                <p>Check-in Date: <?= htmlspecialchars($checkinDate); ?></p>
-                <p>Check-out Date: <?= htmlspecialchars($checkoutDate); ?></p>
-                <p>Check-out Date: <?= htmlspecialchars($room_id); ?></p>
-                <p>Check-out Date: <?= htmlspecialchars($room_type); ?></p>
-                <p>Check-out Date: <?= htmlspecialchars($room_price); ?></p>
-                <p>Check-out Date: <?= htmlspecialchars($amount); ?></p>
-            </div>
 
-            <div>
-                <!-- Booking Form -->
-                <form action="" method="post" enctype="multipart/form-data"
-                    class="mx-4 md:p-8 px-4 py-4 rounded-xl main_form">
-                    <div class="flex justify-center mb-3">
-                        <img src="assets/hotel_logo/hotelix.png" alt="Hotelix Logo" class="w-[170px]">
-                    </div>
-                    <h2 class="text-2xl font-bold text-center mb-4 uppercase titel_content">Booking</h2>
+        <div class="">
+            <div class="grid grid-cols-2 gap-5 w-full max-w-7xl mx-auto p-4">
+                <!-- Info Card Section -->
 
-                    <!-- Name & Email Fields -->
-                    <div class="grid md:grid-cols-2 gap-3 mb-4">
-                        <div>
-                            <input type="text" name="name" id="name" placeholder=" Name"
-                                class="py-2 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle text-black"
-                                value="<?php echo htmlspecialchars($user['name']); ?>">
-                        </div>
-                        <div>
-                            <input type="email" name="email" id="email" placeholder="Email Address"
-                                class="py-2 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle text-black"
-                                value="<?php echo htmlspecialchars($user['email']); ?>" disabled>
-                            <small class="text-red-500"><?= $errors['email'] ?? '' ?></small>
-                        </div>
-                    </div>
+                <div
+                    class=" p-8 text-center rounded-xl shadow-xl hover:shadow-2xl transition-shadow duration-300 titel_content">
+                    <h3 class="text-4xl font-semibold titel_content mb-6 uppercase">Booking Details</h3>
+                    <p class="text-xl font-medium mb-2">Room Type: <span
+                            class=""><?= htmlspecialchars($room_type); ?></span></p>
+                    <p class="text-xl font-medium mb-2">Room Number: <span
+                            class=""><?= htmlspecialchars($room_number); ?></span></p>
+                    <p class="text-xl font-medium mb-2">Check-in Date: <span
+                            class=""><?= htmlspecialchars($checkinDate); ?></span></p>
+                    <p class="text-xl font-medium mb-2">Check-out Date: <span
+                            class=""><?= htmlspecialchars($checkoutDate); ?></span></p>
+                    <p class="text-xl font-medium mb-2">Room Price: <span
+                            class=""><?= htmlspecialchars($room_price); ?></span></p>
+                    <p class="text-xl font-medium mb-2">Total Amount: <span
+                            class=""><?= htmlspecialchars($amount); ?></span></p>
+                </div>
 
-                    <!-- Phone Number & Profile Photo Fields -->
-                    <div class="grid grid-cols-1 gap-3 mb-4">
-                        <div>
-                            <input type="tel" name="number" id="number" placeholder="Phone Number"
-                                class="py-2 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle text-black"
-                                value="<?php echo htmlspecialchars($user['phone']); ?>">
+                <!-- Booking Form Section -->
+                <div class="card w-full shrink-0 rounded-xl hover:shadow-2xl transition-shadow duration-300">
+                    <form action="" method="post" enctype="multipart/form-data"
+                        class="mx-4 md:p-8 px-4 py-4 rounded-xl main_form">
+                        <div class="flex justify-center mb-3">
+                            <img src="assets/hotel_logo/hotelix.png" alt="Hotelix Logo" class="w-[170px]">
                         </div>
-                        <div>
-                            <input type="hidden" name="room_id" id="room_id" placeholder="Phone Number"
-                                class="py-2 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle text-black"
-                                value="<?php echo htmlspecialchars($room_id) ?>">
+                        <h2 class="text-2xl font-bold text-center mb-4 uppercase titel_content">Booking Form</h2>
+
+                        <!-- Name & Email Fields -->
+                        <div class="grid md:grid-cols-1 gap-3 mb-4">
+                            <div>
+                                <input type="text" name="name" id="name" placeholder="Name"
+                                    class="py-2 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle text-black"
+                                    value="<?php echo htmlspecialchars($user['name']); ?>" required>
+                            </div>
+                            <div>
+                                <input type="email" name="email" id="email" placeholder="Email Address"
+                                    class="py-2 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle text-black"
+                                    value="<?php echo htmlspecialchars($user['email']); ?>" disabled required>
+                                <small class="text-red-500"><?= $errors['email'] ?? '' ?></small>
+                            </div>
                         </div>
-                    </div>
-                    <div class="grid md:grid-cols-2 gap-3 mb-4">
-                        <div>
-                            <input type="text" name="room_type" id="room_type" placeholder=""
-                                class="py-2 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle text-black"
-                                value="<?php echo htmlspecialchars($room_type) ?>" readonly>
+
+                        <!-- Phone Number & Profile Photo Fields -->
+                        <div class="grid grid-cols-1 gap-3 mb-4">
+                            <div>
+                                <input type="tel" name="number" id="number" placeholder="Phone Number"
+                                    class="py-2 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle text-black"
+                                    value="<?php echo htmlspecialchars($user['phone']); ?>" required>
+                            </div>
+                            <div>
+                                <input type="hidden" name="room_id" id="room_id"
+                                    value="<?php echo htmlspecialchars($room_id) ?>">
+                            </div>
                         </div>
-                        <div>
-                            <input type="hidden" name="price" id="price" placeholder=""
-                                class="py-2 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle text-black"
-                                value="<?= $room_price ?>" readonly>
+
+                        <!-- Hidden Fields for Booking Info -->
+                        <div class="grid md:grid-cols-2 gap-3">
+                            <div>
+                                <input type="hidden" name="room_type" id="room_type"
+                                    value="<?php echo htmlspecialchars($room_type) ?>">
+                            </div>
+                            <div>
+                                <input type="hidden" name="price" id="price" value="<?= $room_price ?>">
+                            </div>
                         </div>
-                    </div>
-                    <div class="grid md:grid-cols-2 gap-3 mb-4">
-                        <div>
-                            <input type="text" name="checkin" id="checkin" placeholder=""
-                                class="py-2 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle text-black"
-                                value="<?php echo htmlspecialchars($checkinDate) ?>" readonly>
+                        <div class="grid md:grid-cols-2 gap-3">
+                            <div>
+                                <input type="hidden" name="checkin" id="checkin"
+                                    value="<?php echo htmlspecialchars($checkinDate) ?>">
+                            </div>
+                            <div>
+                                <input type="hidden" name="checkout" id="checkout"
+                                    value="<?php echo htmlspecialchars($checkoutDate) ?>">
+                            </div>
                         </div>
+
+                        <!-- Submit Button -->
                         <div>
-                            <input type="text" name="checkout" id="checkout" placeholder=""
-                                class="py-2 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle text-black"
-                                value="<?php echo htmlspecialchars($checkoutDate) ?>" readonly>
+                            <button type="submit" name="checkoutBtn" id="checkout"
+                                class="relative flex justify-center items-center w-full py-3 border-2 rounded-lg border-blue-500 hover:text-white overflow-hidden group transition-transform duration-500">
+                                <span
+                                    class="absolute inset-0 bg-blue-500 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500 ease-out"></span>
+                                <span class="relative z-10 uppercase titel_content">CheckOut</span>
+                            </button>
                         </div>
-                    </div>
-                    <!-- Submit Button -->
-                    <div>
-                        <button type="submit" name="checkoutBtn" id="checkout"
-                            class="relative flex justify-center items-center w-full py-3 border-2 rounded-lg border-blue-500 hover:text-white overflow-hidden group transition-transform duration-500">
-                            <span
-                                class="absolute inset-0 bg-blue-500 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500 ease-out"></span>
-                            <span class="relative z-10 uppercase titel_content">CheckOut</span>
-                        </button>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
     </section>
-
 </body>
 
 </html>
 
 <?php
+require_once('../shared/footer.php');
 ob_end_flush(); // End output buffering and flush the output
 ?>

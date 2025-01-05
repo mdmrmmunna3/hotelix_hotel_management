@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <table class="w-full table table-xs md:table-md mb-20">
                 <thead>
                     <tr
-                        class="bg-[--secondary-color] border-b border-gray-200 text-center text-xs md:text-sm font-thin">
+                        class="bg-[--secondary-color] text-[--primary-color] border-b border-gray-200 text-center text-xs md:text-sm font-thin">
                         <th>Photo</th>
                         <th>Name</th>
                         <th>Email</th>
