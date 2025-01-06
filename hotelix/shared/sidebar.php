@@ -32,12 +32,26 @@ if ($result->num_rows > 0) {
         .sidebar_main {
             box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
         }
+
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: gray !important;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: blue;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: blue;
+        }
     </style>
 </head>
 
 <body>
     <section>
-        <div class=" p-4 h-full hidden bg-[--primary-color] lg:block w-72 mt-18 sidebar_main pt-16">
+        <div
+            class=" p-4 h-full hidden bg-[--primary-color] lg:block w-72 mt-18 sidebar_main pt-16 overflow-y-auto max-h-screen scroll-smooth scrollbar-thin scrollbar-thumb-green-500 scrollbar-track-gray-100 ">
             <div class="flex flex-col items-center gap-4 p-6 border-b ">
                 <div class="shrink-0">
                     <a href="#" class="relative flex items-center justify-center w-16 h-16 text-white rounded-full ">
@@ -101,15 +115,18 @@ if ($result->num_rows > 0) {
                             class="flex items-center w-full p-2 text-lg font-normal  transition duration-75 rounded-lg group hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 pl-11 ajax-link focus:text-emerald-500">Update
                             Room
                         </a></li>
-                    <li><a href="#"
+                    <li><a href="main_dashboard.php?page=room_type"
+                            class="flex items-center w-full p-2 text-lg font-normal  transition duration-75 rounded-lg group hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 pl-11 ajax-link focus:text-emerald-500">Room
+                            Types
+                            List</a></li>
+                    <li><a href="main_dashboard.php?page=bed_type"
                             class="flex items-center w-full p-2 text-lg font-normal  transition duration-75 rounded-lg group hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 pl-11 ajax-link focus:text-emerald-500">Bed
                             List</a></li>
+
+
                     <li><a href="#"
                             class="flex items-center w-full p-2 text-lg font-normal  transition duration-75 rounded-lg group hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 pl-11 ajax-link focus:text-emerald-500">Room
                             Status</a></li>
-                    <li><a href="#"
-                            class="flex items-center w-full p-2 text-lg font-normal  transition duration-75 rounded-lg group hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 pl-11 ajax-link focus:text-emerald-500">Floor
-                            Plan List</a></li>
                     <li><a href="#"
                             class="flex items-center w-full p-2 text-lg font-normal  transition duration-75 rounded-lg group hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 pl-11 ajax-link focus:text-emerald-500">Room
                             Images</a></li>

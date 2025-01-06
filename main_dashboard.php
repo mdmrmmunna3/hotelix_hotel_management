@@ -13,12 +13,12 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body class="">
     <section>
         <?php require_once 'hotelix/shared/topbar.php'; ?>
-        <div class="flex">
+        <div class="flex ">
             <?php require_once 'hotelix/shared/sidebar.php'; ?>
-            <main class="flex-1 p-6 h-screen">
+            <main class="flex-1 p-6 h-screen overflow-y-auto">
                 <?php
                 $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
                 $file = "hotelix/dashboard_pages/{$page}.php";
@@ -29,6 +29,9 @@
                 }
                 ?>
             </main>
+        </div>
+        <div class="flex items-center justify-center bg-gray-800 text-white py-5">
+            <span>Copyright © <?php echo date('Y'); ?> Hotelix. All Rights Reserved.</span>
         </div>
     </section>
     <script>

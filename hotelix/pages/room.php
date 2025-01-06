@@ -45,7 +45,7 @@
 
     <?php
     require_once('../../db_root.php');
-    $getRoomsdata = $db_root->query("SELECT * FROM rooms_info");
+    $getRoomsdata = $db_root->query("SELECT * FROM rooms");
     $checkinDate = isset($_POST['checkin']) ? $_POST['checkin'] : '';
     $checkoutDate = isset($_POST['checkout']) ? $_POST['checkout'] : '';
     if ($getRoomsdata->num_rows > 0) {

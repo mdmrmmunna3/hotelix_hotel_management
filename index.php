@@ -18,7 +18,20 @@
 
     <!-- ======= vanila css ====== -->
     <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: gray !important;
+        }
 
+        ::-webkit-scrollbar-track {
+            background: blue;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: blue;
+        }
+    </style>
 </head>
 
 <body>

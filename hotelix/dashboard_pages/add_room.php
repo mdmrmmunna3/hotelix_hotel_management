@@ -25,7 +25,7 @@ if (isset($_POST['addRoomBtn'])) {
     if (empty($view)) {
         $errors['view'] = "Room View is required.";
     }
-    
+
     if (empty($desription)) {
         $errors['describ'] = "Description is required.";
     }
@@ -35,14 +35,14 @@ if (isset($_POST['addRoomBtn'])) {
     if (empty($floor_number)) {
         $errors['floor_number'] = "floor_number is required.";
     }
-    
+
     if (empty($room_size)) {
         $errors['room_size'] = "room_size is required.";
     }
     if (empty($price)) {
         $errors['price'] = "Price is required.";
     }
-    
+
 
     // Validate uploaded photo
     if ($uploaded_photo['error'] === UPLOAD_ERR_NO_FILE) {
@@ -113,12 +113,18 @@ if (isset($_POST['addRoomBtn'])) {
     <link rel="stylesheet" href="../style.css">
 
     <style>
-        /* .inStyle:is(:focus) {
-            border: 2px solid transparent;
-            transition: all 0.1s ease;
-            background: linear-gradient(#121125, #121125) padding-box, linear-gradient(45deg, blue, red) border-box;
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: gray !important;
+        }
 
-        } */
+        ::-webkit-scrollbar-track {
+            background: blue;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: blue;
+        }
 
         .inStyle:is(:focus) {
             border: 2px solid transparent;
@@ -144,26 +150,23 @@ if (isset($_POST['addRoomBtn'])) {
                 <img src="assets/hotel_logo/hotelix.png" alt="Hotelix Logo" class="w-[170px]">
             </div>
 
-            <h2 class="text-2xl font-bold text-center mb-4 uppercase titel_content">Add Room</h2>
+            <h2 class="text-2xl font-bold text-center mb-4 uppercase titel_content">Add Rooms </h2>
 
             <!-- === Name Fields ==== -->
             <div class="grid grid-cols-2 gap-3 mb-4">
                 <div>
-                <select name="room_name" id="room_name"
-                        class='w-full py-3 px-4 border-2 border-violet-300 rounded-lg focus:outline-none inStyle text-gray-400'
-                        value="<?= isset($room_name) ? htmlspecialchars($room_name) : '' ?>">
-                        <option value="" <?= empty($room_name) ? 'selected' : '' ?>>Select Room Type</option>
-                        <option value="Single" <?= (isset($room_name) && $room_name === 'Single') ? 'selected' : '' ?>>Single</option>
-                        <option value="Double" <?= (isset($room_name) && $room_name === 'Double') ? 'selected' : '' ?>>Double
-                        </option>
-                        <option value="Suite" <?= (isset($room_name) && $room_name === 'Suite') ? 'selected' : '' ?>>Suite</option>
-                        <option value="Standard" <?= (isset($room_name) && $room_name === 'Standard') ? 'selected' : '' ?>>Double
-                        </option>
-                        <option value="Deluxe" <?= (isset($room_name) && $room_name === 'Deluxe') ? 'selected' : '' ?>>Deluxe
-                        </option>
-                        <option value="Penthouse" <?= (isset($room_name) && $room_name === 'Penthouse') ? 'Penthouse' : '' ?>>Penthouse
-                        </option>
-                </select>
+                    <select name="room_name" id="room_name"
+                        class='w-full py-3 px-4 border-2 border-violet-300 rounded-lg focus:outline-none inStyle text-gray-400'>
+                        <option value='' selected>Select Room Type</option>
+                        <?php
+                        $getroomType = $db_root->query("select * from add_room_type");
+                        while (list($roomId, $room_type) = $getroomType->fetch_row()) {
+                            echo "
+                                    <option value='$roomId'>$room_type</option>
+                                ";
+                        }
+                        ?>
+                    </select>
                     <small class="text-red-500"><?= $errors['room_name'] ?? '' ?></small>
                 </div>
                 <div>
@@ -181,9 +184,25 @@ if (isset($_POST['addRoomBtn'])) {
                         value="<?= isset($price) ? htmlspecialchars($price) : '' ?>">
                     <small class="text-red-500"><?= $errors['price'] ?? '' ?></small>
                 </div>
-               
+
+                <div>
+                    <select name="bed_type" id="bed_type"
+                        class='w-full py-3 px-4 border-2 border-violet-300 rounded-lg focus:outline-none inStyle text-gray-400'>
+                        <option value='' selected>Select Bed Type</option>
+                        <?php
+                        $getbedType = $db_root->query("select * from add_bed_type");
+                        while (list($bedId, $bed_type) = $getbedType->fetch_row()) {
+                            echo "
+                                    <option value='$bedId'>$bed_type</option>
+                                ";
+                        }
+                        ?>
+                    </select>
+                    <small class="text-red-500"><?= $errors['bed_type'] ?? '' ?></small>
+                </div>
+
             </div>
-           
+
             <div class="grid md:grid-cols-2 gap-3 mb-4">
                 <div>
                     <input type="text" name="room_size" id="room_size" placeholder="Room Size"
@@ -192,45 +211,28 @@ if (isset($_POST['addRoomBtn'])) {
                     <small class="text-red-500"><?= $errors['room_size'] ?? '' ?></small>
                 </div>
                 <div>
-                <select name="bed_type" id="bed_type"
-                        class='w-full py-3 px-4 border-2 border-violet-300 rounded-lg focus:outline-none inStyle text-gray-400'
-                        value="<?= isset($bed_type) ? htmlspecialchars($bed_type) : '' ?>">
-                        <option value="" <?= empty($bed_type) ? 'selected' : '' ?>>Select Bed Type</option>
-                        <option value="Single Bed" <?= (isset($bed_type) && $bed_type === 'Single Bed') ? 'selected' : '' ?>>Single Bed</option>
-                        <option value="Double Bed" <?= (isset($bed_type) && $bed_type === 'Double Bed') ? 'selected' : '' ?>>Double Bed
-                        </option>
-                        <option value="King Bed" <?= (isset($bed_type) && $bed_type === 'King Bed') ? 'selected' : '' ?>>King Bed</option>
-                        <option value="Queen Bed" <?= (isset($bed_type) && $bed_type === 'Queen Bed') ? 'selected' : '' ?>>Queen Bed
-                        </option>
-                        
-                </select>
-                    <small class="text-red-500"><?= $errors['bed_type'] ?? '' ?></small>
-                </div>
-                
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-3 mb-4">
-                <div>
                     <input type="text" name="floor_number" id="floor_number" placeholder="Floor Number"
                         class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle"
                         value="<?= isset($floor_number) ? htmlspecialchars($floor_number) : '' ?>">
                     <small class="text-red-500"><?= $errors['floor_number'] ?? '' ?></small>
                 </div>
+
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-3 mb-4">
                 <div>
                     <input type="text" name="view" id="view" placeholder="View"
                         class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle"
                         value="<?= isset($view) ? htmlspecialchars($view) : '' ?>">
                     <small class="text-red-500"><?= $errors['view'] ?? '' ?></small>
                 </div>
-                
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-3 mb-4">
-                
                 <div>
-                    <textarea name="describ" id="describ" placeholder="Description" cols="2" rows="1" class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle"  value="<?= isset($desription) ? htmlspecialchars($desription) : '' ?>"></textarea>
+                    <textarea name="describ" id="describ" placeholder="Description" cols="2" rows="1"
+                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle"
+                        value="<?= isset($desription) ? htmlspecialchars($desription) : '' ?>"></textarea>
                     <small class="text-red-500"><?= $errors['describ'] ?? '' ?></small>
                 </div>
+
             </div>
 
             <!-- ==== Upload Profile Photo ==== -->
