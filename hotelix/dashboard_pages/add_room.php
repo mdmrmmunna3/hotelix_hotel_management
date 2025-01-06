@@ -1,0 +1,257 @@
+<?php
+require_once "db_root.php";
+
+$errors = [];
+
+if (isset($_POST['addRoomBtn'])) {
+    $room_name = trim($_POST['room_name']);
+    $room_number = trim($_POST['room_number']);
+    $bed_type = trim($_POST['bed_type']);
+    $price = trim($_POST['price']);
+    $view = trim($_POST['view']);
+    $floor_number = trim($_POST['floor_number']);
+    $room_size = trim($_POST['room_size']);
+    $desription = trim($_POST['describ']);
+    $uploaded_photo = $_FILES['upload_photo'];
+    $default_status = 'Available';
+
+    // Validate inputs
+    if (empty($room_name)) {
+        $errors['room_name'] = "Room name is required.";
+    }
+    if (empty($room_number)) {
+        $errors['room_number'] = "Room number is required.";
+    }
+    if (empty($view)) {
+        $errors['view'] = "Room View is required.";
+    }
+    
+    if (empty($desription)) {
+        $errors['describ'] = "Description is required.";
+    }
+    if (empty($bed_type)) {
+        $errors['bed_type'] = "bed_type is required.";
+    }
+    if (empty($floor_number)) {
+        $errors['floor_number'] = "floor_number is required.";
+    }
+    
+    if (empty($room_size)) {
+        $errors['room_size'] = "room_size is required.";
+    }
+    if (empty($price)) {
+        $errors['price'] = "Price is required.";
+    }
+    
+
+    // Validate uploaded photo
+    if ($uploaded_photo['error'] === UPLOAD_ERR_NO_FILE) {
+        $errors['upload_photo'] = "Photo is required.";
+    } else {
+        $allowed_exten = ['jpg', 'jpeg', 'png', 'gif'];
+        $allowed_mime_types = ['image/jpeg', 'image/png', 'image/gif'];
+        $file_size_limit = 400 * 1024; // 400 KB
+        $file_exten = strtolower(pathinfo($uploaded_photo['name'], PATHINFO_EXTENSION));
+        $mime_type = mime_content_type($uploaded_photo['tmp_name']);
+
+        if (!in_array($file_exten, $allowed_exten) || !in_array($mime_type, $allowed_mime_types)) {
+            $errors['upload_photo'] = "Invalid file format. Only JPG, PNG, or GIF are allowed.";
+        } elseif ($uploaded_photo['size'] > $file_size_limit) {
+            $errors['upload_photo'] = "File size must not exceed 400 KB.";
+        }
+
+        $photo_content = @file_get_contents($uploaded_photo['tmp_name']);
+        if ($photo_content === false) {
+            $errors['upload_photo'] = "Error reading the uploaded file.";
+        }
+    }
+
+    if (empty($errors)) {
+        // Check if email is already registered
+        $stmt = $db_root->prepare("SELECT id FROM rooms_info WHERE email = ?");
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            $errors['email'] = "Email is already registered.";
+        } else {
+            // Hash the password
+            $hash_password = password_hash($password, PASSWORD_BCRYPT);
+
+            // Insert user data into the database
+            $insert = $db_root->prepare("INSERT INTO add_room (name, room_number, view, desription,photo, mime_type) VALUES (?, ?, ?, ?, ?, ?)");
+            $insert->bind_param("ssssssss", $add_room, $room_number, $view, $desription, $photo_content, $mime_type);
+
+        }
+    }
+}
+?>
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <base href="/hotelix_hotel_management/">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <!-- Tailwind CSS plugin CDN link (DaisyUI) -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui/dist/full.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- Font Awesome link -->
+    <script src="https://kit.fontawesome.com/9ce82b2c02.js" crossorigin="anonymous"></script>
+    <!-- Tailwind CSS CDN link -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Swiper CDN link CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../style.css">
+
+    <style>
+        /* .inStyle:is(:focus) {
+            border: 2px solid transparent;
+            transition: all 0.1s ease;
+            background: linear-gradient(#121125, #121125) padding-box, linear-gradient(45deg, blue, red) border-box;
+
+        } */
+
+        .inStyle:is(:focus) {
+            border: 2px solid transparent;
+            border-image: linear-gradient(to right, #3b82f6, #9333ea) 1;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body class="">
+    <section class="w-full py-10 bg-gray-200 min-h-[100vh]" id="form_container">
+
+        <form action="" method="post" enctype="multipart/form-data"
+            class="max-w-lg md:mx-auto mx-4 bg-white md:p-8 px-4 py-4 rounded-xl shadow-md ">
+            <!-- go to home  -->
+            <div class=" flex justify-center items-center gap-2 mb-4">
+                <a href="index.php"><i class="text-[#079d49] fa-solid fa-arrow-left"></i></a>
+                <a class="text-black font-medium titel_content" href="index.php">Go To Home Page</a>
+            </div>
+
+            <!-- logo  -->
+            <div class="flex justify-center mb-3">
+                <img src="assets/hotel_logo/hotelix.png" alt="Hotelix Logo" class="w-[170px]">
+            </div>
+
+            <h2 class="text-2xl font-bold text-center mb-4 uppercase titel_content">Add Room</h2>
+
+            <!-- === Name Fields ==== -->
+            <div class="grid grid-cols-2 gap-3 mb-4">
+                <div>
+                <select name="room_name" id="room_name"
+                        class='w-full py-3 px-4 border-2 border-violet-300 rounded-lg focus:outline-none inStyle text-gray-400'
+                        value="<?= isset($room_name) ? htmlspecialchars($room_name) : '' ?>">
+                        <option value="" <?= empty($room_name) ? 'selected' : '' ?>>Select Room Type</option>
+                        <option value="Single" <?= (isset($room_name) && $room_name === 'Single') ? 'selected' : '' ?>>Single</option>
+                        <option value="Double" <?= (isset($room_name) && $room_name === 'Double') ? 'selected' : '' ?>>Double
+                        </option>
+                        <option value="Suite" <?= (isset($room_name) && $room_name === 'Suite') ? 'selected' : '' ?>>Suite</option>
+                        <option value="Standard" <?= (isset($room_name) && $room_name === 'Standard') ? 'selected' : '' ?>>Double
+                        </option>
+                        <option value="Deluxe" <?= (isset($room_name) && $room_name === 'Deluxe') ? 'selected' : '' ?>>Deluxe
+                        </option>
+                        <option value="Penthouse" <?= (isset($room_name) && $room_name === 'Penthouse') ? 'Penthouse' : '' ?>>Penthouse
+                        </option>
+                </select>
+                    <small class="text-red-500"><?= $errors['room_name'] ?? '' ?></small>
+                </div>
+                <div>
+                    <input type="text" name="room_number" id="room_number" placeholder="Room Number"
+                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle"
+                        value="<?= isset($room_number) ? htmlspecialchars($room_number) : '' ?>">
+                    <small class="text-red-500"><?= $errors['room_number'] ?? '' ?></small>
+                </div>
+            </div>
+            <!-- ===  ==== -->
+            <div class="grid grid-cols-2 gap-3 mb-4">
+                <div>
+                    <input type="text" name="price" id="price" placeholder="Room Price"
+                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle"
+                        value="<?= isset($price) ? htmlspecialchars($price) : '' ?>">
+                    <small class="text-red-500"><?= $errors['price'] ?? '' ?></small>
+                </div>
+               
+            </div>
+           
+            <div class="grid md:grid-cols-2 gap-3 mb-4">
+                <div>
+                    <input type="text" name="room_size" id="room_size" placeholder="Room Size"
+                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle"
+                        value="<?= isset($room_size) ? htmlspecialchars($room_size) : '' ?>">
+                    <small class="text-red-500"><?= $errors['room_size'] ?? '' ?></small>
+                </div>
+                <div>
+                <select name="bed_type" id="bed_type"
+                        class='w-full py-3 px-4 border-2 border-violet-300 rounded-lg focus:outline-none inStyle text-gray-400'
+                        value="<?= isset($bed_type) ? htmlspecialchars($bed_type) : '' ?>">
+                        <option value="" <?= empty($bed_type) ? 'selected' : '' ?>>Select Bed Type</option>
+                        <option value="Single Bed" <?= (isset($bed_type) && $bed_type === 'Single Bed') ? 'selected' : '' ?>>Single Bed</option>
+                        <option value="Double Bed" <?= (isset($bed_type) && $bed_type === 'Double Bed') ? 'selected' : '' ?>>Double Bed
+                        </option>
+                        <option value="King Bed" <?= (isset($bed_type) && $bed_type === 'King Bed') ? 'selected' : '' ?>>King Bed</option>
+                        <option value="Queen Bed" <?= (isset($bed_type) && $bed_type === 'Queen Bed') ? 'selected' : '' ?>>Queen Bed
+                        </option>
+                        
+                </select>
+                    <small class="text-red-500"><?= $errors['bed_type'] ?? '' ?></small>
+                </div>
+                
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-3 mb-4">
+                <div>
+                    <input type="text" name="floor_number" id="floor_number" placeholder="Floor Number"
+                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle"
+                        value="<?= isset($floor_number) ? htmlspecialchars($floor_number) : '' ?>">
+                    <small class="text-red-500"><?= $errors['floor_number'] ?? '' ?></small>
+                </div>
+                <div>
+                    <input type="text" name="view" id="view" placeholder="View"
+                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle"
+                        value="<?= isset($view) ? htmlspecialchars($view) : '' ?>">
+                    <small class="text-red-500"><?= $errors['view'] ?? '' ?></small>
+                </div>
+                
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-3 mb-4">
+                
+                <div>
+                    <textarea name="describ" id="describ" placeholder="Description" cols="2" rows="1" class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle"  value="<?= isset($desription) ? htmlspecialchars($desription) : '' ?>"></textarea>
+                    <small class="text-red-500"><?= $errors['describ'] ?? '' ?></small>
+                </div>
+            </div>
+
+            <!-- ==== Upload Profile Photo ==== -->
+            <div class="mb-4">
+                <label class="block mb-2 text-sm font-medium text-gray-700">Upload Photo</label>
+                <input type="file" name="upload_photo" id="upload_photo"
+                    class="file-input w-full file-input-ghost bg-gray-200 outline-none">
+                <small class="text-red-500"><?= $errors['upload_photo'] ?? '' ?></small>
+            </div>
+
+            <!-- === Register Button ==== -->
+            <div>
+                <button type="submit" name="addRoomBtn" id="addroom"
+                    class="relative flex justify-center items-center w-full py-3  border-2 rounded-lg border-blue-500 hover:text-white overflow-hidden group transition-transform duration-500">
+                    <span
+                        class="absolute inset-0 bg-blue-500 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500 ease-out"></span>
+                    <span class="relative z-10 uppercase  titel_content">Add Room</span>
+                </button>
+            </div>
+        </form>
+    </section>
+</body>
+
+</html>
