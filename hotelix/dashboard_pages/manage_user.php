@@ -54,6 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <thead>
                     <tr
                         class="bg-[--secondary-color] text-[--primary-color] border-b border-gray-200 text-center text-xs md:text-sm font-thin">
+                        <th>SL</th>
                         <th>Photo</th>
                         <th>Name</th>
                         <th>Email</th>
@@ -65,6 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <?php
                     $getUsers = $db_root->query("SELECT * FROM users");
                     if ($getUsers->num_rows > 0) {
+                        $counter = 1;
                         while ($row = $getUsers->fetch_assoc()) {
                             $id = $row['id'];
                             $name = $row['name'];
@@ -74,6 +76,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             $photo_mime = $row['mime_type'];
                             echo "
                                 <tr class=' text-xs md:text-sm text-center'>
+                                    <td>
+                                      $counter
+                                    </td>
                                     <td>
                                         <img class='h-10 w-10 object-cover rounded-full' 
                                             src='data:$photo_mime;base64," . base64_encode($photo) . "' alt='User Photo'>
@@ -95,6 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     </td>
                                 </tr>
                             ";
+                            $counter++;
                         }
                     } else {
                         echo "<tr><td colspan='5'>Users not found</td></tr>";
