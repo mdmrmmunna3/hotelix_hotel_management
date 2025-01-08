@@ -113,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <!-- Update Modal -->
         <div id="updateModel"
             class="fixed hidden z-50 inset-0 bg-gray-900 bg-opacity-60 overflow-y-auto h-full w-full px-4">
-            <div class="relative top-40 mx-auto shadow-xl rounded-md bg-white max-w-md">
+            <div class="relative top-40 mx-auto shadow-xl rounded-md bg-[--primary-color] max-w-md">
                 <div class="flex justify-end p-2">
                     <button onclick="closeModal('updateModel')" type="button"
                         class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center">
@@ -127,7 +127,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <input type="hidden" id="updateUserId" name="userId" />
                         <div class="mb-4">
                             <label for="updateRole" class="block text-left">Role</label>
-                            <select id="updateRole" name="role" class="w-full px-3 py-2 mt-2 border rounded-md">
+                            <select id="updateRole" name="role"
+                                class="w-full px-3 py-2 mt-2 text-black border rounded-md">
                                 <option value="admin" id="roleAdmin">Admin</option>
                                 <option value="user" id="roleUser">User</option>
                             </select>
@@ -151,7 +152,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <!-- Delete Confirmation Modal -->
         <div id="modelConfirm"
             class="fixed hidden z-50 inset-0 bg-gray-900 bg-opacity-60 overflow-y-auto h-full w-full px-4">
-            <div class="relative top-40 mx-auto shadow-xl rounded-md bg-white max-w-md">
+            <div class="relative top-40 mx-auto shadow-xl rounded-md bg-[--primary-color] max-w-md">
                 <div class="flex justify-end p-2">
                     <button onclick="closeModal('modelConfirm')" type="button"
                         class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center">

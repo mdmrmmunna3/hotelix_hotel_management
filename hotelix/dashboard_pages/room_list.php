@@ -1,4 +1,4 @@
-<?php 
+<?php
 require_once "db_root.php";
 $success_message = '';
 // Delete Bed Type
@@ -16,6 +16,7 @@ if (isset($_GET['deleteId'])) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -49,6 +50,7 @@ if (isset($_GET['deleteId'])) {
         }
     </style>
 </head>
+
 <body>
     <?php if (isset($_GET['success_message'])) { ?>
         <div id="successMessage" class="toast toast-top toast-center toast-visible z-30">
@@ -59,36 +61,37 @@ if (isset($_GET['deleteId'])) {
     <?php } ?>
     <!-- show details  -->
     <section class="py-20">
-            <div class="overflow-x-auto">
-                <a href="main_dashboard.php?page=add_room" class="border border-blue-500 px-4 py-2 font-medium"><i class="text-[#079d49] fa-solid fa-arrow-left pe-3"></i>Add Room</a>
-                <table class="max-w-lg md:mx-auto mx-4 table table-xs md:table-md mb-20">
-                    <caption class="text-3xl mb-3 uppercase titel_content">Room Info List</caption>
-                    <thead>
-                        <tr
-                            class="bg-[--secondary-color] text-[--primary-color] border-b border-gray-200 text-center text-xs md:text-sm font-thin">
-                            <th>SL</th>
-                            <th>Room Type</th>
-                            <th>Room Size</th>
-                            <th>Room Price</th>
-                            <th>Bed Type</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody class="bg-[--primary-color]">
-                        <?php
-                        $getRoomsData = $db_root->query("select * from rooms");
-                        if ($getRoomsData->num_rows > 0) {
-                            $counter = 1;
-                            while ($row = $getRoomsData->fetch_assoc()) {
-                                $id = $row['id'];
-                                $room_type = $row['room_type'];
-                                $price = $row['price_per_night'];
-                                $status = $row['av_status'];
-                                $room_size = $row['room_size'];
-                                $bed_type = $row['bed_type'];
+        <div class="overflow-x-auto">
+            <a href="main_dashboard.php?page=add_room" class="border border-blue-500 px-4 py-2 font-medium"><i
+                    class="text-[#079d49] fa-solid fa-arrow-left pe-3"></i>Add Room</a>
+            <table class="max-w-lg md:mx-auto mx-4 table table-xs md:table-md mb-20">
+                <caption class="text-3xl mb-3 uppercase titel_content">Room Info List</caption>
+                <thead>
+                    <tr
+                        class="bg-[--secondary-color] text-[--primary-color] border-b border-gray-200 text-center text-xs md:text-sm font-thin">
+                        <th>SL</th>
+                        <th>Room Type</th>
+                        <th>Room Size</th>
+                        <th>Room Price</th>
+                        <th>Bed Type</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-[--primary-color]">
+                    <?php
+                    $getRoomsData = $db_root->query("select * from rooms");
+                    if ($getRoomsData->num_rows > 0) {
+                        $counter = 1;
+                        while ($row = $getRoomsData->fetch_assoc()) {
+                            $id = $row['id'];
+                            $room_type = $row['room_type'];
+                            $price = $row['price_per_night'];
+                            $status = $row['av_status'];
+                            $room_size = $row['room_size'];
+                            $bed_type = $row['bed_type'];
 
-                                echo "
+                            echo "
                         <tr class=' text-xs md:text-sm text-center'>
                             <td>$counter</td>
                             <td>$room_type</td>
@@ -96,24 +99,27 @@ if (isset($_GET['deleteId'])) {
                             <td>$price</td>
                             <td>$bed_type</td>
                             <td>$status</td>
-                            <td>
+                            <td class='flex gap-3'>
+                             <a href='main_dashboard.php?page=update_room&updateId=$id' class='px-3 py-1 rounded-md text-xs md:text-sm border border-blue-500 font-medium hover:text-white hover:bg-blue-500 transition duration-150'>
+                                    <i class='fa-solid fa-pen-to-square'></i>
+                                </a>
                              <a href='main_dashboard.php?page=room_list&deleteId=$id' class='px-3 py-1 rounded-md text-xs md:text-sm border border-red-500 font-medium hover:text-white hover:bg-red-500 transition duration-150'>
                                     <i class='fa-solid fa-trash-can'></i>
                                 </a>
                             </td>
                         </tr>
                     ";
-                                $counter++;
-                            }
-                        } else {
-                            echo "<tr><td colspan='5'>No bed types found</td></tr>";
+                            $counter++;
                         }
-                        ?>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-        <script>
+                    } else {
+                        echo "<tr><td colspan='5'>No bed types found</td></tr>";
+                    }
+                    ?>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <script>
         // Automatically hide the success message after 2 seconds
         setTimeout(function () {
             const successMessage = document.getElementById('successMessage');
@@ -122,6 +128,7 @@ if (isset($_GET['deleteId'])) {
                 successMessage.classList.add('toast-hidden');
             }
         }, 2000);
-        </script>
+    </script>
 </body>
+
 </html>

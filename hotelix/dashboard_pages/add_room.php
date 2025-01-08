@@ -54,14 +54,14 @@ if (isset($_POST['addRoomBtn'])) {
     } else {
         $allowed_exten = ['jpg', 'jpeg', 'png', 'gif'];
         $allowed_mime_types = ['image/jpeg', 'image/png', 'image/gif'];
-        $file_size_limit = 400 * 1024; // 400 KB
+        $file_size_limit = 700 * 1024; // 400 KB
         $file_exten = strtolower(pathinfo($uploaded_photo['name'], PATHINFO_EXTENSION));
         $mime_type = mime_content_type($uploaded_photo['tmp_name']);
-    
+
         if (!in_array($file_exten, $allowed_exten) || !in_array($mime_type, $allowed_mime_types)) {
             $errors['upload_photo'] = "Invalid file format. Only JPG, PNG, or GIF are allowed.";
         } elseif ($uploaded_photo['size'] > $file_size_limit) {
-            $errors['upload_photo'] = "File size must not exceed 400 KB.";
+            $errors['upload_photo'] = "File size must not exceed 700 KB.";
         } else {
             // Safely handle file content
             $photo_content = file_get_contents($uploaded_photo['tmp_name']);
@@ -70,12 +70,12 @@ if (isset($_POST['addRoomBtn'])) {
             }
         }
     }
-    if(empty($errors)) {
-        
+    if (empty($errors)) {
+
         $insertRoom = $db_root->prepare("INSERT INTO rooms (room_type, room_number, price_per_night, av_status, room_size, view, floor_number, room_desc,room_mime_type,room_photo,bed_type,capacity) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?)");
 
-        $insertRoom->bind_param("ssssssssssss", $room_name, $room_number, $price, $default_status, $room_size, $view, $floor_number, $desription,$mime_type,$photo_content,$bed_type,$capacity);
-    
+        $insertRoom->bind_param("ssssssssssss", $room_name, $room_number, $price, $default_status, $room_size, $view, $floor_number, $desription, $mime_type, $photo_content, $bed_type, $capacity);
+
         if ($insertRoom->execute()) {
             $success_message = "Room added successfully!";
             header("location:main_dashboard.php?page=room_list&success_message=$success_message");
@@ -84,8 +84,8 @@ if (isset($_POST['addRoomBtn'])) {
             echo "<p class='text-red-500'>Error: " . $stmt->error . "</p>";
         }
     }
-    
-} 
+
+}
 ?>
 
 <!DOCTYPE html>
@@ -111,7 +111,7 @@ if (isset($_POST['addRoomBtn'])) {
     <link rel="stylesheet" href="../style.css">
 
     <style>
-            .main_form {
+        .main_form {
             box-shadow: rgba(0, 0, 0, 0.45) 0px 2px 8px;
         }
 
@@ -133,6 +133,7 @@ if (isset($_POST['addRoomBtn'])) {
             border-image: linear-gradient(to right, #3b82f6, #9333ea) 1;
             border-radius: 5px;
         }
+
         .toast {
             transition: opacity 2s ease-in-out;
         }
@@ -161,7 +162,7 @@ if (isset($_POST['addRoomBtn'])) {
 
         <form action="" method="post" enctype="multipart/form-data"
             class="max-w-lg md:mx-auto mx-4 md:p-8 px-4 py-4 rounded-xl hover:shadow-2xl transition-shadow duration-300 main_form">
-           
+
             <!-- logo  -->
             <div class="flex justify-center mb-3">
                 <img src="assets/hotel_logo/hotelix.png" alt="Hotelix Logo" class="w-[170px]">
@@ -243,7 +244,7 @@ if (isset($_POST['addRoomBtn'])) {
                         value="<?= isset($view) ? htmlspecialchars($view) : '' ?>">
                     <small class="text-red-500"><?= $errors['view'] ?? '' ?></small>
                 </div>
-                
+
                 <div>
                     <input type="text" name="capacity" id="capacity" placeholder="Room Capacity"
                         class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle"
@@ -252,7 +253,7 @@ if (isset($_POST['addRoomBtn'])) {
                 </div>
 
             </div>
-            
+
             <div>
                 <div>
                     <textarea name="describ" id="describ" placeholder="Description" cols="2" rows="1"
@@ -261,11 +262,11 @@ if (isset($_POST['addRoomBtn'])) {
                     <small class="text-red-500"><?= $errors['describ'] ?? '' ?></small>
                 </div>
                 <!-- ==== Upload Profile Photo ==== -->
-                <div   div class="mb-4">
-                <label class="block mb-2 text-sm font-medium text-gray-700">Upload Photo</label>
-                <input type="file" name="upload_photo" id="upload_photo"
-                    class="file-input w-full file-input-ghost bg-gray-200 outline-none">
-                <small class="text-red-500"><?= $errors['upload_photo'] ?? '' ?></small>
+                <div div class="mb-4">
+                    <label class="block mb-2 text-sm font-medium text-gray-700">Upload Photo</label>
+                    <input type="file" name="upload_photo" id="upload_photo"
+                        class="file-input w-full file-input-ghost bg-gray-200 outline-none">
+                    <small class="text-red-500"><?= $errors['upload_photo'] ?? '' ?></small>
                 </div>
             </div>
 
@@ -281,8 +282,8 @@ if (isset($_POST['addRoomBtn'])) {
         </form>
     </section>
 
-    
-        <script>
+
+    <script>
         // Automatically hide the success message after 2 seconds
         setTimeout(function () {
             const successMessage = document.getElementById('successMessage');

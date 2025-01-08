@@ -50,3 +50,14 @@ window.addEventListener('DOMContentLoaded', () => {
         document.body.classList.remove('dark');
     }
 });
+
+
+// success toast 
+// Automatically hide the success message after 2 seconds
+setTimeout(function () {
+    const successMessage = document.getElementById('successMessage');
+    if (successMessage) {
+        successMessage.classList.remove('toast-visible');
+        successMessage.classList.add('toast-hidden');
+    }
+}, 2000);

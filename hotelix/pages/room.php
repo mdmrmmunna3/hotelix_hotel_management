@@ -16,9 +16,16 @@
 
     <!-- ======== swiper cdn link css ======= -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-
+    <!-- FancyBox CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- ======= vanilla css ====== -->
     <link rel="stylesheet" href="style.css">
+    <style>
+        .room_img {
+            display: block !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -65,11 +72,14 @@
             $image_mime = $row['room_mime_type'];
             $view = $row['view'];
             $room_number = $row['room_number'];
+            $base64_photo = base64_encode($room_image);
 
             echo "
     <div class='card border border-blue-500 w-full shadow-xl'>
-        <figure class='relative overflow-hidden'>
-            <img src='data:$image_mime;base64," . base64_encode($room_image) . "' alt='$room_type' class='w-full h-48 object-cover' />
+        <figure class='room_img relative overflow-hidden'>
+        <a data-fancybox='' href='data:$image_mime;base64,$base64_photo'>
+            <img src='data:$image_mime;base64,$base64_photo' alt='$room_type' class='w-full h-52 object-cover ' />
+        </a>
             <p class='absolute top-3 right-4 text-xl bg-blue-400 px-3 py-2 rounded-md titel_content'>$status</p>
         </figure>
         <div class='card-body'>
@@ -116,6 +126,8 @@
 
     require_once('../shared/footer.php');
     ?>
+    <!-- FancyBox JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
 </body>
 
 </html>
