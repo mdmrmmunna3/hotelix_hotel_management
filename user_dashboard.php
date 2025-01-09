@@ -18,7 +18,7 @@
         <?php require_once 'hotelix/shared/topbar.php'; ?>
         <div class="flex">
             <?php require_once 'hotelix/shared/user_sidebar.php'; ?>
-            <main class="flex-1 p-6 h-screen">
+            <main class="flex-1 p-6 h-screen overflow-y-auto">
                 <?php
                 $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
                 $file = "hotelix/dashboard_pages/{$page}.php";
@@ -39,7 +39,7 @@
             $('.ajax-link').on('click', function (e) {
                 e.preventDefault();
                 const url = $(this).attr('href');
-                $('main').html('<div class="text-center py-10"><span>Loading...</span></div>');
+                $('main').html('<div class="text-center py-10 flex justify-center items-center h-screen"><span class="loading loading-ring  w-20"></span></div>');
                 $.get(url, function (data) {
                     const content = $(data).find('main').html();
                     $('main').html(content);

@@ -71,34 +71,40 @@ if (isset($_GET['deleteId'])) {
                         class="bg-[--secondary-color] text-[--primary-color] border-b border-gray-200 text-center text-xs md:text-sm font-thin">
                         <th>SL</th>
                         <th>Room Type</th>
-                        <th>Room Size</th>
-                        <th>Room Price</th>
-                        <th>Bed Type</th>
-                        <th>Status</th>
+                        <th>Room Number</th>
+                        <th>Booking Date</th>
+                        <th>Checkin Date</th>
+                        <th>Checkout Date</th>
+                        <th>Payment Status</th>
+                        <th>Total Amount</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody class="bg-[--primary-color]">
                     <?php
-                    $getRoomsData = $db_root->query("select * from rooms");
-                    if ($getRoomsData->num_rows > 0) {
+                    $getBookData = $db_root->query("select * from bookings");
+                    if ($getBookData->num_rows > 0) {
                         $counter = 1;
-                        while ($row = $getRoomsData->fetch_assoc()) {
+                        while ($row = $getBookData->fetch_assoc()) {
                             $id = $row['id'];
                             $room_type = $row['room_type'];
-                            $price = $row['price_per_night'];
-                            $status = $row['av_status'];
-                            $room_size = $row['room_size'];
-                            $bed_type = $row['bed_type'];
+                            $room_number = $row['room_number'];
+                            $booking_date = $row['booking_date'];
+                            $checkin_date = $row['checkin_date'];
+                            $checkout_date = $row['checkout_date'];
+                            $payment_status = $row['payment_status'];
+                            $total_amount = $row['amount'];
 
                             echo "
                         <tr class=' text-xs md:text-sm text-center'>
                             <td>$counter</td>
                             <td>$room_type</td>
-                            <td>$room_size</td>
-                            <td>$price</td>
-                            <td>$bed_type</td>
-                            <td class=''>$status</td>
+                            <td>$room_number</td>
+                            <td>$booking_date</td>
+                            <td>$checkin_date</td>
+                            <td>$checkout_date</td>
+                            <td>$payment_status</td>
+                            <td>$total_amount</td>
                             <td class='flex gap-3'>
                              <a href='main_dashboard.php?page=update_room&updateId=$id' class='px-3 py-1 rounded-md text-xs md:text-sm border border-blue-500 font-medium hover:text-white hover:bg-blue-500 transition duration-150'>
                                     <i class='fa-solid fa-pen-to-square'></i>

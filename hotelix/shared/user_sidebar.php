@@ -37,6 +37,18 @@ if ($result->num_rows > 0) {
         .sidebar_main {
             box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
         }
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: gray !important;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: blue;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: blue;
+        }
     </style>
 </head>
 
@@ -89,7 +101,7 @@ if ($result->num_rows > 0) {
                             class="flex items-center w-full p-2 text-lg font-normal  transition duration-75 rounded-lg group hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 pl-11 ajax-link focus:text-emerald-500">
                             Search & Book
                         </a></li>
-                    <li><a href="#"
+                    <li><a href="user_dashboard.php?page=display_booking"
                             class="flex items-center w-full p-2 text-lg font-normal  transition duration-75 rounded-lg group hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 pl-11 ajax-link focus:text-emerald-500">Current
                             Bookings
                         </a></li>
@@ -165,7 +177,7 @@ if ($result->num_rows > 0) {
                             class="flex items-center w-full p-2 text-lg font-normal  transition duration-75 rounded-lg group hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 pl-11 ajax-link focus:text-emerald-500">
                             Search & Book
                         </a></li>
-                    <li><a href="#"
+                    <li><a href="user_dashboard.php?page=display_booking"
                             class="flex items-center w-full p-2 text-lg font-normal  transition duration-75 rounded-lg group hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 pl-11 ajax-link focus:text-emerald-500">Current
                             Bookings
                         </a></li>

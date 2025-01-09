@@ -34,12 +34,26 @@ renderBanner($banner['bannerImage'], $banner['title'], $banner['subtitle']);
         .card {
             box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
         }
+        .toast {
+            transition: opacity 2s ease-in-out;
+        }
+
+        .toast-hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .toast-visible {
+            opacity: 1;
+            visibility: visible;
+        }
     </style>
 </head>
 
 <body>
     <section>
         <?php
+        $success_message = '';
         if (!isset($_SESSION['isLoggedIn']) || $_SESSION['isLoggedIn'] !== true) {
             // Store the current URL in the session
             $_SESSION['redirectTo'] = $_SERVER['REQUEST_URI'];
@@ -123,13 +137,20 @@ renderBanner($banner['bannerImage'], $banner['title'], $banner['subtitle']);
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkoutBtn'])) {
             $payment_status = 'pending';
 
-            $sqlInsert = "INSERT INTO bookings (user_id, room_id, room_type, checkin_date, checkout_date, payment_status,amount)
-                          VALUES (?, ?, ?, ?, ?, ?, ?)";
+            $sqlInsert = "INSERT INTO bookings (user_id, room_id, room_type, room_number, checkin_date, checkout_date, payment_status,amount)
+                          VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
             $stmtInsert = $db_root->prepare($sqlInsert);
-            $stmtInsert->bind_param("iissssd", $userId, $room_id, $room_type, $checkinDate, $checkoutDate, $payment_status, $amount);
+            $stmtInsert->bind_param("iisssssd", $userId, $room_id, $room_type, $room_number, $checkinDate, $checkoutDate, $payment_status, $amount);
             if ($stmtInsert->execute()) {
-                header('location: ../../user_dashboard.php?page=dashboard');
+                // update status after booking 
+                $UpdateRoomStatus = "UPDATE rooms set av_status = 'booked' where id = ?";
+                $stmtUpdateRoomStatus = $db_root->prepare("$UpdateRoomStatus");
+                $stmtUpdateRoomStatus->bind_param("i", $room_id);
+                $stmtUpdateRoomStatus->execute();
+
+                $success_message = "Room Booking successfully!";
+                header('location: ../../user_dashboard.php?page=display_booking&success_message='. urlencode($success_message));
             } else {
                 echo "<p class='text-red-500'>Error: " . $stmtInsert->error . "</p>";
             }
@@ -139,6 +160,14 @@ renderBanner($banner['bannerImage'], $banner['title'], $banner['subtitle']);
 
 
         <div class="">
+        <?php if (isset($_GET['success_message'])) { ?>
+            <div id="successMessage" class="toast toast-top toast-center toast-visible z-30">
+                <div class="alert alert-success">
+                    <span class="text-white"><?= htmlspecialchars($_GET['success_message']) ?></span>
+                </div>
+            </div>
+        <?php } ?>
+        
             <div class="grid grid-cols-2 gap-5 w-full max-w-7xl mx-auto p-4">
                 <!-- Info Card Section -->
 
@@ -205,6 +234,9 @@ renderBanner($banner['bannerImage'], $banner['title'], $banner['subtitle']);
                             <div>
                                 <input type="hidden" name="price" id="price" value="<?= $room_price ?>">
                             </div>
+                            <div>
+                                <input type="hidden" name="room_number" id="room_number" value="<?= $room_number ?>">
+                            </div>
                         </div>
                         <div class="grid md:grid-cols-2 gap-3">
                             <div>
@@ -231,6 +263,8 @@ renderBanner($banner['bannerImage'], $banner['title'], $banner['subtitle']);
             </div>
         </div>
     </section>
+
+    <script src="main.js"></script>
 </body>
 
 </html>
