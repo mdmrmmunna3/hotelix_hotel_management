@@ -10,7 +10,7 @@ if (isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn'] === true) {
 }
 
 $errors = [];
-
+$success_message = '';
 if (isset($_POST['loginBtn'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
@@ -43,10 +43,12 @@ if (isset($_POST['loginBtn'])) {
                 // Determine the role and redirect
                 if ($user['role'] == 'admin') {
                     // Redirect to admin dashboard if the user is an admin
-                    header('Location: ../main_dashboard.php?page=dashboard');
+                    $success_message = "Login successfully!";
+                    header('Location: ../main_dashboard.php?page=dashboard&success_message=' . urlencode($success_message));
                 } else {
+                    $success_message = "User Login successfully!";
                     // Redirect to user dashboard if the user is a regular user
-                    $redirectTo = $_SESSION['redirectTo'] ?? '../user_dashboard.php?page=dashboard';
+                    $redirectTo = $_SESSION['redirectTo'] ?? '../user_dashboard.php?page=dashboard&success_message=' . urlencode($success_message);
                     unset($_SESSION['redirectTo']); // Clear the redirect URL after use
                     header("Location: $redirectTo");
                     exit;
@@ -90,6 +92,20 @@ if (isset($_POST['loginBtn'])) {
     <link rel="stylesheet" href="../style.css">
 
     <style>
+        .toast {
+            transition: opacity 2s ease-in-out;
+        }
+
+        .toast-hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .toast-visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
         .inStyle:is(:focus) {
             border: 2px solid transparent;
             border-image: linear-gradient(to right, #3b82f6, #9333ea) 1;
@@ -99,6 +115,13 @@ if (isset($_POST['loginBtn'])) {
 </head>
 
 <body class="">
+    <?php if (isset($_GET['success_message'])) { ?>
+        <div id="successMessage" class="toast toast-top toast-center toast-visible z-30">
+            <div class="alert alert-success">
+                <span class="text-white"><?= htmlspecialchars($_GET['success_message']) ?></span>
+            </div>
+        </div>
+    <?php } ?>
     <section class="w-full py-10 bg-gray-200 h-[100vh] " id="form_container">
 
         <form action="" method="post" enctype="multipart/form-data"
@@ -150,6 +173,17 @@ if (isset($_POST['loginBtn'])) {
             </div>
         </form>
     </section>
+
+    <script>
+        // Automatically hide the success message after 2 seconds
+        setTimeout(function () {
+            const successMessage = document.getElementById('successMessage');
+            if (successMessage) {
+                successMessage.classList.remove('toast-visible');
+                successMessage.classList.add('toast-hidden');
+            }
+        }, 2000);
+    </script>
 </body>
 
 </html>

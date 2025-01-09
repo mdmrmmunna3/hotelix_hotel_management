@@ -1,6 +1,6 @@
 <?php
 require_once "db_root.php"; // Ensure this file connects to your database
-
+$success_message = '';
 // Handle Role Update
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['updateUserBtn'])) {
@@ -9,7 +9,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $update_user = "UPDATE users SET role = '$updateRole' WHERE id = '$updateId'";
         if (mysqli_query($db_root, $update_user)) {
-            header('location:main_dashboard.php?page=manage_user');
+            $success_message = "User Update successfully!";
+            header("Location:main_dashboard.php?page=manage_user&success_message=" . urlencode($success_message));
             exit();
         } else {
             $error = "Failed to update user role.";
@@ -22,7 +23,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $delete_user = $db_root->query("DELETE FROM users WHERE id = '$deleteId'");
         if ($delete_user) {
-            header('location:main_dashboard.php?page=manage_user');
+            $success_message = "User Deleted successfully!";
+            header("Location:main_dashboard.php?page=manage_user&success_message=" . urlencode($success_message));
             exit();
         } else {
             $error = "Failed to delete user.";
@@ -43,9 +45,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
     <link rel="stylesheet" href="style.css">
+    <style>
+        .toast {
+            transition: opacity 2s ease-in-out;
+        }
+
+        .toast-hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .toast-visible {
+            opacity: 1;
+            visibility: visible;
+        }
+    </style>
 </head>
 
 <body>
+    <?php if (isset($_GET['success_message'])) { ?>
+        <div id="successMessage" class="toast toast-top toast-center toast-visible z-30">
+            <div class="alert alert-success">
+                <span class="text-white"><?= htmlspecialchars($_GET['success_message']) ?></span>
+            </div>
+        </div>
+    <?php } ?>
     <section class="pt-16">
         <h3 class="lg:text-5xl md:text-4xl text-2xl uppercase titel_content text-center">Manage Users</h3>
 
@@ -205,6 +229,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             document.getElementById('modelConfirm').style.display = 'block';
             document.body.classList.add('overflow-y-hidden');
         }
+
+        // success message 
+        setTimeout(function () {
+            const successMessage = document.getElementById('successMessage');
+            if (successMessage) {
+                successMessage.classList.remove('toast-visible');
+                successMessage.classList.add('toast-hidden');
+            }
+        }, 2000);
     </script>
 </body>
 

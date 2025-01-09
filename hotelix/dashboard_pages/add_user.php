@@ -1,5 +1,5 @@
 <?php
-require_once('../db_root.php');
+require_once('db_root.php');
 
 $errors = [];
 $success_message = '';
@@ -90,7 +90,7 @@ if (isset($_POST['registerBtn'])) {
 
             if ($insert->execute()) {
                 $success_message = "User Register successfully!";
-                header("Location: login.php?success_message=" . urlencode($success_message));
+                header("Location: main_dashboard.php?page=manage_user&success_message=" . urlencode($success_message));
                 exit();
             } else {
                 $errors['insert'] = "Error: " . $insert->error;
@@ -99,15 +99,13 @@ if (isset($_POST['registerBtn'])) {
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <base href="/hotelix_hotel_management/">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration</title>
+    <title>Add user </title>
     <!-- Tailwind CSS plugin CDN link (DaisyUI) -->
     <link href="https://cdn.jsdelivr.net/npm/daisyui/dist/full.min.css" rel="stylesheet" type="text/css" />
 
@@ -123,12 +121,22 @@ if (isset($_POST['registerBtn'])) {
     <link rel="stylesheet" href="../style.css">
 
     <style>
-        /* .inStyle:is(:focus) {
-            border: 2px solid transparent;
-            transition: all 0.1s ease;
-            background: linear-gradient(#121125, #121125) padding-box, linear-gradient(45deg, blue, red) border-box;
+        .main_form {
+            box-shadow: rgba(0, 0, 0, 0.45) 0px 2px 8px;
+        }
 
-        } */
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: gray !important;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: blue;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: blue;
+        }
 
         .inStyle:is(:focus) {
             border: 2px solid transparent;
@@ -152,7 +160,7 @@ if (isset($_POST['registerBtn'])) {
     </style>
 </head>
 
-<body class="">
+<body>
     <?php if (isset($_GET['success_message'])) { ?>
         <div id="successMessage" class="toast toast-top toast-center toast-visible z-30">
             <div class="alert alert-success">
@@ -160,16 +168,11 @@ if (isset($_POST['registerBtn'])) {
             </div>
         </div>
     <?php } ?>
-    <section class="w-full py-10 bg-gray-200 min-h-[100vh]" id="form_container">
+
+    <section class="w-full py-20 min-h-[100vh]" id="form_container">
 
         <form action="" method="post" enctype="multipart/form-data"
-            class="max-w-lg md:mx-auto mx-4 bg-white md:p-8 px-4 py-4 rounded-xl shadow-md ">
-            <!-- go to home  -->
-            <div class=" flex justify-center items-center gap-2 mb-4">
-                <a href="index.php"><i class="text-[#079d49] fa-solid fa-arrow-left"></i></a>
-                <a class="text-black font-medium titel_content" href="index.php">Go To Home Page</a>
-            </div>
-
+            class="max-w-lg md:mx-auto mx-4 md:p-8 px-4 py-4 rounded-xl hover:shadow-2xl transition-shadow duration-300 main_form ">
             <!-- logo  -->
             <div class="flex justify-center mb-3">
                 <img src="assets/hotel_logo/hotelix.png" alt="Hotelix Logo" class="w-[170px]">
@@ -181,13 +184,13 @@ if (isset($_POST['registerBtn'])) {
             <div class="grid grid-cols-2 gap-3 mb-4">
                 <div>
                     <input type="text" name="first_name" id="first_name" placeholder="First Name"
-                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle"
+                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle text-black"
                         value="<?= isset($first_name) ? htmlspecialchars($first_name) : '' ?>">
                     <small class="text-red-500"><?= $errors['first_name'] ?? '' ?></small>
                 </div>
                 <div>
                     <input type="text" name="last_name" id="last_name" placeholder="Last Name"
-                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle"
+                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle text-black"
                         value="<?= isset($last_name) ? htmlspecialchars($last_name) : '' ?>">
                     <small class="text-red-500"><?= $errors['last_name'] ?? '' ?></small>
                 </div>
@@ -197,13 +200,13 @@ if (isset($_POST['registerBtn'])) {
             <div class="grid md:grid-cols-2 gap-3 mb-4">
                 <div>
                     <input type="email" name="email" id="email" placeholder="Email Address"
-                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle"
+                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle text-black"
                         value="<?= isset($email) ? htmlspecialchars($email) : '' ?>">
                     <small class="text-red-500"><?= $errors['email'] ?? '' ?></small>
                 </div>
                 <div>
                     <input type="tel" name="number" id="number" placeholder="Phone Number"
-                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle"
+                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle text-black"
                         value="<?= isset($phone) ? htmlspecialchars($phone) : '' ?>">
                     <small class="text-red-500"><?= $errors['number'] ?? '' ?></small>
                 </div>
@@ -213,13 +216,13 @@ if (isset($_POST['registerBtn'])) {
             <div class="grid grid-cols-2 gap-3 mb-4">
                 <div>
                     <input type="password" name="password" id="password" placeholder="Password"
-                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle"
+                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle text-black"
                         value="<?= isset($password) ? htmlspecialchars($password) : '' ?>">
                     <small class="text-red-500"><?= $errors['password'] ?? '' ?></small>
                 </div>
                 <div>
                     <input type="password" name="co_pass" id="co_pass" placeholder="Confirm Password"
-                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle"
+                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle text-black"
                         value="<?= isset($con_password) ? htmlspecialchars($con_password) : '' ?>">
                     <small class="text-red-500"><?= $errors['co_pass'] ?? '' ?></small>
                 </div>
@@ -229,7 +232,7 @@ if (isset($_POST['registerBtn'])) {
             <div class="grid grid-cols-2 gap-3 mb-4">
                 <div>
                     <select name="gender" id="gender"
-                        class='w-full py-3 px-4 border-2 border-violet-300 rounded-lg focus:outline-none inStyle text-gray-400'
+                        class='w-full py-3 px-4 border-2 border-violet-300 rounded-lg focus:outline-none inStyle text-gray-600'
                         value="<?= isset($gender) ? htmlspecialchars($gender) : '' ?>">
                         <option value="" <?= empty($gender) ? 'selected' : '' ?>>Gender</option>
                         <option value="male" <?= (isset($gender) && $gender === 'male') ? 'selected' : '' ?>>Male</option>
@@ -239,29 +242,21 @@ if (isset($_POST['registerBtn'])) {
                     <small class="text-red-500"><?= $errors['gender'] ?? '' ?></small>
                 </div>
                 <div>
-                    <textarea name="address" id="address" cols="2" rows="1"
-                        class=" px-4 py-3 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle"
-                        value="<?= isset($address) ? htmlspecialchars($address) : '' ?>"
-                        placeholder="Address"></textarea>
+
+                    <textarea name="address" id="address" placeholder="Address" cols="2" rows="1"
+                        class="py-3 px-4 border-2 text-black border-violet-300 rounded-lg w-full focus:outline-none inStyle"
+                        value="<?= isset($address) ? htmlspecialchars($address) : '' ?>"></textarea>
                     <small class="text-red-500"><?= $errors['address'] ?? '' ?></small>
                 </div>
             </div>
 
             <!-- ==== Upload Profile Photo ==== -->
             <div class="mb-4">
-                <label class="block mb-2 text-sm font-medium text-gray-700">Upload Photo</label>
+                <label class="block mb-2 text-md font-medium text-gray-700 titel_content">Upload Photo</label>
                 <input type="file" name="upload_photo" id="upload_photo"
                     class="file-input w-full file-input-ghost bg-gray-200 outline-none">
                 <small class="text-red-500"><?= $errors['upload_photo'] ?? '' ?></small>
             </div>
-
-            <!-- already have account  -->
-
-            <div class="flex justify-between mx-2 mb-3 font-medium">
-                <p>Already, have an account?</p>
-                <a href="auth/login.php" class="uppercase titel_content font-medium text-red-500">Log In</a>
-            </div>
-
             <!-- === Register Button ==== -->
             <div>
                 <button type="submit" name="registerBtn" id="register"
@@ -273,6 +268,7 @@ if (isset($_POST['registerBtn'])) {
             </div>
         </form>
     </section>
+
     <script>
         // Automatically hide the success message after 2 seconds
         setTimeout(function () {
