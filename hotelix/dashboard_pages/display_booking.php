@@ -1,6 +1,14 @@
 <?php
 require_once "db_root.php";
 $success_message = '';
+if (!isset($_SESSION['user_id'])) {
+    // Redirect to login page if no user is logged in
+    header("Location: auth/login.php");
+    exit;
+}
+
+$user_id = $_SESSION['user_id'];
+
 // Delete Bed Type
 if (isset($_GET['deleteId'])) {
     $deletedId = $_GET['deleteId'];
@@ -62,10 +70,8 @@ if (isset($_GET['deleteId'])) {
     <!-- show details  -->
     <section class="py-20">
         <div class="overflow-x-auto">
-            <a href="main_dashboard.php?page=add_room" class="border border-blue-500 px-4 py-2 font-medium"><i
-                    class="text-[#079d49] fa-solid fa-arrow-left pe-3"></i>Add Room</a>
             <table class="max-w-lg md:mx-auto mx-4 table table-xs md:table-md mb-20">
-                <caption class="text-3xl mb-3 uppercase titel_content">Room Info List</caption>
+                <caption class="text-3xl mb-3 uppercase titel_content">Booking List</caption>
                 <thead>
                     <tr
                         class="bg-[--secondary-color] text-[--primary-color] border-b border-gray-200 text-center text-xs md:text-sm font-thin">
@@ -82,7 +88,7 @@ if (isset($_GET['deleteId'])) {
                 </thead>
                 <tbody class="bg-[--primary-color]">
                     <?php
-                    $getBookData = $db_root->query("select * from bookings");
+                    $getBookData = $db_root->query("SELECT * FROM bookings WHERE user_id = $user_id ORDER BY booking_date DESC");
                     if ($getBookData->num_rows > 0) {
                         $counter = 1;
                         while ($row = $getBookData->fetch_assoc()) {
@@ -105,20 +111,18 @@ if (isset($_GET['deleteId'])) {
                             <td>$checkout_date</td>
                             <td>$payment_status</td>
                             <td>$total_amount</td>
-                            <td class='flex gap-3'>
-                             <a href='main_dashboard.php?page=update_room&updateId=$id' class='px-3 py-1 rounded-md text-xs md:text-sm border border-blue-500 font-medium hover:text-white hover:bg-blue-500 transition duration-150'>
-                                    <i class='fa-solid fa-pen-to-square'></i>
+                            <td class=''>
+                             <a href='user_dashboard.php?page=payment_history' class='px-3 py-1 rounded-md text-xs md:text-sm border border-blue-500 font-medium hover:text-white hover:bg-blue-500 transition duration-150 flex gap-2 justify-center items-center'>
+                                    <i class='fa-solid fa-money-check-dollar'></i> <span>payment</span>
                                 </a>
-                             <a href='main_dashboard.php?page=room_list&deleteId=$id' class='px-3 py-1 rounded-md text-xs md:text-sm border border-red-500 font-medium hover:text-white hover:bg-red-500 transition duration-150'>
-                                    <i class='fa-solid fa-trash-can'></i>
-                                </a>
+                             
                             </td>
                         </tr>
                     ";
                             $counter++;
                         }
                     } else {
-                        echo "<tr><td colspan='5'>No bed types found</td></tr>";
+                        echo "<tr><td colspan='9' class='text-center'>No Booking found</td></tr>";
                     }
                     ?>
                 </tbody>

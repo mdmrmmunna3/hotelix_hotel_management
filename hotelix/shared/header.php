@@ -91,7 +91,7 @@ $userRole = $isLoggedIn ? $_SESSION['user']['role'] : null;
                                 <a href="main_dashboard.php?page=dashboard" class="relative z-10">Dashboard</a>
                             <?php else: ?>
                                 <!-- User Dashboard Link -->
-                                <a href="user_dashboard.php?page=dashboardp" class="relative z-10">Dashboard</a>
+                                <a href="user_dashboard.php?page=dashboard" class="relative z-10">Dashboard</a>
                             <?php endif; ?>
                         </li>
 

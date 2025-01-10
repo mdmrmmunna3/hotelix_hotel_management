@@ -93,22 +93,19 @@ if ($result->num_rows > 0) {
                 <div class="block py-3 px-4 rounded transition-colors hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50"
                     aria-controls="dropdown-manage-book" data-collapse-toggle="dropdown-manage-book">
                     <div class="flex justify-between items-center text-lg">
-                        <span> <i class="fa-solid fa-table-list"></i> Manage Booking</span> <span><i
+                        <span> <i class="fa-solid fa-table-list"></i>Booking Management</span> <span><i
                                 class="fa-solid fa-angle-down"></i></span>
                     </div>
                 </div>
                 <ul id="dropdown-manage-book" class="hidden py-2 space-y-2 ">
-                    <li><a href="#"
+                    <li><a href="user_dashboard.php?page=display_booking"
                             class="flex items-center w-full p-2 text-lg font-normal  transition duration-75 rounded-lg group hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 pl-11 ajax-link focus:text-emerald-500">
-                            Search & Book
+                            Manage Bookings
                         </a></li>
                     <li><a href="user_dashboard.php?page=display_booking"
-                            class="flex items-center w-full p-2 text-lg font-normal  transition duration-75 rounded-lg group hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 pl-11 ajax-link focus:text-emerald-500">Current
-                            Bookings
+                            class="flex items-center w-full p-2 text-lg font-normal  transition duration-75 rounded-lg group hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 pl-11 ajax-link focus:text-emerald-500">Payment
+                            History
                         </a></li>
-                    <li><a href="#"
-                            class="flex items-center w-full p-2 text-lg font-normal  transition duration-75 rounded-lg group hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 pl-11 ajax-link focus:text-emerald-500">Past
-                            Bookings</a></li>
                 </ul>
 
 
@@ -169,22 +166,20 @@ if ($result->num_rows > 0) {
                 <div class="block py-3 px-4 rounded transition-colors hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50"
                     aria-controls="dropdown-manage-book2" data-collapse-toggle="dropdown-manage-book2">
                     <div class="flex justify-between items-center text-lg">
-                        <span> <i class="fa-solid fa-table-list"></i> Manage Booking</span> <span><i
+                        <span> <i class="fa-solid fa-table-list"></i>Booking Mangement</span> <span><i
                                 class="fa-solid fa-angle-down"></i></span>
                     </div>
                 </div>
                 <ul id="dropdown-manage-book2" class="hidden py-2 space-y-2 ">
                     <li><a href="#"
                             class="flex items-center w-full p-2 text-lg font-normal  transition duration-75 rounded-lg group hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 pl-11 ajax-link focus:text-emerald-500">
-                            Search & Book
+                            Manage Bookings
                         </a></li>
                     <li><a href="user_dashboard.php?page=display_booking"
-                            class="flex items-center w-full p-2 text-lg font-normal  transition duration-75 rounded-lg group hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 pl-11 ajax-link focus:text-emerald-500">Current
-                            Bookings
+                            class="flex items-center w-full p-2 text-lg font-normal  transition duration-75 rounded-lg group hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 pl-11 ajax-link focus:text-emerald-500">Payment
+                            History
                         </a></li>
-                    <li><a href="#"
-                            class="flex items-center w-full p-2 text-lg font-normal  transition duration-75 rounded-lg group hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 pl-11 ajax-link focus:text-emerald-500">Past
-                            Bookings</a></li>
+
                 </ul>
 
 

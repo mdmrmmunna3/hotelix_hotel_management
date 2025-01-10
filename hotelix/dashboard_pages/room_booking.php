@@ -34,6 +34,7 @@ renderBanner($banner['bannerImage'], $banner['title'], $banner['subtitle']);
         .card {
             box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
         }
+
         .toast {
             transition: opacity 2s ease-in-out;
         }
@@ -150,7 +151,7 @@ renderBanner($banner['bannerImage'], $banner['title'], $banner['subtitle']);
                 $stmtUpdateRoomStatus->execute();
 
                 $success_message = "Room Booking successfully!";
-                header('location: ../../user_dashboard.php?page=display_booking&success_message='. urlencode($success_message));
+                header('location: ../../user_dashboard.php?page=display_booking&success_message=' . urlencode($success_message));
             } else {
                 echo "<p class='text-red-500'>Error: " . $stmtInsert->error . "</p>";
             }
@@ -160,14 +161,14 @@ renderBanner($banner['bannerImage'], $banner['title'], $banner['subtitle']);
 
 
         <div class="">
-        <?php if (isset($_GET['success_message'])) { ?>
-            <div id="successMessage" class="toast toast-top toast-center toast-visible z-30">
-                <div class="alert alert-success">
-                    <span class="text-white"><?= htmlspecialchars($_GET['success_message']) ?></span>
+            <?php if (isset($_GET['success_message'])) { ?>
+                <div id="successMessage" class="toast toast-top toast-center toast-visible z-30">
+                    <div class="alert alert-success">
+                        <span class="text-white"><?= htmlspecialchars($_GET['success_message']) ?></span>
+                    </div>
                 </div>
-            </div>
-        <?php } ?>
-        
+            <?php } ?>
+
             <div class="grid grid-cols-2 gap-5 w-full max-w-7xl mx-auto p-4">
                 <!-- Info Card Section -->
 

@@ -29,56 +29,67 @@
 </head>
 
 <body>
-<?php
-require_once('../shared/header.php');
-require_once('../components/banner_hook.php');
-$page = 'Rooms';
-$banner = $pageBanners[$page];
+    <?php
+    require_once('../shared/header.php');
+    require_once('../components/banner_hook.php');
+    $page = 'Rooms';
+    $banner = $pageBanners[$page];
 
-function renderBanner($bannerImage, $title, $subtitle)
-{
-    echo "
+    function renderBanner($bannerImage, $title, $subtitle)
+    {
+        echo "
     <div class='relative lg:h-[600px] h-[400px] w-full bg-cover bg-center bg-no-repeat' style='background-image: url($bannerImage);'>
         <div class='bg-black bg-opacity-60 w-full h-full p-6 text-center rounded-lg flex flex-col items-center justify-center'>
             <h1 class='md:text-6xl text-4xl font-bold text-white uppercase titel_content'>$title</h1>
             <p class='text-lg text-gray-300 mt-2 font-bold uppercase'>$subtitle</p>
         </div>
     </div>";
-}
-renderBanner($banner['bannerImage'], $banner['title'], $banner['subtitle']);
-?>
+    }
+    renderBanner($banner['bannerImage'], $banner['title'], $banner['subtitle']);
+    ?>
 
 
-<?php
-require_once('../../db_root.php');
-$getRoomsdata = $db_root->query("SELECT * FROM rooms");
-$checkinDate = isset($_POST['checkin']) ? $_POST['checkin'] : '';
-$checkoutDate = isset($_POST['checkout']) ? $_POST['checkout'] : '';
+    <?php
+    require_once('../../db_root.php');
+    $checkinDate = isset($_POST['checkin']) ? $_POST['checkin'] : '';
+    $checkoutDate = isset($_POST['checkout']) ? $_POST['checkout'] : '';
+    // (checkin_date <= '$checkoutDate' AND checkout_date >= '$checkinDate') simple version 
+    $getRoomsdata = $db_root->query("
+    SELECT * 
+    FROM rooms 
+    WHERE id NOT IN (
+        SELECT room_id 
+        FROM bookings 
+        WHERE 
+           (checkin_date <= '$checkoutDate' AND checkout_date >= '$checkinDate')
+    )
+");
 
-if ($getRoomsdata->num_rows > 0) {
-    echo "<div class='md:mx-8 mx-5 my-2'>
+
+    if ($getRoomsdata->num_rows > 0) {
+        echo "<div class='md:mx-8 mx-5 my-2'>
         <div class='grid md:grid-cols-2 lg:grid-cols-3 gap-5'>"; // Start of grid container
+    
+        while ($row = $getRoomsdata->fetch_assoc()) {
+            $id = $row['id'];
+            $room_type = $row['room_type'];
+            $price = $row['price_per_night'];
+            $status = $row['av_status'];
+            $capacity = $row['capacity'];
+            $room_size = $row['room_size'];
+            $room_descrip = $row['room_desc'];
+            $bed_type = $row['bed_type'];
+            $room_image = $row['room_photo'];
+            $image_mime = $row['room_mime_type'];
+            $view = $row['view'];
+            $room_number = $row['room_number'];
+            $base64_photo = base64_encode($room_image);
 
-    while ($row = $getRoomsdata->fetch_assoc()) {
-        $id = $row['id'];
-        $room_type = $row['room_type'];
-        $price = $row['price_per_night'];
-        $status = $row['av_status'];
-        $capacity = $row['capacity'];
-        $room_size = $row['room_size'];
-        $room_descrip = $row['room_desc'];
-        $bed_type = $row['bed_type'];
-        $room_image = $row['room_photo'];
-        $image_mime = $row['room_mime_type'];
-        $view = $row['view'];
-        $room_number = $row['room_number'];
-        $base64_photo = base64_encode($room_image);
+            // Determine if the room is booked
+            $isBooked = ($status == 'booked') ? true : false;
 
-        // Determine if the room is booked
-        $isBooked = ($status == 'booked') ? true : false;
-
-        // Start room card
-        echo "
+            // Start room card
+            echo "
         <div class='card border border-blue-500 w-full shadow-xl'>
             <figure class='room_img relative overflow-hidden'>
                 <a data-fancybox='' href='data:$image_mime;base64,$base64_photo'>
@@ -115,36 +126,36 @@ if ($getRoomsdata->num_rows > 0) {
                     <input type='hidden' name='checkin' value='$checkinDate'>
                     <input type='hidden' name='checkout' value='$checkoutDate'>";
 
-                    // Check if the room is booked, disable the button
-                    if ($isBooked) {
-                        echo "
-                        <button type='submit' disabled class='relative inline-block px-5 py-2 mt-2 text-center border-2 rounded-lg border-gray-500 cursor-not-allowed w-full booked'>
-                            <span class='absolute inset-0 bg-gray-500 '></span>
-                            <span class='relative z-10'>Room Booked</span>
-                        </button>";
-                    } else {
-                        echo "
+            // Check if the room is booked, disable the button
+            // if ($isBooked) {
+            //     echo "
+            // <button type='submit' disabled class='relative inline-block px-5 py-2 mt-2 text-center border-2 rounded-lg border-gray-500 cursor-not-allowed w-full booked'>
+            //     <span class='absolute inset-0 bg-gray-500 '></span>
+            //     <span class='relative z-10'>Room Booked</span>
+            // </button>";
+            // } else {
+            echo "
                         <button type='submit' class='relative inline-block px-5 py-2 mt-2 text-center border-2 rounded-lg border-blue-500 hover:text-white overflow-hidden group uppercase w-full available'>
                             <span class='absolute inset-0 bg-blue-500 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-out'></span>
                             <span class='relative z-10'>Book Room</span>
                         </button>";
-                    }
-
-        echo "</form>
+            // }
+    
+            echo "</form>
             </div>
         </div>"; // End of card
+    
+        }
 
+        echo "</div></div>"; // End of grid container
+    } else {
+        echo "No rooms found!";
     }
 
-    echo "</div></div>"; // End of grid container
-} else {
-    echo "No rooms found!";
-}
-
-require_once('../shared/footer.php');
-?>
-<!-- FancyBox JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+    require_once('../shared/footer.php');
+    ?>
+    <!-- FancyBox JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
 </body>
 
 </html>
