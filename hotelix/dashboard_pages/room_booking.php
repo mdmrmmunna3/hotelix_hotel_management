@@ -137,19 +137,23 @@ renderBanner($banner['bannerImage'], $banner['title'], $banner['subtitle']);
         // Handle form submission to store booking details
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkoutBtn'])) {
             $payment_status = 'pending';
-
-            $sqlInsert = "INSERT INTO bookings (user_id, room_id, room_type, room_number, checkin_date, checkout_date, payment_status,amount)
-                          VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            $userName = $_POST['u_name'];
+            $userEmail = $_POST['email'];
+            $number = $_POST['number'];
+            // var_dump($userName, $userEmail, $number);
+        
+            $sqlInsert = "INSERT INTO bookings (user_id, user_name, user_email, user_number, room_id, room_type, room_number, checkin_date, checkout_date, payment_status,amount)
+                          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             $stmtInsert = $db_root->prepare($sqlInsert);
-            $stmtInsert->bind_param("iisssssd", $userId, $room_id, $room_type, $room_number, $checkinDate, $checkoutDate, $payment_status, $amount);
+            $stmtInsert->bind_param("isssisssssd", $userId, $userName, $userEmail, $number, $room_id, $room_type, $room_number, $checkinDate, $checkoutDate, $payment_status, $amount);
             if ($stmtInsert->execute()) {
                 // update status after booking 
-                $UpdateRoomStatus = "UPDATE rooms set av_status = 'booked' where id = ?";
-                $stmtUpdateRoomStatus = $db_root->prepare("$UpdateRoomStatus");
-                $stmtUpdateRoomStatus->bind_param("i", $room_id);
-                $stmtUpdateRoomStatus->execute();
-
+                // $UpdateRoomStatus = "UPDATE rooms set av_status = 'booked' where id = ?";
+                // $stmtUpdateRoomStatus = $db_root->prepare("$UpdateRoomStatus");
+                // $stmtUpdateRoomStatus->bind_param("i", $room_id);
+                // $stmtUpdateRoomStatus->execute();
+        
                 $success_message = "Room Booking successfully!";
                 header('location: ../../user_dashboard.php?page=display_booking&success_message=' . urlencode($success_message));
             } else {
@@ -201,14 +205,14 @@ renderBanner($banner['bannerImage'], $banner['title'], $banner['subtitle']);
                         <!-- Name & Email Fields -->
                         <div class="grid md:grid-cols-1 gap-3 mb-4">
                             <div>
-                                <input type="text" name="name" id="name" placeholder="Name"
+                                <input type="text" name="u_name" id="u_name" placeholder="Name"
                                     class="py-2 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle text-black"
-                                    value="<?php echo htmlspecialchars($user['name']); ?>" required>
+                                    value="<?php echo htmlspecialchars($user['name']); ?>" readonly required>
                             </div>
                             <div>
                                 <input type="email" name="email" id="email" placeholder="Email Address"
                                     class="py-2 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle text-black"
-                                    value="<?php echo htmlspecialchars($user['email']); ?>" disabled required>
+                                    value="<?php echo htmlspecialchars($user['email']); ?>" readonly required>
                                 <small class="text-red-500"><?= $errors['email'] ?? '' ?></small>
                             </div>
                         </div>

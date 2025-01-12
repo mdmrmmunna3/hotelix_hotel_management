@@ -1,6 +1,14 @@
 <?php
 require_once "db_root.php";
 $success_message = '';
+if (!isset($_SESSION['user_id'])) {
+    // Redirect to login page if no user is logged in
+    header("Location: auth/login.php");
+    exit;
+}
+
+$user_id = $_SESSION['user_id'];
+
 // Delete Bed Type
 if (isset($_GET['deleteId'])) {
     $deletedId = $_GET['deleteId'];
@@ -62,57 +70,59 @@ if (isset($_GET['deleteId'])) {
     <!-- show details  -->
     <section class="py-20">
         <div class="overflow-x-auto">
-            <a href="main_dashboard.php?page=add_room" class="border border-blue-500 px-4 py-2 font-medium"><i
-                    class="text-[#079d49] fa-solid fa-arrow-left pe-3"></i>Add Room</a>
             <table class="max-w-lg md:mx-auto mx-4 table table-xs md:table-md mb-20">
-                <caption class="text-3xl mb-3 uppercase titel_content">Room Info List</caption>
+                <caption class="text-3xl mb-3 uppercase titel_content">Booking List</caption>
                 <thead>
                     <tr
                         class="bg-[--secondary-color] text-[--primary-color] border-b border-gray-200 text-center text-xs md:text-sm font-thin">
                         <th>SL</th>
+                        <th>User Name</th>
+                        <th>User Email</th>
                         <th>Room Type</th>
-                        <th>Room Size</th>
-                        <th>Room Price</th>
-                        <th>Bed Type</th>
-                        <th>Status</th>
-                        <th>Action</th>
+                        <th>Room Number</th>
+                        <th>Booking Date</th>
+                        <th>Checkin Date</th>
+                        <th>Checkout Date</th>
+                        <th>Payment Status</th>
+                        <th>Total Amount</th>
                     </tr>
                 </thead>
                 <tbody class="bg-[--primary-color]">
                     <?php
-                    $getRoomsData = $db_root->query("select * from rooms");
-                    if ($getRoomsData->num_rows > 0) {
+                    $getBookData = $db_root->query("SELECT * FROM bookings ORDER BY booking_date DESC");
+                    if ($getBookData->num_rows > 0) {
                         $counter = 1;
-                        while ($row = $getRoomsData->fetch_assoc()) {
+                        while ($row = $getBookData->fetch_assoc()) {
                             $id = $row['id'];
+                            $name = $row['user_name'];
+                            $Email = $row['user_email'];
                             $room_type = $row['room_type'];
-                            $price = $row['price_per_night'];
-                            $status = $row['av_status'];
-                            $room_size = $row['room_size'];
-                            $bed_type = $row['bed_type'];
+                            $room_number = $row['room_number'];
+                            $booking_date = $row['booking_date'];
+                            $checkin_date = $row['checkin_date'];
+                            $checkout_date = $row['checkout_date'];
+                            $payment_status = $row['payment_status'];
+                            $total_amount = $row['amount'];
 
                             echo "
                         <tr class=' text-xs md:text-sm text-center'>
                             <td>$counter</td>
+                            <td>$name</td>
+                            <td>$Email</td>
                             <td>$room_type</td>
-                            <td>$room_size</td>
-                            <td>$price</td>
-                            <td>$bed_type</td>
-                            <td class=''>$status</td>
-                            <td class='flex gap-3'>
-                             <a data-tip='Edit Room' href='main_dashboard.php?page=update_room&updateId=$id' class='tooltip px-3 py-1 rounded-md text-xs md:text-sm border border-blue-500 font-medium hover:text-white hover:bg-blue-500 transition duration-150'>
-                                    <i class='fa-solid fa-pen-to-square'></i>
-                                </a>
-                             <a href='main_dashboard.php?page=room_list&deleteId=$id' data-tip='Delete Room' class='tooltip px-3 py-1 rounded-md text-xs md:text-sm border border-red-500 font-medium hover:text-white hover:bg-red-500 transition duration-150'>
-                                    <i class='fa-solid fa-trash-can'></i>
-                                </a>
-                            </td>
+                            <td>$room_number</td>
+                            <td>$booking_date</td>
+                            <td>$checkin_date</td>
+                            <td>$checkout_date</td>
+                            <td>$payment_status</td>
+                            <td>$total_amount</td>
+                           
                         </tr>
                     ";
                             $counter++;
                         }
                     } else {
-                        echo "<tr><td colspan='5'>No bed types found</td></tr>";
+                        echo "<tr><td colspan='9' class='text-center'>No Booking found</td></tr>";
                     }
                     ?>
                 </tbody>

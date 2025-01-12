@@ -151,7 +151,7 @@ if (isset($_GET['deleteId'])) {
                             <td>$counter</td>
                             <td>$room_type_name</td>
                             <td>
-                             <a href='main_dashboard.php?page=room_type&deleteId=$id' class='px-3 py-1 rounded-md text-xs md:text-sm border border-red-500 font-medium hover:text-white hover:bg-red-500 transition duration-150'>
+                             <a href='main_dashboard.php?page=room_type&deleteId=$id' data-tip='Delete Room Type' class='tooltip px-3 py-1 rounded-md text-xs md:text-sm border border-red-500 font-medium hover:text-white hover:bg-red-500 transition duration-150'>
                                     <i class='fa-solid fa-trash-can'></i>
                                 </a>
                             </td>

@@ -111,12 +111,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <td>$email</td>
                                     <td>$role</td>
                                     <td>
-                                        <button class='px-3 py-1 rounded-md text-xs md:text-sm border border-blue-500 font-medium 
+                                        <button data-tip='Edit User' class='tooltip px-3 py-1 rounded-md text-xs md:text-sm border border-blue-500 font-medium 
                                                         hover:text-white hover:bg-blue-500 transition duration-150' 
                                                         onclick=\"openUpdateModal($id, '$role')\">
                                             <i class='fa-solid fa-pen-to-square'></i>
                                         </button>
-                                        <button class='px-3 py-1 rounded-md text-xs md:text-sm border border-red-500 font-medium 
+                                        <button data-tip='delete user' class='tooltip px-3 py-1 rounded-md text-xs md:text-sm border border-red-500 font-medium 
                                                         hover:text-white hover:bg-red-500 transition duration-150' 
                                                         onclick=\"openModal($id, '$name')\">
                                             <i class='fa-solid fa-trash-can'></i>

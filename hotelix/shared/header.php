@@ -23,7 +23,7 @@ $userRole = $isLoggedIn ? $_SESSION['user']['role'] : null;
 
 <body>
 
-    <nav class="bg-[--primary-color] p-4 shadow-md shadow-blue-200  w-full backdrop-blur-[8px]">
+    <nav class="bg-[--primary-color] p-4 shadow-md shadow-blue-200 fixed z-[1000] w-full backdrop-blur-[8px]">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <!-- ====== Logo or Brand Name ======== -->
             <a href="/hotelix_hotel_management" class="cursor-pointer">

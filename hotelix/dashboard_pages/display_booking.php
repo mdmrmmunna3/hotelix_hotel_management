@@ -111,11 +111,13 @@ if (isset($_GET['deleteId'])) {
                             <td>$checkout_date</td>
                             <td>$payment_status</td>
                             <td>$total_amount</td>
-                            <td class=''>
-                             <a href='user_dashboard.php?page=payment_history' class='px-3 py-1 rounded-md text-xs md:text-sm border border-blue-500 font-medium hover:text-white hover:bg-blue-500 transition duration-150 flex gap-2 justify-center items-center'>
-                                    <i class='fa-solid fa-money-check-dollar'></i> <span>payment</span>
+                            <td class='flex gap-3'>
+                             <a href='user_dashboard.php?page=payment_history' class='px-3 py-1 rounded-md text-xs md:text-sm border border-blue-500 font-medium hover:text-white hover:bg-blue-500 transition duration-150 flex gap-2 justify-center items-center tooltip' data-tip='Payment'>
+                                    <i class='fa-solid fa-money-check-dollar'></i>
                                 </a>
-                             
+                             <a href='user_dashboard.php?page=payment_history' class='px-3 py-1 rounded-md text-xs md:text-sm border border-blue-500 font-medium hover:text-white hover:bg-blue-500 transition duration-150 flex gap-2 justify-center items-center tooltip' data-tip='Invoice'>
+                                    <i class='fa-solid fa-receipt'></i>
+                                </a>
                             </td>
                         </tr>
                     ";
