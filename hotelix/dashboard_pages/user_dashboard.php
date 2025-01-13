@@ -28,29 +28,8 @@ require_once "db_root.php";
 <body>
     <section class="py-16">
         <h3 class="titel_content text-3xl mb-2">Hello Dashboard!</h3>
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div class="card border border-blue-500 p-4 rounded-lg text-center">
-                <span class="text-center mb-3"><i class="fa-solid fa-users text-4xl"></i></span>
-                <h2 class="text-xl uppercase">Total Register Users</h2>
-                <?php
-                $getUsers = $db_root->query("select * from users");
-                echo "<p class='text-2xl'>" . $getUsers->num_rows . ' Users' . "</p>";
-                ?>
-                <a href="main_dashboard.php?page=manage_user"
-                    class="border border-blue-600 text-center rounded-md py-3 mt-3 font-medium hover:bg-blue-600 hover:text-white transition-all">View
-                    More</a>
-            </div>
-            <div class="card border border-blue-500 p-4 rounded-lg text-center">
-                <span class="text-center mb-3"><i class="fa-solid fa-house-chimney-user text-4xl"></i></span>
-                <h2 class="text-xl uppercase">Total Rooms</h2>
-                <?php
-                $getUsers = $db_root->query("select * from rooms");
-                echo "<p class='text-2xl'>" . $getUsers->num_rows . ' Rooms' . "</p>";
-                ?>
-                <a href="main_dashboard.php?page=room_list"
-                    class="border border-blue-600 text-center rounded-md py-3 mt-3 font-medium hover:bg-blue-600 hover:text-white transition-all">View
-                    More</a>
-            </div>
+        <div class="grid md:grid-cols-2 gap-4">
+           
             <div class="card border border-blue-500 p-4 rounded-lg text-center">
                 <span  class="text-center mb-3"><i class="fa-solid fa-clipboard-list text-4xl"></i></span>
                 <h2 class="text-xl uppercase">Total Booking List</h2>
@@ -58,7 +37,7 @@ require_once "db_root.php";
                 $getUsers = $db_root->query("select * from bookings");
                 echo "<p class='text-2xl'>" . $getUsers->num_rows . ' Bookings' . "</p>";
                 ?>
-                <a href="main_dashboard.php?page=all_booking_list"
+                <a href="main_dashboard.php?page=display_booking"
                     class="border border-blue-600 text-center rounded-md py-3 mt-3 font-medium hover:bg-blue-600 hover:text-white transition-all">View
                     More</a>
             </div>
