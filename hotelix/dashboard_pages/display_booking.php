@@ -12,10 +12,10 @@ $user_id = $_SESSION['user_id'];
 // Delete Bed Type
 if (isset($_GET['deleteId'])) {
     $deletedId = $_GET['deleteId'];
-    $isDeleted = "DELETE FROM rooms WHERE id = $deletedId";
+    $isDeleted = "DELETE FROM bookings WHERE id = $deletedId";
     if (mysqli_query($db_root, $isDeleted)) {
-        $success_message = "Room deleted successfully!";
-        header("location:main_dashboard.php?page=room_list&success_message=$success_message");
+        $success_message = "Booking Cancle successfully!";
+        header("location:user_dashboard.php?page=display_booking&success_message=$success_message");
         exit; // Ensure the script stops after the redirect
     } else {
         echo "<p class='text-red-500'>Error: " . mysqli_error($db_root) . "</p>";
@@ -117,6 +117,9 @@ if (isset($_GET['deleteId'])) {
                                 </a>
                              <a href='user_dashboard.php?page=payment_history' class='px-3 py-1 rounded-md text-xs md:text-sm border border-blue-500 font-medium hover:text-white hover:bg-blue-500 transition duration-150 flex gap-2 justify-center items-center tooltip' data-tip='Invoice'>
                                     <i class='fa-solid fa-receipt'></i>
+                                </a>
+                             <a href='user_dashboard.php?page=display_booking&deleteId=$id' class='px-3 py-1 rounded-md text-xs md:text-sm border border-blue-500 font-medium hover:text-white hover:bg-blue-500 transition duration-150 flex gap-2 justify-center items-center tooltip' data-tip='Cancle'>
+                                    <i class='fa-solid fa-store-slash'></i>
                                 </a>
                             </td>
                         </tr>

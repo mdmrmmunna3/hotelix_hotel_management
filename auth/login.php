@@ -48,7 +48,7 @@ if (isset($_POST['loginBtn'])) {
                 } else {
                     $success_message = "User Login successfully!";
                     // Redirect to user dashboard if the user is a regular user
-                    $redirectTo = $_SESSION['redirectTo'] ?? '../user_dashboard.php?page=dashboard&success_message=' . urlencode($success_message);
+                    $redirectTo = $_SESSION['redirectTo'] ?? '../user_dashboard.php?page=user_dashboard&success_message=' . urlencode($success_message);
                     unset($_SESSION['redirectTo']); // Clear the redirect URL after use
                     header("Location: $redirectTo");
                     exit;

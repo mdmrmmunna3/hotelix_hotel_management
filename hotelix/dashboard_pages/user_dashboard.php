@@ -1,5 +1,12 @@
 <?php
 require_once "db_root.php";
+if (!isset($_SESSION['user_id'])) {
+    // Redirect to login page if no user is logged in
+    header("Location: auth/login.php");
+    exit;
+}
+
+$user_id = $_SESSION['user_id'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,19 +36,19 @@ require_once "db_root.php";
     <section class="py-16">
         <h3 class="titel_content text-3xl mb-2">Hello Dashboard!</h3>
         <div class="grid md:grid-cols-2 gap-4">
-           
+
             <div class="card border border-blue-500 p-4 rounded-lg text-center">
-                <span  class="text-center mb-3"><i class="fa-solid fa-clipboard-list text-4xl"></i></span>
+                <span class="text-center mb-3"><i class="fa-solid fa-clipboard-list text-4xl"></i></span>
                 <h2 class="text-xl uppercase">Total Booking List</h2>
                 <?php
-                $getUsers = $db_root->query("select * from bookings");
+                $getUsers = $db_root->query("SELECT * FROM bookings WHERE user_id = $user_id");
                 echo "<p class='text-2xl'>" . $getUsers->num_rows . ' Bookings' . "</p>";
                 ?>
                 <a href="main_dashboard.php?page=display_booking"
                     class="border border-blue-600 text-center rounded-md py-3 mt-3 font-medium hover:bg-blue-600 hover:text-white transition-all">View
                     More</a>
             </div>
-           
+
             <div class="card border border-blue-500 p-4 rounded-lg text-center">
                 <span class="text-center mb-3"><i class="fa-solid fa-hand-holding-dollar text-4xl"></i></span>
                 <h2 class="text-xl uppercase">Total Amount</h2>
