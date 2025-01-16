@@ -142,11 +142,11 @@ renderBanner($banner['bannerImage'], $banner['title'], $banner['subtitle']);
             $number = $_POST['number'];
             // var_dump($userName, $userEmail, $number);
         
-            $sqlInsert = "INSERT INTO bookings (user_id, user_name, user_email, user_number, room_id, room_type, room_number, checkin_date, checkout_date, payment_status,amount)
-                          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $sqlInsert = "INSERT INTO bookings (user_id, user_name, user_email, user_number, room_id, room_type, room_number, checkin_date, checkout_date, payment_status, per_amount, total_amount)
+                          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             $stmtInsert = $db_root->prepare($sqlInsert);
-            $stmtInsert->bind_param("isssisssssd", $userId, $userName, $userEmail, $number, $room_id, $room_type, $room_number, $checkinDate, $checkoutDate, $payment_status, $amount);
+            $stmtInsert->bind_param("isssisssssdd", $userId, $userName, $userEmail, $number, $room_id, $room_type, $room_number, $checkinDate, $checkoutDate, $payment_status, $room_price, $amount);
             if ($stmtInsert->execute()) {
                 // update status after booking 
                 // $UpdateRoomStatus = "UPDATE rooms set av_status = 'booked' where id = ?";

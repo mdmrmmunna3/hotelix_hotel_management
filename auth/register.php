@@ -120,7 +120,7 @@ if (isset($_POST['registerBtn'])) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="style.css">
 
     <style>
         /* .inStyle:is(:focus) {
