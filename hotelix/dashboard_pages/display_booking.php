@@ -103,6 +103,7 @@ if (isset($_GET['deleteId'])) {
                             $checkout_date = $row['checkout_date'];
                             $payment_status = $row['payment_status'];
                             $total_amount = $row['total_amount'];
+                            $per_nights = $row['per_amount'];
 
                             echo "
                         <tr class=' text-xs md:text-sm text-center'>
@@ -118,7 +119,7 @@ if (isset($_GET['deleteId'])) {
                              <a href='user_dashboard.php?page=payment_history' class='px-3 py-1 rounded-md text-xs md:text-sm border border-blue-500 font-medium hover:text-white hover:bg-blue-500 transition duration-150 flex gap-2 justify-center items-center tooltip' data-tip='Payment'>
                                     <i class='fa-solid fa-money-check-dollar'></i>
                                 </a>
-                             <a class='px-3 py-1 rounded-md text-xs md:text-sm border border-blue-500 font-medium hover:text-white hover:bg-blue-500 transition duration-150 flex gap-2 justify-center items-center tooltip' data-tip='Invoice' onclick=\"openInvoiceModal($id)\">
+                             <a class='px-3 py-1 rounded-md text-xs md:text-sm border border-blue-500 font-medium hover:text-white hover:bg-blue-500 transition duration-150 flex gap-2 justify-center items-center tooltip' data-tip='Invoice' onclick=\"openInvoiceModal($id, '$user_name', '$user_email', '$user_number', '$checkin_date', '$checkout_date', '$booking_date', '$per_nights', '$total_amount')\">
                                     <i class='fa-solid fa-receipt'></i>
                                 </a>
                              <a href='user_dashboard.php?page=display_booking&deleteId=$id' class='px-3 py-1 rounded-md text-xs md:text-sm border border-red-500 font-medium hover:text-white hover:bg-red-500 transition duration-150 flex gap-2 justify-center items-center tooltip' data-tip='Cancle'>
@@ -155,7 +156,7 @@ if (isset($_GET['deleteId'])) {
                     <h3 class="text-3xl font-normal text-gray-500 mt-5 mb-6 titel_content uppercase">Invoice </h3>
                     <div class="">
                         <form method="POST" id="invoiceForm">
-                            <input type="text" id="deleteUserId" name="userId">
+                            <input type="hidden" id="deleteUserId" name="userId">
                             <div class="divider divider-info"></div>
                             <!-- invoice related info  -->
                             <div class="grid md:grid-cols-3 gap-2">
@@ -167,13 +168,15 @@ if (isset($_GET['deleteId'])) {
                                 <div class="">
                                     <label for="invoiceDate" class="flex justify-start titel_content">Invoice
                                         Date</label>
-                                    <input type="text" name="invoiceDate" id="invoiceDate" placeholder="invoice date"
+                                    <input type="text" name="invoiceDate" id="invoiceDate"
+                                        value="<?php echo date('Y-m-d'); ?>" placeholder="invoice date"
                                         class="border border-blue-600 rounded-sm w-full bg-transparent py-1">
                                 </div>
                                 <div class="">
                                     <label for="invoiceDueDate" class="flex justify-start titel_content">Invoice Due
                                         Date</label>
                                     <input type="text" name="invoiceDueDate" id="invoiceDueDate"
+                                        value="<?php echo date('Y-m-d', strtotime('+1 day')); ?>"
                                         placeholder="invoice due date"
                                         class="border border-blue-600 rounded-sm w-full bg-transparent py-1">
                                 </div>
@@ -251,10 +254,6 @@ if (isset($_GET['deleteId'])) {
                                 Yes, I'm sure
                             </button>
                         </form>
-                        <!-- <button type="button" onclick="closeModal('modelConfirm')"
-                            class="text-gray-900 bg-white hover:bg-gray-100 focus:ring-4 focus:ring-cyan-200 border border-gray-200 font-medium inline-flex items-center rounded-lg text-base px-3 py-2.5 text-center">
-                            No, cancel
-                        </button> -->
                     </div>
                 </div>
             </div>
@@ -275,8 +274,27 @@ if (isset($_GET['deleteId'])) {
             document.body.classList.remove('overflow-y-hidden');
         }
 
-        function openInvoiceModal(userId) {
+        function openInvoiceModal(userId, userName, userEmail, userPhone, checkinDate, checkoutDate, bookingDate, perNights, totalAmount) {
             document.getElementById('deleteUserId').value = userId;
+            document.getElementById('g_name').value = userName;
+            document.getElementById('g_email').value = userEmail;
+            document.getElementById('g_phone').value = userPhone;
+            document.getElementById('checkin').value = checkinDate;
+            document.getElementById('checkout').value = checkoutDate;
+            document.getElementById('booking_date').value = bookingDate;
+            document.getElementById('night').value = perNights;
+            document.getElementById('total_amount').value = totalAmount;
+
+            if (perNights > 0) {
+                const pricePerNight = (totalAmount / perNights);
+                document.getElementById('night').value = pricePerNight;
+            } else {
+                document.getElementById('night').value = 0;
+            }
+
+            // Set Invoice ID as Booking ID
+            document.getElementById('invoiceId').value = userId;
+
             document.getElementById('modelConfirm').style.display = 'block';
             document.body.classList.add('overflow-y-hidden');
         }
