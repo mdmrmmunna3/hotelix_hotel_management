@@ -9,6 +9,11 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 
+$results_per_page = 10;
+$subpage = isset($_GET['subpage']) && (int) $_GET['subpage'] > 0 ? (int) $_GET['subpage'] : 1;
+
+$start_from = intval(($subpage - 1) * $results_per_page);
+
 // Delete Bed Type
 if (isset($_GET['deleteId'])) {
     $deletedId = $_GET['deleteId'];
@@ -89,9 +94,10 @@ if (isset($_GET['deleteId'])) {
                 </thead>
                 <tbody class="bg-[--primary-color]">
                     <?php
-                    $getBookData = $db_root->query("SELECT * FROM bookings ORDER BY booking_date DESC");
+                    // Fetch bookings with LIMIT for pagination
+                    $getBookData = $db_root->query("SELECT * FROM bookings ORDER BY booking_date DESC LIMIT $start_from, $results_per_page");
                     if ($getBookData->num_rows > 0) {
-                        $counter = 1;
+                        $counter = $start_from + 1; // Adjust counter for the current page
                         while ($row = $getBookData->fetch_assoc()) {
                             $id = $row['id'];
                             $name = $row['user_name'];
@@ -102,7 +108,7 @@ if (isset($_GET['deleteId'])) {
                             $checkin_date = $row['checkin_date'];
                             $checkout_date = $row['checkout_date'];
                             $payment_status = $row['payment_status'];
-                            $total_amount = $row['amount'];
+                            $total_amount = $row['total_amount'];
 
                             echo "
                         <tr class=' text-xs md:text-sm text-center'>
@@ -116,17 +122,30 @@ if (isset($_GET['deleteId'])) {
                             <td>$checkout_date</td>
                             <td>$payment_status</td>
                             <td>$total_amount</td>
-                           
                         </tr>
                     ";
                             $counter++;
                         }
                     } else {
-                        echo "<tr><td colspan='9' class='text-center'>No Booking found</td></tr>";
+                        echo "<tr><td colspan='10' class='text-center'>No Booking found</td></tr>";
                     }
                     ?>
                 </tbody>
             </table>
+
+            <!-- Pagination -->
+            <div class="flex justify-center">
+                <?php
+                $result = $db_root->query("SELECT COUNT(id) AS total FROM bookings");
+                $row = $result->fetch_assoc();
+                $total_records = $row['total'];
+
+                $total_pages = ceil($total_records / $results_per_page);
+                for ($i = 1; $i <= $total_pages; $i++) {
+                    echo "<a href='main_dashboard.php?page=all_booking_list&subpage=$i' class='mx-2 px-4 py-2 border rounded-md " . ($subpage == $i ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700') . "'>$i</a>";
+                }
+                ?>
+            </div>
         </div>
     </section>
     <script>
