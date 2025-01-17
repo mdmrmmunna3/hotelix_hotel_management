@@ -148,11 +148,22 @@ if (isset($_POST['loginBtn'])) {
             </div>
 
             <!-- ==== Password Fields ==== -->
-            <div class="mb-4">
+            <div class="mb-4 relative">
                 <input type="password" name="password" id="password" placeholder="Password"
                     class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle"
                     value="<?= isset($password) ? htmlspecialchars($password) : '' ?>">
                 <small class="text-red-500"><?= $errors['password'] ?? '' ?></small>
+
+                <label class="swap swap-rotate absolute top-4 right-0">
+                    <!-- this hidden checkbox controls the state -->
+                    <input onclick="handleVisiblePassword()" type="checkbox" class="" value="synthwave" />
+
+                    <!-- eye icon -->
+                    <i class="fa-solid fa-eye swap-off h-10 w-10 "></i>
+                    <!-- eye slash icon -->
+                    <i class="fa-solid fa-eye-slash swap-on h-10 w-10 "></i>
+
+                </label>
             </div>
 
             <!-- already have account  -->
@@ -183,6 +194,16 @@ if (isset($_POST['loginBtn'])) {
                 successMessage.classList.add('toast-hidden');
             }
         }, 2000);
+
+        const handleVisiblePassword = () => {
+            const passField = document.getElementById('password');
+            const checkbox = document.querySelector('input[type="checkbox"]');
+            if (checkbox.checked) {
+                passField.type = 'text';
+            } else {
+                passField.type = 'password';
+            }
+        }
     </script>
 </body>
 

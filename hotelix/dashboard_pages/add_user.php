@@ -157,6 +157,10 @@ if (isset($_POST['registerBtn'])) {
             opacity: 1;
             visibility: visible;
         }
+
+        .eye_icons {
+            position: absolute;
+        }
     </style>
 </head>
 
@@ -184,13 +188,13 @@ if (isset($_POST['registerBtn'])) {
             <div class="grid grid-cols-2 gap-3 mb-4">
                 <div>
                     <input type="text" name="first_name" id="first_name" placeholder="First Name"
-                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle text-black"
+                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle  bg-transparent"
                         value="<?= isset($first_name) ? htmlspecialchars($first_name) : '' ?>">
                     <small class="text-red-500"><?= $errors['first_name'] ?? '' ?></small>
                 </div>
                 <div>
                     <input type="text" name="last_name" id="last_name" placeholder="Last Name"
-                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle text-black"
+                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle  bg-transparent"
                         value="<?= isset($last_name) ? htmlspecialchars($last_name) : '' ?>">
                     <small class="text-red-500"><?= $errors['last_name'] ?? '' ?></small>
                 </div>
@@ -200,13 +204,13 @@ if (isset($_POST['registerBtn'])) {
             <div class="grid md:grid-cols-2 gap-3 mb-4">
                 <div>
                     <input type="email" name="email" id="email" placeholder="Email Address"
-                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle text-black"
+                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle  bg-transparent"
                         value="<?= isset($email) ? htmlspecialchars($email) : '' ?>">
                     <small class="text-red-500"><?= $errors['email'] ?? '' ?></small>
                 </div>
                 <div>
                     <input type="tel" name="number" id="number" placeholder="Phone Number"
-                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle text-black"
+                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle  bg-transparent"
                         value="<?= isset($phone) ? htmlspecialchars($phone) : '' ?>">
                     <small class="text-red-500"><?= $errors['number'] ?? '' ?></small>
                 </div>
@@ -214,17 +218,39 @@ if (isset($_POST['registerBtn'])) {
 
             <!-- ==== Password Fields ==== -->
             <div class="grid grid-cols-2 gap-3 mb-4">
-                <div>
+                <div class="relative">
                     <input type="password" name="password" id="password" placeholder="Password"
-                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle text-black"
+                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle  bg-transparent"
                         value="<?= isset($password) ? htmlspecialchars($password) : '' ?>">
                     <small class="text-red-500"><?= $errors['password'] ?? '' ?></small>
+
+                    <label class="swap swap-rotate eye_icons top-4 right-0">
+                        <!-- this hidden checkbox controls the state -->
+                        <input onclick="handleVisiblePassword(event)" type="checkbox" class="" value="synthwave" />
+
+                        <!-- eye icon -->
+                        <i class="fa-solid fa-eye swap-off h-10 w-10 "></i>
+                        <!-- eye slash icon -->
+                        <i class="fa-solid fa-eye-slash swap-on h-10 w-10 "></i>
+
+                    </label>
                 </div>
-                <div>
+                <div class="relative">
                     <input type="password" name="co_pass" id="co_pass" placeholder="Confirm Password"
-                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle text-black"
+                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle  bg-transparent"
                         value="<?= isset($con_password) ? htmlspecialchars($con_password) : '' ?>">
                     <small class="text-red-500"><?= $errors['co_pass'] ?? '' ?></small>
+
+                    <label class="swap swap-rotate eye_icons top-4 right-0">
+                        <!-- this hidden checkbox controls the state -->
+                        <input onclick="handleVisibleConPassword(event)" type="checkbox" class="" value="synthwave" />
+
+                        <!-- eye icon -->
+                        <i class="fa-solid fa-eye swap-off h-10 w-10 "></i>
+                        <!-- eye slash icon -->
+                        <i class="fa-solid fa-eye-slash swap-on h-10 w-10 "></i>
+
+                    </label>
                 </div>
             </div>
 
@@ -232,7 +258,7 @@ if (isset($_POST['registerBtn'])) {
             <div class="grid grid-cols-2 gap-3 mb-4">
                 <div>
                     <select name="gender" id="gender"
-                        class='w-full py-3 px-4 border-2 border-violet-300 rounded-lg focus:outline-none inStyle text-gray-600'
+                        class='w-full py-3 px-4 border-2 border-violet-300 rounded-lg focus:outline-none inStyle text-gray-600 bg-transparent'
                         value="<?= isset($gender) ? htmlspecialchars($gender) : '' ?>">
                         <option value="" <?= empty($gender) ? 'selected' : '' ?>>Gender</option>
                         <option value="male" <?= (isset($gender) && $gender === 'male') ? 'selected' : '' ?>>Male</option>
@@ -244,7 +270,7 @@ if (isset($_POST['registerBtn'])) {
                 <div>
 
                     <textarea name="address" id="address" placeholder="Address" cols="2" rows="1"
-                        class="py-3 px-4 border-2 text-black border-violet-300 rounded-lg w-full focus:outline-none inStyle"
+                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle bg-transparent"
                         value="<?= isset($address) ? htmlspecialchars($address) : '' ?>"></textarea>
                     <small class="text-red-500"><?= $errors['address'] ?? '' ?></small>
                 </div>
@@ -254,7 +280,7 @@ if (isset($_POST['registerBtn'])) {
             <div class="mb-4">
                 <label class="block mb-2 text-md font-medium text-gray-700 titel_content">Upload Photo</label>
                 <input type="file" name="upload_photo" id="upload_photo"
-                    class="file-input w-full file-input-ghost bg-gray-200 outline-none">
+                    class="file-input w-full file-input-ghost bg-gray-200 outline-none bg-transparent">
                 <small class="text-red-500"><?= $errors['upload_photo'] ?? '' ?></small>
             </div>
             <!-- === Register Button ==== -->
@@ -278,6 +304,25 @@ if (isset($_POST['registerBtn'])) {
                 successMessage.classList.add('toast-hidden');
             }
         }, 2000);
+
+        const handleVisiblePassword = (event) => {
+            const passField = document.getElementById('password');
+            const checkbox = document.querySelector('input[type="checkbox"]');
+            if (event.target.checked) {
+                passField.type = 'text';
+            } else {
+                passField.type = 'password';
+            }
+        }
+        const handleVisibleConPassword = (event) => {
+            const passField = document.getElementById('co_pass');
+            const checkbox = document.querySelector('input[type="checkbox"]');
+            if (event.target.checked) {
+                passField.type = 'text';
+            } else {
+                passField.type = 'password';
+            }
+        }
     </script>
 </body>
 

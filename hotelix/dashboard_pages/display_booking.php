@@ -249,9 +249,9 @@ if (isset($_GET['deleteId'])) {
                                 </div>
                             </div>
 
-                            <button type="submit" name="deleteUserBtn"
-                                class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-base inline-flex items-center px-3 py-2.5 text-center mr-2 mt-3">
-                                Yes, I'm sure
+                            <button type="submit" name="downloadBtn"
+                                class="text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-base inline-flex items-center px-3 py-2.5 text-center mr-2 mt-3">
+                                <i class="fa-solid fa-download"></i>
                             </button>
                         </form>
                     </div>
