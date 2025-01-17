@@ -1,6 +1,10 @@
 <?php
 require_once "db_root.php";
 $success_message = '';
+$results_per_page = 10;
+$subpage = isset($_GET['subpage']) && (int) $_GET['subpage'] > 0 ? (int) $_GET['subpage'] : 1;
+
+$start_from = intval(($subpage - 1) * $results_per_page);
 // Delete Bed Type
 if (isset($_GET['deleteId'])) {
     $deletedId = $_GET['deleteId'];
@@ -80,9 +84,9 @@ if (isset($_GET['deleteId'])) {
                 </thead>
                 <tbody class="bg-[--primary-color]">
                     <?php
-                    $getRoomsData = $db_root->query("select * from rooms");
+                    $getRoomsData = $db_root->query("SELECT * FROM rooms LIMIT $start_from, $results_per_page");
                     if ($getRoomsData->num_rows > 0) {
-                        $counter = 1;
+                        $counter = $start_from + 1;
                         while ($row = $getRoomsData->fetch_assoc()) {
                             $id = $row['id'];
                             $room_type = $row['room_type'];
@@ -117,6 +121,36 @@ if (isset($_GET['deleteId'])) {
                     ?>
                 </tbody>
             </table>
+
+            <!-- Pagination -->
+            <div class="flex justify-center">
+                <?php
+                $result = $db_root->query("SELECT COUNT(id) AS total FROM rooms");
+                $row = $result->fetch_assoc();
+                $total_records = $row['total'];
+
+                $total_pages = ceil($total_records / $results_per_page);
+                $visible_pages = 3; // Maximum number of pagination tabs to display
+                $subpage = isset($_GET['subpage']) && (int) $_GET['subpage'] > 0 ? (int) $_GET['subpage'] : 1;
+
+                $start_page = max(1, $subpage - floor($visible_pages / 2));
+                $end_page = min($total_pages, $start_page + $visible_pages - 1);
+
+                $start_page = max(1, $end_page - $visible_pages + 1);
+                // Display "Previous" button
+                if ($subpage > 1) {
+                    echo "<a href='main_dashboard.php?page=room_list&subpage=" . ($subpage - 1) . "' class='mx-2 px-4 py-2 border rounded-md bg-gray-200 text-gray-700'>&laquo; Previous</a>";
+                }
+                // Display page numbers
+                for ($i = $start_page; $i <= $end_page; $i++) {
+                    echo "<a href='main_dashboard.php?page=room_list&subpage=$i' class='mx-2 px-4 py-2 border rounded-md " . ($subpage == $i ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700') . "'>$i</a>";
+                }
+                // Display "Next" button
+                if ($subpage < $total_pages) {
+                    echo "<a href='main_dashboard.php?page=room_list&subpage=" . ($subpage + 1) . "' class='mx-2 px-4 py-2 border rounded-md bg-gray-200 text-gray-700'>Next &raquo;</a>";
+                }
+                ?>
+            </div>
         </div>
     </section>
     <script>

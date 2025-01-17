@@ -141,11 +141,33 @@ if (isset($_GET['deleteId'])) {
                 $total_records = $row['total'];
 
                 $total_pages = ceil($total_records / $results_per_page);
-                for ($i = 1; $i <= $total_pages; $i++) {
+                $visible_pages = 3; // Maximum number of pagination tabs to display
+                $subpage = isset($_GET['subpage']) && (int) $_GET['subpage'] > 0 ? (int) $_GET['subpage'] : 1;
+
+                // Calculate the range of pages to display
+                $start_page = max(1, $subpage - floor($visible_pages / 2));
+                $end_page = min($total_pages, $start_page + $visible_pages - 1);
+
+                // Adjust start_page if we're near the end
+                $start_page = max(1, $end_page - $visible_pages + 1);
+
+                // Display "Previous" button
+                if ($subpage > 1) {
+                    echo "<a href='main_dashboard.php?page=all_booking_list&subpage=" . ($subpage - 1) . "' class='mx-2 px-4 py-2 border rounded-md bg-gray-200 text-gray-700'>&laquo; Previous</a>";
+                }
+
+                // Display page numbers
+                for ($i = $start_page; $i <= $end_page; $i++) {
                     echo "<a href='main_dashboard.php?page=all_booking_list&subpage=$i' class='mx-2 px-4 py-2 border rounded-md " . ($subpage == $i ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700') . "'>$i</a>";
+                }
+
+                // Display "Next" button
+                if ($subpage < $total_pages) {
+                    echo "<a href='main_dashboard.php?page=all_booking_list&subpage=" . ($subpage + 1) . "' class='mx-2 px-4 py-2 border rounded-md bg-gray-200 text-gray-700'>Next &raquo;</a>";
                 }
                 ?>
             </div>
+
         </div>
     </section>
     <script>
