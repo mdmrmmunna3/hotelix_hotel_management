@@ -39,9 +39,15 @@ if (isset($_GET['deleteId'])) {
 
     <!-- Swiper CDN link CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
+    <!-- Include jsPDF library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
+    <!-- Include html2pdf.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../style.css">
+
     <style>
         .toast {
             transition: opacity 2s ease-in-out;
@@ -55,6 +61,12 @@ if (isset($_GET['deleteId'])) {
         .toast-visible {
             opacity: 1;
             visibility: visible;
+        }
+        input {
+            /* border: 1px dashed blue; */
+            padding-left: 10px;
+            box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+            
         }
     </style>
 </head>
@@ -138,126 +150,97 @@ if (isset($_GET['deleteId'])) {
             </table>
         </div>
 
-        <!-- Delete Confirmation Modal -->
-        <div id="modelConfirm"
-            class="fixed hidden z-50 inset-0 bg-gray-900 bg-opacity-60 overflow-y-auto h-full w-full px-4">
-            <div class="relative top-40 left-[20%] shadow-xl rounded-md bg-[--primary-color] max-w-[80%]">
-                <div class="flex justify-end p-2">
-                    <button onclick="closeModal('modelConfirm')" type="button"
-                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center">
-                        <i class="fa-solid fa-xmark w-5 h-5 text-2xl"></i>
-                    </button>
-                </div>
-
-                <div class="p-6 pt-0 text-center">
-                    <div class="flex justify-center items-center">
-                        <img src="<?php echo './assets/hotel_logo/hotelix.png' ?>" class="w-[160px]" alt="">
-                    </div>
-                    <h3 class="text-3xl font-normal text-gray-500 mt-5 mb-6 titel_content uppercase">Invoice </h3>
-                    <div class="">
-                        <form method="POST" id="invoiceForm">
-                            <input type="hidden" id="deleteUserId" name="userId">
-                            <div class="divider divider-info"></div>
-                            <!-- invoice related info  -->
-                            <div class="grid md:grid-cols-3 gap-2">
-                                <div class="">
-                                    <label for="invoiceId" class="flex justify-start titel_content">Invoice ID</label>
-                                    <input type="text" name="invoiceId" id="invoiceId" placeholder="invoice Id"
-                                        class="border border-blue-600 rounded-sm w-full bg-transparent py-1">
-                                </div>
-                                <div class="">
-                                    <label for="invoiceDate" class="flex justify-start titel_content">Invoice
-                                        Date</label>
-                                    <input type="text" name="invoiceDate" id="invoiceDate"
-                                        value="<?php echo date('Y-m-d'); ?>" placeholder="invoice date"
-                                        class="border border-blue-600 rounded-sm w-full bg-transparent py-1">
-                                </div>
-                                <div class="">
-                                    <label for="invoiceDueDate" class="flex justify-start titel_content">Invoice Due
-                                        Date</label>
-                                    <input type="text" name="invoiceDueDate" id="invoiceDueDate"
-                                        value="<?php echo date('Y-m-d', strtotime('+1 day')); ?>"
-                                        placeholder="invoice due date"
-                                        class="border border-blue-600 rounded-sm w-full bg-transparent py-1">
-                                </div>
-                            </div>
-
-                            <div class="divider divider-info"></div>
-
-                            <div class="grid md:grid-cols-2 gap-2">
-                                <!-- user related info  -->
-                                <div class="grid gap-2">
-                                    <div class="">
-                                        <label for="g_name" class="flex justify-start titel_content">Guest Name</label>
-                                        <input type="text" name="g_name" id="g_name" placeholder="guest name"
-                                            class="border border-blue-600 rounded-sm w-full bg-transparent py-1">
-                                    </div>
-                                    <div class="">
-                                        <label for="g_email" class="flex justify-start titel_content">Email</label>
-                                        <input type="email" name="g_email" id="g_email" placeholder="Email"
-                                            class="border border-blue-600 rounded-sm w-full bg-transparent py-1">
-                                    </div>
-                                    <div class="">
-                                        <label for="g_phone" class="flex justify-start titel_content">Phone</label>
-                                        <input type="text" name="g_phone" id="g_phone" placeholder="Phone"
-                                            class="border border-blue-600 rounded-sm w-full bg-transparent py-1">
-                                    </div>
-                                </div>
-                                <!-- booking related info  -->
-                                <div class="grid md:grid-cols-2 gap-2">
-                                    <div class="">
-                                        <label for="checkin" class="flex justify-start titel_content">Checkin
-                                            Date</label>
-                                        <input type="text" name="checkin" id="checkin" placeholder="Check in Date"
-                                            class="border border-blue-600 rounded-sm w-full bg-transparent py-1">
-                                    </div>
-                                    <div class="">
-                                        <label for="checkout" class="flex justify-start titel_content">Checkout
-                                            Date</label>
-                                        <input type="text" name="checkout" id="checkout" placeholder="Check out Date"
-                                            class="border border-blue-600 rounded-sm w-full bg-transparent py-1">
-                                    </div>
-                                    <div class="">
-                                        <label for="booking_date" class="flex justify-start titel_content">Booking
-                                            Date</label>
-                                        <input type="text" name="booking_date" id="booking_date"
-                                            placeholder="Booking Date"
-                                            class="border border-blue-600 rounded-sm w-full bg-transparent py-1">
-                                    </div>
-                                    <div class="">
-                                        <label for="night" class="flex justify-start titel_content">Per Nights
-                                        </label>
-                                        <input type="text" name="night" id="night" placeholder="Per Nights"
-                                            class="border border-blue-600 rounded-sm w-full bg-transparent py-1">
-                                    </div>
-                                    <div class="">
-                                        <label for="total_amount" class="flex justify-start titel_content">Total Amount
-                                        </label>
-                                        <input type="text" name="total_amount" id="total_amount"
-                                            placeholder="Total Amount"
-                                            class="border border-blue-600 rounded-sm w-full bg-transparent py-1">
-                                    </div>
-
-                                    <div class="">
-                                        <label for="payment_met" class="flex justify-start titel_content">Payment
-                                            Method</label>
-                                        <input type="text" name="payment_met" id="payment_met"
-                                            placeholder="Payment Method"
-                                            class="border border-blue-600 rounded-sm w-full bg-transparent py-1">
-                                    </div>
-
-                                </div>
-                            </div>
-
-                            <button type="submit" name="downloadBtn"
-                                class="text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-base inline-flex items-center px-3 py-2.5 text-center mr-2 mt-3">
-                                <i class="fa-solid fa-download"></i>
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
+        <!-- Invoice Modal -->
+        <div id="modelConfirm" class="fixed hidden z-50 inset-0 bg-gray-900 bg-opacity-60 overflow-y-auto h-full w-full px-4">
+    <div class="relative top-5 left-[20%] shadow-xl rounded-md bg-[--primary-color] max-w-[80%]">
+        <div class="flex justify-end mr-3 mt-1">
+        <span onclick="handleInvoice(event)" data-tip='Download' type="button" class="text-gray-400 hover:text-white tooltip bg-transparent hover:bg-blue-800 focus:ring-red-300 font-medium text-base inline-flex items-center text-center p-1">
+                <i class="fa-solid fa-download"></i> 
+            </span>
+            <span onclick="closeModal('modelConfirm')" type="button" class="text-gray-400 bg-white hover:bg-gray-200 hover:text-gray-900 text-sm p-1">
+                <i class="fa-solid fa-xmark text-2xl"></i>
+            </span>
         </div>
+
+        <div class="p-6 pt-0 text-center">
+            <div class="flex justify-center items-center">
+                <img src="<?php echo './assets/hotel_logo/hotelix.png' ?>" class="w-[160px]" alt="">
+            </div>
+            <h3 class="text-3xl font-normal text-gray-500 mt-5 mb-6 titel_content uppercase">Invoice </h3>
+            <div class="">
+                <form method="POST" id="invoiceForm" download>
+                    <input type="hidden" id="deleteUserId" name="userId">
+                    <div class="divider"></div>
+                    <!-- Invoice related info -->
+                    <div class="grid md:grid-cols-3 gap-2">
+                        <div class="">
+                            <label for="invoiceId" class="flex justify-start titel_content">Invoice ID</label>
+                            <input type="text" name="invoiceId" id="invoiceId" placeholder="invoice Id" class="rounded-sm w-full bg-gray-100 py-1">
+                        </div>
+                        <div class="">
+                            <label for="invoiceDate" class="flex justify-start titel_content">Invoice Date</label>
+                            <input type="text" name="invoiceDate" id="invoiceDate" value="<?php echo date('Y-m-d'); ?>" placeholder="invoice date" class="rounded-sm w-full bg-gray-100 py-1">
+                        </div>
+                        <div class="">
+                            <label for="invoiceDueDate" class="flex justify-start titel_content">Invoice Due Date</label>
+                            <input type="text" name="invoiceDueDate" id="invoiceDueDate" value="<?php echo date('Y-m-d', strtotime('+1 day')); ?>" placeholder="invoice due date" class="rounded-sm w-full bg-gray-100 py-1">
+                        </div>
+                    </div>
+
+                    <div class="divider"></div>
+
+                    <div class="grid md:grid-cols-2 gap-2">
+                        <!-- User related info -->
+                        <div class="grid gap-2">
+                            <div class="">
+                                <label for="g_name" class="flex justify-start titel_content">Guest Name</label>
+                                <input type="text" name="g_name" id="g_name" placeholder="guest name" class="rounded-sm w-full bg-gray-100 py-1">
+                            </div>
+                            <div class="">
+                                <label for="g_email" class="flex justify-start titel_content">Email</label>
+                                <input type="email" name="g_email" id="g_email" placeholder="Email" class="rounded-sm w-full bg-gray-100 py-1">
+                            </div>
+                            <div class="">
+                                <label for="g_phone" class="flex justify-start titel_content">Phone</label>
+                                <input type="text" name="g_phone" id="g_phone" placeholder="Phone" class="rounded-sm w-full bg-gray-100 py-1">
+                            </div>
+                        </div>
+                        <!-- Booking related info -->
+                        <div class="grid md:grid-cols-2 gap-2">
+                            <div class="">
+                                <label for="checkin" class="flex justify-start titel_content">Checkin Date</label>
+                                <input type="text" name="checkin" id="checkin" placeholder="Check in Date" class="rounded-sm w-full bg-gray-100 py-1">
+                            </div>
+                            <div class="">
+                                <label for="checkout" class="flex justify-start titel_content">Checkout Date</label>
+                                <input type="text" name="checkout" id="checkout" placeholder="Check out Date" class="rounded-sm w-full bg-gray-100 py-1">
+                            </div>
+                            <div class="">
+                                <label for="booking_date" class="flex justify-start titel_content">Booking Date</label>
+                                <input type="text" name="booking_date" id="booking_date" placeholder="Booking Date" class="rounded-sm w-full bg-gray-100 py-1">
+                            </div>
+                            <div class="">
+                                <label for="night" class="flex justify-start titel_content">Per Nights</label>
+                                <input type="text" name="night" id="night" placeholder="Per Nights" class="rounded-sm w-full bg-gray-100 py-1">
+                            </div>
+                            <div class="">
+                                <label for="total_amount" class="flex justify-start titel_content">Total Amount</label>
+                                <input type="text" name="total_amount" id="total_amount" placeholder="Total Amount" class="rounded-sm w-full bg-gray-100 py-1">
+                            </div>
+                            <div class="">
+                                <label for="payment_met" class="flex justify-start titel_content">Payment Method</label>
+                                <input type="text" name="payment_met" id="payment_met" placeholder="Payment Method" class="rounded-sm w-full bg-gray-100 py-1">
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+           
+        </div>
+    </div>
+</div>
+        
     </section>
     <script>
         // Automatically hide the success message after 2 seconds
@@ -298,6 +281,26 @@ if (isset($_GET['deleteId'])) {
             document.getElementById('modelConfirm').style.display = 'block';
             document.body.classList.add('overflow-y-hidden');
         }
+
+       // Handle the generation of PDF
+    function handleInvoice(event) {
+        event.preventDefault(); 
+
+        const invoiceModal = document.getElementById('modelConfirm');
+        const invoiceContent = invoiceModal.querySelector('.p-6'); 
+
+        // Use html2pdf to generate the PDF
+        const options = {
+            margin:       10,
+            filename:     'invoice.pdf',
+            image:        { type: 'jpeg', quality: 0.98 },
+            html2canvas:  { dpi: 192, letterRendering: true },
+            jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
+
+        html2pdf().from(invoiceContent).set(options).save();
+    }
+
     </script>
 </body>
 
