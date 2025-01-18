@@ -8,6 +8,7 @@ require_once "db_root.php";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         .card {
             box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
@@ -73,7 +74,58 @@ require_once "db_root.php";
             </div>
             <!-- Add more cards -->
         </div>
+
+        <div>
+        <canvas id="myChart"></canvas>
+        </div>
     </section>
+
+
+<script>
+  const ctx = document.getElementById('myChart');
+
+  // Data values
+  const dataValues = [65, 59, 80, 81, 26, 55, 40, 30, 20];
+
+  // Create an array of colors based on the data values
+  const lineColors = dataValues.map(value => value <= 30 ? 'rgb(255, 99, 132)' : 'rgb(75, 192, 192) ');
+
+  // Create a dataset with these dynamic colors applied to the line
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September'],
+      datasets: [{
+        label: 'Looping tension',
+        data: dataValues,
+        fill: false,
+        borderColor: lineColors, // Apply the dynamic colors to the line
+        tension: 0.1,
+      }]
+    },
+    options: {
+      animations: {
+        tension: {
+          duration: 1000,
+          easing: 'linear',
+          from: 1,
+          to: 0,
+          loop: true
+        }
+      },
+      scales: {
+        y: { 
+          min: 0,
+          max: 100
+        }
+      }
+    }
+  });
+</script>
+
+
+
+
 </body>
 
 </html>
