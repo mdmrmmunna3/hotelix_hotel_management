@@ -1,5 +1,6 @@
 <?php
 ob_start();
+// Include necessary files and setup page variables
 require_once('../shared/header.php');
 require_once('../components/banner_hook.php');
 $page = 'Booking';
