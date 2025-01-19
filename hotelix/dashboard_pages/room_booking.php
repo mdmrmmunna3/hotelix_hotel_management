@@ -1,10 +1,10 @@
 <?php
 ob_start();
-// Include necessary files and setup page variables
 require_once('../shared/header.php');
 require_once('../components/banner_hook.php');
 $page = 'Booking';
 $banner = $pageBanners[$page];
+
 function renderBanner($bannerImage, $title, $subtitle)
 {
     echo "
@@ -159,6 +159,26 @@ renderBanner($banner['bannerImage'], $banner['title'], $banner['subtitle']);
             } else {
                 echo "<p class='text-red-500'>Error: " . $stmtInsert->error . "</p>";
             }
+        }
+
+        // Handle cancellation for bookings made in the last 2 minutes
+        $currentTimestamp = date('Y-m-d H:i:s');
+        $sql = "SELECT id FROM bookings WHERE payment_status = 'pending' AND TIMESTAMPDIFF(MINUTE, booking_date, ?) >= 2";
+
+        $stmt = $db_root->prepare($sql);
+        $stmt->bind_param('s', $currentTimestamp);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        while ($row = $result->fetch_assoc()) {
+            $bookingId = $row['id'];
+
+            // cancellation 
+            // $cancleSql = "UPDATE bookings SET payment_status = 'cancelled' WHERE id = ?";
+            $deleteBookingSql = "DELETE FROM bookings WHERE id = ?";
+            $deleteStmt = $db_root->prepare($deleteBookingSql);
+            $deleteStmt->bind_param("i", $bookingId);
+            $deleteStmt->execute();
         }
 
         ?>

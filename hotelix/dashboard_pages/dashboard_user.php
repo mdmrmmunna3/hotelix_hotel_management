@@ -45,7 +45,7 @@ $user_id = $_SESSION['user_id'];
                 $getUsers = $db_root->query("SELECT * FROM bookings WHERE user_id = $user_id");
                 echo "<p class='text-2xl titel_content'>" . $getUsers->num_rows . ' Bookings' . "</p>";
                 ?>
-                <a href="main_dashboard.php?page=display_booking"
+                <a href="user_dashboard.php?page=display_booking"
                     class="border border-blue-600 text-center rounded-md py-3 mt-3 font-medium hover:bg-blue-600 hover:text-white transition-all titel_content">View
                     More</a>
             </div>
