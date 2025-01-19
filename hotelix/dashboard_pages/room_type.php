@@ -111,7 +111,7 @@ if (isset($_GET['deleteId'])) {
                 <div class="grid grid-cols-1 gap-3 mb-4">
                     <div>
                         <input type="text" name="room_type" id="room_type" placeholder="Room Type Name"
-                            class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle"
+                            class="py-3 px-4 border-2 bg-transparent border-violet-300 rounded-lg w-full focus:outline-none inStyle"
                             value="<?= isset($room_type) ? htmlspecialchars($room_type) : '' ?>">
                         <small class="text-red-500"><?= $errors['room_type'] ?? '' ?></small>
                     </div>

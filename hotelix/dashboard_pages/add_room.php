@@ -174,7 +174,7 @@ if (isset($_POST['addRoomBtn'])) {
             <div class="grid md:grid-cols-2 gap-3 mb-4">
                 <div>
                     <select name="room_name" id="room_name"
-                        class='w-full py-3 px-4 border-2 border-violet-300 rounded-lg focus:outline-none inStyle text-gray-400'>
+                        class='w-full py-3 px-4 bg-transparent border-2 border-violet-300 rounded-lg focus:outline-none inStyle text-gray-700'>
                         <option value='' selected>Select Room Type</option>
                         <?php
                         $getroomType = $db_root->query("select * from add_room_type");
@@ -189,7 +189,7 @@ if (isset($_POST['addRoomBtn'])) {
                 </div>
                 <div>
                     <input type="text" name="room_number" id="room_number" placeholder="Room Number"
-                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle"
+                        class="py-3 px-4 bg-transparent border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle"
                         value="<?= isset($room_number) ? htmlspecialchars($room_number) : '' ?>">
                     <small class="text-red-500"><?= $errors['room_number'] ?? '' ?></small>
                 </div>
@@ -198,14 +198,14 @@ if (isset($_POST['addRoomBtn'])) {
             <div class="grid md:grid-cols-2 gap-3 mb-4">
                 <div>
                     <input type="text" name="price" id="price" placeholder="Room Price"
-                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle"
+                        class="py-3 px-4 bg-transparent border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle"
                         value="<?= isset($price) ? htmlspecialchars($price) : '' ?>">
                     <small class="text-red-500"><?= $errors['price'] ?? '' ?></small>
                 </div>
 
                 <div>
                     <select name="bed_type" id="bed_type"
-                        class='w-full py-3 px-4 border-2 border-violet-300 rounded-lg focus:outline-none inStyle text-gray-400'>
+                        class='w-full py-3 px-4 bg-transparent border-2 border-violet-300 rounded-lg focus:outline-none inStyle text-gray-700'>
                         <option value='' selected>Select Bed Type</option>
                         <?php
                         $getbedType = $db_root->query("select * from add_bed_type");
@@ -224,13 +224,13 @@ if (isset($_POST['addRoomBtn'])) {
             <div class="grid md:grid-cols-2 gap-3 mb-4">
                 <div>
                     <input type="text" name="room_size" id="room_size" placeholder="Room Size"
-                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle"
+                        class="py-3 px-4 bg-transparent border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle"
                         value="<?= isset($room_size) ? htmlspecialchars($room_size) : '' ?>">
                     <small class="text-red-500"><?= $errors['room_size'] ?? '' ?></small>
                 </div>
                 <div>
                     <input type="text" name="floor_number" id="floor_number" placeholder="Floor Number"
-                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle"
+                        class="py-3 px-4 bg-transparent border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle"
                         value="<?= isset($floor_number) ? htmlspecialchars($floor_number) : '' ?>">
                     <small class="text-red-500"><?= $errors['floor_number'] ?? '' ?></small>
                 </div>
@@ -240,14 +240,14 @@ if (isset($_POST['addRoomBtn'])) {
             <div class="grid md:grid-cols-2 gap-3 mb-4">
                 <div>
                     <input type="text" name="view" id="view" placeholder="View"
-                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle"
+                        class="py-3 px-4 bg-transparent border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle"
                         value="<?= isset($view) ? htmlspecialchars($view) : '' ?>">
                     <small class="text-red-500"><?= $errors['view'] ?? '' ?></small>
                 </div>
 
                 <div>
                     <input type="text" name="capacity" id="capacity" placeholder="Room Capacity"
-                        class="py-3 px-4 border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle"
+                        class="py-3 px-4 bg-transparent border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle"
                         value="<?= isset($capacity) ? htmlspecialchars($capacity) : '' ?>">
                     <small class="text-red-500"><?= $errors['$capacity'] ?? '' ?></small>
                 </div>
@@ -257,7 +257,7 @@ if (isset($_POST['addRoomBtn'])) {
             <div>
                 <div>
                     <textarea name="describ" id="describ" placeholder="Description" cols="2" rows="1"
-                        class="py-3 px-4 border-2 text-black border-violet-300 rounded-lg w-full focus:outline-none inStyle"
+                        class="py-3 px-4 bg-transparent border-2 border-violet-300 rounded-lg w-full focus:outline-none inStyle"
                         value="<?= isset($desription) ? htmlspecialchars($desription) : '' ?>"></textarea>
                     <small class="text-red-500"><?= $errors['describ'] ?? '' ?></small>
                 </div>

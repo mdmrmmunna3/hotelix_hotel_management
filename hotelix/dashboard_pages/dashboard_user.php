@@ -15,6 +15,7 @@ $user_id = $_SESSION['user_id'];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+    <link rel="stylesheet" href="style.css">
     <style>
         .card {
             box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;

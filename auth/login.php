@@ -4,7 +4,7 @@ session_start(); // Start the session
 // Check if the user is already logged in, and if so, redirect them to their intended page
 if (isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn'] === true) {
     // Redirect to the page that was saved in the session or default to the user dashboard
-    $redirectTo = $_SESSION['redirectTo'] ?? 'user_dashboard.php?page=dashboard';
+    $redirectTo = $_SESSION['redirectTo'] ?? 'user_dashboard.php?page=dashboard_user';
     header("Location: $redirectTo");
     exit;
 }
@@ -48,7 +48,7 @@ if (isset($_POST['loginBtn'])) {
                 } else {
                     $success_message = "User Login successfully!";
                     // Redirect to user dashboard if the user is a regular user
-                    $redirectTo = $_SESSION['redirectTo'] ?? '../user_dashboard.php?page=user_dashboard&success_message=' . urlencode($success_message);
+                    $redirectTo = $_SESSION['redirectTo'] ?? '../user_dashboard.php?page=dashboard_user&success_message=' . urlencode($success_message);
                     unset($_SESSION['redirectTo']); // Clear the redirect URL after use
                     header("Location: $redirectTo");
                     exit;

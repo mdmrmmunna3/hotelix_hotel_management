@@ -8,12 +8,10 @@
     <title>hotelix || Room</title>
     <!-- tailwind css plugin cdn link (daisyui) -->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css" rel="stylesheet" type="text/css" />
-
     <!-- ======== font awesome  link ========= -->
     <script src="https://kit.fontawesome.com/9ce82b2c02.js" crossorigin="anonymous"></script>
     <!-- ========= tailwind css cdn link ======== -->
     <script src="https://cdn.tailwindcss.com"></script>
-
     <!-- ======== swiper cdn link css ======= -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <!-- FancyBox CSS -->
@@ -34,6 +32,10 @@
     require_once('../components/banner_hook.php');
     $page = 'Rooms';
     $banner = $pageBanners[$page];
+    $results_per_page = 9;
+    $subpage = isset($_GET['subpage']) && (int) $_GET['subpage'] > 0 ? (int) $_GET['subpage'] : 1;
+
+    $start_from = intval(($subpage - 1) * $results_per_page);
 
     function renderBanner($bannerImage, $title, $subtitle)
     {
@@ -63,6 +65,7 @@
         WHERE 
            (checkin_date <= '$checkoutDate' AND checkout_date >= '$checkinDate')
     )
+           LIMIT $start_from, $results_per_page
 ");
 
 
@@ -148,12 +151,46 @@
         }
 
         echo "</div></div>"; // End of grid container
+        ?>
+
+        <!-- Pagination -->
+        <div class="flex justify-center">
+            <?php
+            $result = $db_root->query("SELECT COUNT(id) AS total FROM rooms");
+            $row = $result->fetch_assoc();
+            $total_records = $row['total'];
+
+            $total_pages = ceil($total_records / $results_per_page);
+            $visible_pages = 3; // Maximum number of pagination tabs to display
+            $subpage = isset($_GET['subpage']) && (int) $_GET['subpage'] > 0 ? (int) $_GET['subpage'] : 1;
+
+            $start_page = max(1, $subpage - floor($visible_pages / 2));
+            $end_page = min($total_pages, $start_page + $visible_pages - 1);
+
+            $start_page = max(1, $end_page - $visible_pages + 1);
+            // Display "Previous" button
+            if ($subpage > 1) {
+                echo "<a href='hotelix/pages/room.php?subpage=" . ($subpage - 1) . "' class='mx-2 px-4 py-2 border rounded-md bg-gray-200 text-gray-700'>&laquo; Previous</a>";
+            }
+            // Display page numbers
+            for ($i = $start_page; $i <= $end_page; $i++) {
+                echo "<a href='hotelix/pages/room.php?subpage=$i' class='mx-2 px-4 py-2 border rounded-md " . ($subpage == $i ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700') . "'>$i</a>";
+            }
+            // Display "Next" button
+            if ($subpage < $total_pages) {
+                echo "<a href='hotelix/pages/room.php?subpage=" . ($subpage + 1) . "' class='mx-2 px-4 py-2 border rounded-md bg-gray-200 text-gray-700'>Next &raquo;</a>";
+            }
+            ?>
+        </div>
+
+
+        <?php
     } else {
         echo "No rooms found!";
     }
-
     require_once('../shared/footer.php');
     ?>
+
     <!-- FancyBox JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
 </body>
