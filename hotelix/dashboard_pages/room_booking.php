@@ -56,6 +56,7 @@ renderBanner($banner['bannerImage'], $banner['title'], $banner['subtitle']);
     <section>
         <?php
         $success_message = '';
+        $error_message = '';
         if (!isset($_SESSION['isLoggedIn']) || $_SESSION['isLoggedIn'] !== true) {
             // Store the current URL in the session
             $_SESSION['redirectTo'] = $_SERVER['REQUEST_URI'];
@@ -66,11 +67,20 @@ renderBanner($banner['bannerImage'], $banner['title'], $banner['subtitle']);
                 $_SESSION['room_id'] = $_POST['room_id'];
                 $_SESSION['room_type'] = $_POST['room_type'];
                 $_SESSION['room_number'] = $_POST['room_number'];
-                $room_price = (float) $_POST['room_price'];
+                $_SESSION['price'] = $_POST['price'];
+                $room_price =(float)$_POST['price'];
             }
             header("Location: ../../auth/login.php");
             exit;
         }
+        
+        $checkinDate = isset($_POST['checkin']) ? $_POST['checkin'] : $_SESSION['checkin'];
+        $checkoutDate = isset($_POST['checkout']) ? $_POST['checkout'] : $_SESSION['checkout'];
+        $room_id = isset($_POST['room_id']) ? $_POST['room_id'] : $_SESSION['room_id'];
+        $room_type = isset($_POST['room_type']) ? $_POST['room_type'] : $_SESSION['room_type'];
+        $room_number = isset($_POST['room_number']) ? $_POST['room_number'] : $_SESSION['room_number'];
+        $room_price = isset($_POST['price']) ? $_POST['price'] : $_SESSION['price'];
+
         // Database connection to fetch user data
         include '../../db_root.php';
         $userId = $_SESSION['user_id'];
@@ -88,79 +98,70 @@ renderBanner($banner['bannerImage'], $banner['title'], $banner['subtitle']);
 
         // Booking check-in and check-out dates
         if (!isset($_SESSION['checkin'])) {
-            $_SESSION['checkin'] = '';  // Set a default value if not set
+            $_SESSION['checkin'] = $checkinDate;  // Set a default value if not set
         }
         if (!isset($_SESSION['checkout'])) {
-            $_SESSION['checkout'] = '';  // Set a default value if not set
+            $_SESSION['checkout'] = $checkoutDate;  // Set a default value if not set
         }
         if (!isset($_SESSION['room_id'])) {
-            $_SESSION['room_id'] = '';  // Set a default value if not set
+            $_SESSION['room_id'] = $room_id;  // Set a default value if not set
         }
         if (!isset($_SESSION['room_type'])) {
-            $_SESSION['room_type'] = '';  // Set a default value if not set
+            $_SESSION['room_type'] = $room_type;  // Set a default value if not set
         }
-        if (!isset($_SESSION['price'])) {
-            $_SESSION['price'] = '';
+        if (!isset($_SESSION['room_price'])) {
+            $_SESSION['price'] = $room_price;
         }
         if (!isset($_SESSION['room_number'])) {
-            $_SESSION['room_number'] = '';
+            $_SESSION['room_number'] = $room_number;
         }
 
-        $checkinDate = isset($_POST['checkin']) ? $_POST['checkin'] : $_SESSION['checkin'];
-        $checkoutDate = isset($_POST['checkout']) ? $_POST['checkout'] : $_SESSION['checkout'];
-        $room_id = isset($_POST['room_id']) ? $_POST['room_id'] : $_SESSION['room_id'];
-        $room_type = isset($_POST['room_type']) ? $_POST['room_type'] : $_SESSION['room_type'];
-        $room_number = isset($_POST['room_number']) ? $_POST['room_number'] : $_SESSION['room_number'];
-        $room_price = isset($_POST['price']) ? $_POST['price'] : $_SESSION['price'];
+        $amount =$room_price;
 
-        // Calculate the number of nights
-        $checkinDateTimestamp = strtotime($checkinDate);
-        $checkoutDateTimestamp = strtotime($checkoutDate);
-
-        if ($checkinDateTimestamp === false || $checkoutDateTimestamp === false) {
-            die('Invalid check-in or check-out date.');
-        }
-
-        $nights = ($checkoutDateTimestamp - $checkinDateTimestamp) / (60 * 60 * 24);
-
-        if ($nights <= 0) {
-            die('Check-out date must be after check-in date.');
-        }
-
-
-        if ($room_price <= 0) {
-            die('Invalid room price.');
-        }
-
-        $amount = $nights * $room_price;
-
-
-        // Handle form submission to store booking details
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkoutBtn'])) {
-            $payment_status = 'pending';
-            $userName = $_POST['u_name'];
-            $userEmail = $_POST['email'];
-            $number = $_POST['number'];
-            // var_dump($userName, $userEmail, $number);
-        
-            $sqlInsert = "INSERT INTO bookings (user_id, user_name, user_email, user_number, room_id, room_type, room_number, checkin_date, checkout_date, payment_status, per_amount, total_amount)
-                          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-            $stmtInsert = $db_root->prepare($sqlInsert);
-            $stmtInsert->bind_param("isssisssssdd", $userId, $userName, $userEmail, $number, $room_id, $room_type, $room_number, $checkinDate, $checkoutDate, $payment_status, $room_price, $amount);
-            if ($stmtInsert->execute()) {
-                // update status after booking 
-                // $UpdateRoomStatus = "UPDATE rooms set av_status = 'booked' where id = ?";
-                // $stmtUpdateRoomStatus = $db_root->prepare("$UpdateRoomStatus");
-                // $stmtUpdateRoomStatus->bind_param("i", $room_id);
-                // $stmtUpdateRoomStatus->execute();
-        
-                $success_message = "Room Booking successfully!";
-                header('location: ../../user_dashboard.php?page=display_booking&success_message=' . urlencode($success_message));
-            } else {
-                echo "<p class='text-red-500'>Error: " . $stmtInsert->error . "</p>";
+        if(!empty($checkinDate) && !empty($checkoutDate)) {
+            // Calculate the number of nights
+            $checkinDateTimestamp = strtotime($checkinDate);
+            $checkoutDateTimestamp = strtotime($checkoutDate);
+    
+            if ($checkinDateTimestamp === false || $checkoutDateTimestamp === false) {
+                die('Invalid check-in or check-out date.');
             }
+    
+            $nights = (float)($checkoutDateTimestamp - $checkinDateTimestamp) / (60 * 60 * 24);
+    
+            if ($nights <= 0) {
+                die('Check-out date must be after check-in date.');
+            }
+            $room_price = (float)$room_price;
+            $amount = $nights * $room_price;        
         }
+    
+      // Handle form submission to store booking details
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkoutBtn'])) {
+        $payment_status = 'pending';
+        $userName = $_POST['u_name'];
+        $userEmail = $_POST['email'];
+        $number = $_POST['number'];
+        // var_dump($userName, $userEmail, $number);
+    
+        $sqlInsert = "INSERT INTO bookings (user_id, user_name, user_email, user_number, room_id, room_type, room_number, checkin_date, checkout_date, payment_status, per_amount, total_amount)
+                      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        $stmtInsert = $db_root->prepare($sqlInsert);
+        $stmtInsert->bind_param("isssisssssdd", $userId, $userName, $userEmail, $number, $room_id, $room_type, $room_number, $checkinDate, $checkoutDate, $payment_status, $room_price, $amount);
+        if ($stmtInsert->execute()) {
+            // update status after booking 
+            // $UpdateRoomStatus = "UPDATE rooms set av_status = 'booked' where id = ?";
+            // $stmtUpdateRoomStatus = $db_root->prepare("$UpdateRoomStatus");
+            // $stmtUpdateRoomStatus->bind_param("i", $room_id);
+            // $stmtUpdateRoomStatus->execute();
+    
+            $success_message = "Room Booking successfully!";
+            header('location: ../../user_dashboard.php?page=display_booking&success_message=' . urlencode($success_message));
+        } else {
+            echo "<p class='text-red-500'>Error: " . $stmtInsert->error . "</p>";
+        }
+    }
 
         // Handle cancellation for bookings made in the last 2 minutes
         $currentTimestamp = date('Y-m-d H:i:s');
@@ -258,10 +259,10 @@ renderBanner($banner['bannerImage'], $banner['title'], $banner['subtitle']);
                                     value="<?php echo htmlspecialchars($room_type) ?>">
                             </div>
                             <div>
-                                <input type="hidden" name="price" id="price" value="<?= $room_price ?>">
+                                <input type="hidden" name="price" id="price" value="<?php echo htmlspecialchars($room_price) ?>">
                             </div>
                             <div>
-                                <input type="hidden" name="room_number" id="room_number" value="<?= $room_number ?>">
+                                <input type="hidden" name="room_number" id="room_number" value="<?php echo htmlspecialchars($room_number) ?>">
                             </div>
                         </div>
                         <div class="grid md:grid-cols-2 gap-3">

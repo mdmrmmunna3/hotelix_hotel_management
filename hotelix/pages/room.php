@@ -53,9 +53,9 @@
 
     <?php
     require_once('../../db_root.php');
-    $checkinDate = isset($_POST['checkin']) ? $_POST['checkin'] : '';
-    $checkoutDate = isset($_POST['checkout']) ? $_POST['checkout'] : '';
-    // (checkin_date <= '$checkoutDate' AND checkout_date >= '$checkinDate') simple version 
+    $checkinDate = isset($_POST['checkin']) ? $_POST['checkin'] : (isset($_GET['checkin']) ? $_GET['checkin'] : '');
+    $checkoutDate = isset($_POST['checkout']) ? $_POST['checkout'] : (isset($_GET['checkout']) ? $_GET['checkout'] : '');
+
     $getRoomsdata = $db_root->query("
     SELECT * 
     FROM rooms 
@@ -66,7 +66,7 @@
            (checkin_date <= '$checkoutDate' AND checkout_date >= '$checkinDate')
     )
            LIMIT $start_from, $results_per_page
-");
+    ");
 
 
     if ($getRoomsdata->num_rows > 0) {
@@ -129,20 +129,11 @@
                     <input type='hidden' name='checkin' value='$checkinDate'>
                     <input type='hidden' name='checkout' value='$checkoutDate'>";
 
-            // Check if the room is booked, disable the button
-            // if ($isBooked) {
-            //     echo "
-            // <button type='submit' disabled class='relative inline-block px-5 py-2 mt-2 text-center border-2 rounded-lg border-gray-500 cursor-not-allowed w-full booked'>
-            //     <span class='absolute inset-0 bg-gray-500 '></span>
-            //     <span class='relative z-10'>Room Booked</span>
-            // </button>";
-            // } else {
             echo "
                         <button type='submit' class='relative inline-block px-5 py-2 mt-2 text-center border-2 rounded-lg border-blue-500 hover:text-white overflow-hidden group uppercase w-full available'>
                             <span class='absolute inset-0 bg-blue-500 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-out'></span>
                             <span class='relative z-10'>Book Room</span>
                         </button>";
-            // }
     
             echo "</form>
             </div>
@@ -170,15 +161,15 @@
             $start_page = max(1, $end_page - $visible_pages + 1);
             // Display "Previous" button
             if ($subpage > 1) {
-                echo "<a href='hotelix/pages/room.php?subpage=" . ($subpage - 1) . "' class='mx-2 px-4 py-2 border rounded-md bg-gray-200 text-gray-700'>&laquo; Previous</a>";
+                echo "<a href='hotelix/pages/room.php?subpage=" . ($subpage - 1) . "&checkin=$checkinDate&checkout=$checkoutDate' class='mx-2 px-4 py-2 border rounded-md bg-gray-200 text-gray-700'>&laquo; Previous</a>";
             }
             // Display page numbers
             for ($i = $start_page; $i <= $end_page; $i++) {
-                echo "<a href='hotelix/pages/room.php?subpage=$i' class='mx-2 px-4 py-2 border rounded-md " . ($subpage == $i ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700') . "'>$i</a>";
+                echo "<a href='hotelix/pages/room.php?subpage=$i&checkin=$checkinDate&checkout=$checkoutDate' class='mx-2 px-4 py-2 border rounded-md " . ($subpage == $i ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700') . "'>$i</a>";
             }
             // Display "Next" button
             if ($subpage < $total_pages) {
-                echo "<a href='hotelix/pages/room.php?subpage=" . ($subpage + 1) . "' class='mx-2 px-4 py-2 border rounded-md bg-gray-200 text-gray-700'>Next &raquo;</a>";
+                echo "<a href='hotelix/pages/room.php?subpage=" . ($subpage + 1) . "&checkin=$checkinDate&checkout=$checkoutDate' class='mx-2 px-4 py-2 border rounded-md bg-gray-200 text-gray-700'>Next &raquo;</a>";
             }
             ?>
         </div>
