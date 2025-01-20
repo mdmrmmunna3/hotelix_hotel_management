@@ -180,7 +180,7 @@ if (isset($_GET['deleteId'])) {
                                         class="flex justify-start titel_content text-gray-600 ">Invoice
                                         ID</label>
                                     <input type="text" name="invoiceId" id="invoiceId" placeholder="invoice Id"
-                                        class="rounded-sm w-full bg-gray-100 py-1 text-black" readonly>
+                                        class="rounded-sm w-full bg-gray-50 py-1 text-black" readonly>
                                 </div>
                                 <div class="">
                                     <label for="invoiceDate"
@@ -188,7 +188,7 @@ if (isset($_GET['deleteId'])) {
                                         Date</label>
                                     <input type="text" name="invoiceDate" id="invoiceDate"
                                         value="<?php echo date('Y-m-d'); ?>" placeholder="invoice date"
-                                        class="rounded-sm w-full bg-gray-100 py-1 text-black" readonly>
+                                        class="rounded-sm w-full bg-gray-50 py-1 text-black" readonly>
                                 </div>
                                 <div class="">
                                     <label for="invoiceDueDate"
@@ -197,7 +197,7 @@ if (isset($_GET['deleteId'])) {
                                     <input type="text" name="invoiceDueDate" id="invoiceDueDate"
                                         value="<?php echo date('Y-m-d', strtotime('+1 day')); ?>"
                                         placeholder="invoice due date"
-                                        class="rounded-sm w-full bg-gray-100 py-1 text-black" readonly>
+                                        class="rounded-sm w-full bg-gray-50 py-1 text-black" readonly>
                                 </div>
                             </div>
 
@@ -206,88 +206,97 @@ if (isset($_GET['deleteId'])) {
                             <div class="grid md:grid-cols-2 gap-2">
                                 <!-- User related info -->
                                 <div class="grid gap-2">
-                                    <div class="">
+                                    <div class="mb-4">
                                         <label for="g_name" class="flex justify-start titel_content text-gray-600">Guest
                                             Name</label>
                                         <input type="text" name="g_name" id="g_name" placeholder="guest name"
-                                            class="rounded-sm w-full bg-gray-100 py-1 text-black" readonly>
+                                            class="rounded-sm w-full bg-gray-50 py-1 text-black" readonly>
                                     </div>
-                                    <div class="">
+                                    <div class="mb-4">
                                         <label for="g_email"
                                             class="flex justify-start titel_content text-gray-600">Email</label>
                                         <input type="email" name="g_email" id="g_email" placeholder="Email"
-                                            class="rounded-sm w-full bg-gray-100 py-1 text-black" readonly>
+                                            class="rounded-sm w-full bg-gray-50 py-1 text-black" readonly>
                                     </div>
-                                    <div class="">
+                                    <div class="mb-4">
                                         <label for="g_phone"
                                             class="flex justify-start titel_content text-gray-600">Phone</label>
                                         <input type="text" name="g_phone" id="g_phone" placeholder="Phone"
-                                            class="rounded-sm w-full bg-gray-100 py-1 text-black" readonly>
+                                            class="rounded-sm w-full bg-gray-50 py-1 text-black" readonly>
                                     </div>
                                 </div>
                                 <!-- Booking related info -->
                                 <div class="grid md:grid-cols-2 gap-2">
-                                    <div class="">
+                                    <div class="mb-4">
                                         <label for="checkin"
                                             class="flex justify-start titel_content text-gray-600">Checkin
                                             Date</label>
                                         <input type="text" name="checkin" id="checkin" placeholder="Check in Date"
-                                            class="rounded-sm w-full bg-gray-100 py-1 text-black" readonly>
+                                            class="rounded-sm w-full bg-gray-50 py-1 text-black" readonly>
                                     </div>
-                                    <div class="">
+                                    <div class="mb-4">
                                         <label for="checkout"
                                             class="flex justify-start titel_content text-gray-600">Checkout
                                             Date</label>
                                         <input type="text" name="checkout" id="checkout" placeholder="Check out Date"
-                                            class="rounded-sm w-full bg-gray-100 py-1 text-black" readonly>
+                                            class="rounded-sm w-full bg-gray-50 py-1 text-black" readonly>
                                     </div>
-                                    <div class="">
+                                    <div class="mb-4">
                                         <label for="booking_date"
                                             class="flex justify-start titel_content text-gray-600">Booking
                                             Date</label>
                                         <input type="text" name="booking_date" id="booking_date"
                                             placeholder="Booking Date"
-                                            class="rounded-sm w-full bg-gray-100 py-1 text-black" readonly>
+                                            class="rounded-sm w-full bg-gray-50 py-1 text-black" readonly>
                                     </div>
-                                    <div class="">
+                                    <div class="mb-4">
                                         <label for="night" class="flex justify-start titel_content text-gray-600">Per
                                             Nights</label>
                                         <input type="text" name="night" id="night" placeholder="Per Nights"
-                                            class="rounded-sm w-full bg-gray-100 py-1 text-black" readonly>
+                                            class="rounded-sm w-full bg-gray-50 py-1 text-black" readonly>
                                     </div>
-                                    <div class="">
+                                    <div class="mb-4">
+                                        <label for="room_price"
+                                            class="flex justify-start titel_content text-gray-600">Room Price
+                                            </label>
+                                        <input type="text" name="room_price" id="room_price"
+                                            placeholder="room_price"
+                                            class="rounded-sm w-full bg-gray-50 py-1 text-black" readonly>
+                                    </div>
+                                    <div class="mb-4">
                                         <label for="total_amount"
                                             class="flex justify-start titel_content text-gray-600">Total
                                             Amount</label>
                                         <input type="text" name="total_amount" id="total_amount"
                                             placeholder="Total Amount"
-                                            class="rounded-sm w-full bg-gray-100 py-1 text-black" readonly>
+                                            class="rounded-sm w-full bg-gray-50 py-1 text-black" readonly>
                                     </div>
-                                    <div class="">
+                                    
+                                </div>
+                            </div>
+
+                            <div class="grid md:grid-cols-3 gap-2">
+                                <div class="mb-4">
+                                    <label for="room_type" class="flex justify-start titel_content text-gray-600">Room
+                                        Type
+                                    </label>
+                                    <input type="text" name="room_type" id="room_type" placeholder="Room Type"
+                                        class="rounded-sm w-full bg-gray-50 py-1 text-black" readonly>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="room_number" class="flex justify-start titel_content text-gray-600">Room
+                                        Number</label>
+                                    <input type="text" name="room_number" id="room_number" placeholder="Room Number"
+                                        class="rounded-sm w-full bg-gray-50 py-1 text-black" readonly>
+                                </div>
+                                <div class="mb-4">
                                         <label for="payment_met"
                                             class="flex justify-start titel_content text-gray-600">Payment
                                             Method</label>
                                         <input type="text" name="payment_met" id="payment_met"
                                             placeholder="Payment Method"
-                                            class="rounded-sm w-full bg-gray-100 py-1 text-black" readonly>
+                                            class="rounded-sm w-full bg-gray-50 py-1 text-black" readonly>
                                     </div>
-                                </div>
-                            </div>
-
-                            <div class="grid md:grid-cols-2 gap-2">
-                                <div class="">
-                                    <label for="room_type" class="flex justify-start titel_content text-gray-600">Room
-                                        Type
-                                    </label>
-                                    <input type="text" name="room_type" id="room_type" placeholder="Room Type"
-                                        class="rounded-sm w-full bg-gray-100 py-1 text-black" readonly>
-                                </div>
-                                <div class="">
-                                    <label for="room_number" class="flex justify-start titel_content text-gray-600">Room
-                                        Number</label>
-                                    <input type="text" name="room_number" id="room_number" placeholder="Room Number"
-                                        class="rounded-sm w-full bg-gray-100 py-1 text-black" readonly>
-                                </div>
                             </div>
 
                         </form>
@@ -322,6 +331,7 @@ if (isset($_GET['deleteId'])) {
             document.getElementById('checkout').value = checkoutDate;
             document.getElementById('booking_date').value = bookingDate;
             document.getElementById('night').value = perNights;
+            document.getElementById('room_price').value = perNights;
             document.getElementById('total_amount').value = totalAmount;
             document.getElementById('room_type').value = room_type;
             document.getElementById('room_number').value = room_number;
