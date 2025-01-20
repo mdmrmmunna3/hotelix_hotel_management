@@ -81,6 +81,12 @@ if (isset($_GET['deleteId'])) {
     <!-- show details  -->
     <section class="py-20">
         <div class="overflow-x-auto">
+            <p class="text-xl mb-2 titel_content">
+                <marquee behavior="infinity" direction="left">Please make the payment for the room booking before the
+                    payment deadline. The payment deadline is 1 hour. Thank You!</marquee>
+            </p>
+            <a href="/hotelix_hotel_management" class="border border-blue-500 px-4 py-2 font-medium"><i
+                    class="text-[#079d49] fa-solid fa-arrow-left pe-3"></i>Book Room</a>
             <table class="max-w-lg md:mx-auto mx-4 table table-xs md:table-md mb-20">
                 <caption class="text-3xl mb-3 uppercase titel_content">Booking List</caption>
                 <thead>
@@ -99,6 +105,22 @@ if (isset($_GET['deleteId'])) {
                 </thead>
                 <tbody class="bg-[--primary-color]">
                     <?php
+                    // Automatically delete pending bookings older than 2 minutes
+                    $currentTimestamp = date('Y-m-d H:i:s');
+                    $sql = "SELECT id FROM bookings WHERE payment_status = 'pending' AND TIMESTAMPDIFF(MINUTE, booking_date, NOW()) >= 30";
+                    $stmt = $db_root->prepare($sql);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+
+                    while ($row = $result->fetch_assoc()) {
+                        $bookingId = $row['id'];
+                        // Delete the booking after 2 minutes if not paid
+                        $deleteBookingSql = "DELETE FROM bookings WHERE id = ?";
+                        $deleteStmt = $db_root->prepare($deleteBookingSql);
+                        $deleteStmt->bind_param("i", $bookingId);
+                        $deleteStmt->execute();
+                    }
+
                     $getBookData = $db_root->query("SELECT * FROM bookings WHERE user_id = $user_id ORDER BY booking_date DESC");
                     if ($getBookData->num_rows > 0) {
                         $counter = 1;
@@ -171,7 +193,7 @@ if (isset($_GET['deleteId'])) {
                     <h3 class="text-3xl font-normal text-gray-500 mt-5 mb-6 titel_content uppercase">Invoice </h3>
                     <div class="">
                         <form method="POST" id="invoiceForm" download>
-                            <input type="hidden" id="deleteUserId" name="userId">
+                            <input type="hidden" id="bookingId" name="bookingId">
                             <div class="divider"></div>
                             <!-- Invoice related info -->
                             <div class="grid md:grid-cols-3 gap-2">
@@ -258,9 +280,8 @@ if (isset($_GET['deleteId'])) {
                                     <div class="mb-4">
                                         <label for="room_price"
                                             class="flex justify-start titel_content text-gray-600">Room Price
-                                            </label>
-                                        <input type="text" name="room_price" id="room_price"
-                                            placeholder="room_price"
+                                        </label>
+                                        <input type="text" name="room_price" id="room_price" placeholder="room_price"
                                             class="rounded-sm w-full bg-gray-50 py-1 text-black" readonly>
                                     </div>
                                     <div class="mb-4">
@@ -271,7 +292,7 @@ if (isset($_GET['deleteId'])) {
                                             placeholder="Total Amount"
                                             class="rounded-sm w-full bg-gray-50 py-1 text-black" readonly>
                                     </div>
-                                    
+
                                 </div>
                             </div>
 
@@ -290,13 +311,12 @@ if (isset($_GET['deleteId'])) {
                                         class="rounded-sm w-full bg-gray-50 py-1 text-black" readonly>
                                 </div>
                                 <div class="mb-4">
-                                        <label for="payment_met"
-                                            class="flex justify-start titel_content text-gray-600">Payment
-                                            Method</label>
-                                        <input type="text" name="payment_met" id="payment_met"
-                                            placeholder="Payment Method"
-                                            class="rounded-sm w-full bg-gray-50 py-1 text-black" readonly>
-                                    </div>
+                                    <label for="payment_met"
+                                        class="flex justify-start titel_content text-gray-600">Payment
+                                        Method</label>
+                                    <input type="text" name="payment_met" id="payment_met" placeholder="Payment Method"
+                                        class="rounded-sm w-full bg-gray-50 py-1 text-black" readonly>
+                                </div>
                             </div>
 
                         </form>
@@ -322,8 +342,8 @@ if (isset($_GET['deleteId'])) {
             document.body.classList.remove('overflow-y-hidden');
         }
 
-        function openInvoiceModal(userId, userName, userEmail, userPhone, checkinDate, checkoutDate, bookingDate, perNights, totalAmount, room_type, room_number,) {
-            document.getElementById('deleteUserId').value = userId;
+        function openInvoiceModal(bookingId, userName, userEmail, userPhone, checkinDate, checkoutDate, bookingDate, perNights, totalAmount, room_type, room_number,) {
+            document.getElementById('bookingId').value = bookingId;
             document.getElementById('g_name').value = userName;
             document.getElementById('g_email').value = userEmail;
             document.getElementById('g_phone').value = userPhone;
@@ -344,7 +364,8 @@ if (isset($_GET['deleteId'])) {
             }
 
             // Set Invoice ID as Booking ID
-            document.getElementById('invoiceId').value = userId;
+            const randomInvoiceId = 'INV-' + Math.floor(Math.random() * 1000000);
+            document.getElementById('invoiceId').value = randomInvoiceId;
 
             document.getElementById('modelConfirm').style.display = 'block';
             document.body.classList.add('overflow-y-hidden');
