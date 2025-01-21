@@ -12,7 +12,7 @@ include 'db_root.php';
 
 $userId = $_SESSION['user_id'];
 $sql = "SELECT * FROM users WHERE id = ?";
-$stmt = $db_root->prepare($sql);
+$stmt = $db_conn->prepare($sql);
 $stmt->bind_param("i", $userId);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -58,7 +58,8 @@ if ($result->num_rows > 0) {
         <div class=" p-4 h-screen hidden bg-[--primary-color] lg:block w-64 mt-18 sidebar_main pt-16">
             <div class="flex flex-col items-center gap-4 p-6 border-b ">
                 <div class="shrink-0">
-                    <a href="#" class="relative flex items-center justify-center w-16 h-16 rounded-full ">
+                    <a href="user_dashboard.php?page=user_profile"
+                        class="relative flex items-center justify-center w-16 h-16 rounded-full ">
                         <img src="get_photo.php?id=<?= htmlspecialchars($user['id']); ?>"
                             alt="<?= htmlspecialchars($user['name']); ?>"
                             title="<?= htmlspecialchars($user['name']); ?>" class="w-16 h-16 rounded-full" />
@@ -108,6 +109,13 @@ if ($result->num_rows > 0) {
                         </a></li>
                 </ul>
 
+                <!-- reviews  -->
+                <a href="user_dashboard.php?page=review"
+                    class="block py-3 px-4 rounded transition-colors hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 text-lg ajax-link focus:text-emerald-500">
+                    <i class="fa-solid fa-star"></i>
+                    Give Review
+                </a>
+
 
                 <!-- logout  -->
                 <footer class="p-3 border-t border-slate-200">
@@ -131,8 +139,9 @@ if ($result->num_rows > 0) {
             <button onclick="toggleSidebar()" class=" absolute top-4 right-4">✕</button>
             <div class="flex flex-col items-center gap-4 p-6 border-b ">
                 <div class="shrink-0">
-                    <a href="#" class="relative flex items-center justify-center w-16 h-16  rounded-full">
-                        <img src="<?= htmlspecialchars($user['photo']); ?>"
+                    <a href="user_dashboard.php?page=user_profile"
+                        class="relative flex items-center justify-center w-16 h-16 rounded-full ">
+                        <img src="get_photo.php?id=<?= htmlspecialchars($user['id']); ?>"
                             alt="<?= htmlspecialchars($user['name']); ?>"
                             title="<?= htmlspecialchars($user['name']); ?>" class="w-16 h-16 rounded-full" />
                         <span

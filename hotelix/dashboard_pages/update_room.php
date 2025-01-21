@@ -5,7 +5,7 @@ $success_message = '';
 if (isset($_GET['updateId'])) {
     $updateRoomId = $_GET['updateId'];
     $showRoomData = "SELECT * FROM rooms WHERE id = $updateRoomId";
-    $query = mysqli_query($db_root, $showRoomData);
+    $query = mysqli_query($db_conn, $showRoomData);
     $roomData = mysqli_fetch_assoc($query);
 
     $room_type = $roomData['room_type'];
@@ -58,7 +58,7 @@ if (isset($_POST['updateRoomBtn'])) {
         if ($photo_content === null) {
             // If no new photo, update only text fields
             $updateInfo = "UPDATE rooms SET room_type = ?, room_number = ?, price_per_night = ?, room_size = ?, view = ?, floor_number = ?, room_desc = ?, bed_type = ?, capacity = ? WHERE id = ?";
-            $stmt = mysqli_prepare($db_root, $updateInfo);
+            $stmt = mysqli_prepare($db_conn, $updateInfo);
             mysqli_stmt_bind_param(
                 $stmt,
                 'sssssssssi',
@@ -76,7 +76,7 @@ if (isset($_POST['updateRoomBtn'])) {
         } else {
             // If new photo uploaded, include it in the update
             $updateInfo = "UPDATE rooms SET room_type = ?, room_number = ?, price_per_night = ?, room_size = ?, view = ?, floor_number = ?, room_desc = ?, room_photo = ?, room_mime_type = ?, bed_type = ?, capacity = ? WHERE id = ?";
-            $stmt = mysqli_prepare($db_root, $updateInfo);
+            $stmt = mysqli_prepare($db_conn, $updateInfo);
             mysqli_stmt_bind_param(
                 $stmt,
                 'sssssssssssi',
@@ -100,7 +100,7 @@ if (isset($_POST['updateRoomBtn'])) {
             header("Location: main_dashboard.php?page=room_list&success_message=" . urlencode($success_message));
             exit();
         } else {
-            $errors['database'] = "Failed to update room: " . mysqli_error($db_root);
+            $errors['database'] = "Failed to update room: " . mysqli_error($db_conn);
         }
     }
 }

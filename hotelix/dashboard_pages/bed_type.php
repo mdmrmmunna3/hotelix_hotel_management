@@ -15,12 +15,12 @@ if (isset($_POST['addBedTypeBtn'])) {
     if (empty($errors)) {
         // Insert bed type data into the database
         $insert = "INSERT INTO add_bed_type (bed_type) values('$bed_type')";
-        if (mysqli_query($db_root, $insert)) {
+        if (mysqli_query($db_conn, $insert)) {
             $success_message = "Bed type added successfully!";
             header("location:main_dashboard.php?page=bed_type&success_message=$success_message");
             exit;
         } else {
-            echo "<p class='text-red-500'>Error: " . mysqli_error($db_root) . "</p>";
+            echo "<p class='text-red-500'>Error: " . mysqli_error($db_conn) . "</p>";
         }
     }
 }
@@ -29,12 +29,12 @@ if (isset($_POST['addBedTypeBtn'])) {
 if (isset($_GET['deleteId'])) {
     $deletedId = $_GET['deleteId'];
     $isDeleted = "DELETE FROM add_bed_type WHERE id = $deletedId";
-    if (mysqli_query($db_root, $isDeleted)) {
+    if (mysqli_query($db_conn, $isDeleted)) {
         $success_message = "Bed type deleted successfully!";
         header("location:main_dashboard.php?page=bed_type&success_message=$success_message");
         exit; // Ensure the script stops after the redirect
     } else {
-        echo "<p class='text-red-500'>Error: " . mysqli_error($db_root) . "</p>";
+        echo "<p class='text-red-500'>Error: " . mysqli_error($db_conn) . "</p>";
     }
 }
 ?>
@@ -143,7 +143,7 @@ if (isset($_GET['deleteId'])) {
                     </thead>
                     <tbody class="bg-[--primary-color]">
                         <?php
-                        $getBedTypes = $db_root->query("select * from add_bed_type");
+                        $getBedTypes = $db_conn->query("select * from add_bed_type");
                         if ($getBedTypes->num_rows > 0) {
                             $counter = 1;
                             while (list($id, $bed_type_name) = $getBedTypes->fetch_row()) {

@@ -13,12 +13,12 @@ $user_id = $_SESSION['user_id'];
 if (isset($_GET['deleteId'])) {
     $deletedId = $_GET['deleteId'];
     $isDeleted = "DELETE FROM bookings WHERE id = $deletedId";
-    if (mysqli_query($db_root, $isDeleted)) {
+    if (mysqli_query($db_conn, $isDeleted)) {
         $success_message = "Booking Cancle successfully!";
         header("location:user_dashboard.php?page=display_booking&success_message=$success_message");
         exit; // Ensure the script stops after the redirect
     } else {
-        echo "<p class='text-red-500'>Error: " . mysqli_error($db_root) . "</p>";
+        echo "<p class='text-red-500'>Error: " . mysqli_error($db_conn) . "</p>";
     }
 }
 ?>
@@ -88,7 +88,7 @@ if (isset($_GET['deleteId'])) {
                 </thead>
                 <tbody class="bg-[--primary-color]">
                     <?php
-                    $getBookData = $db_root->query("SELECT * FROM bookings WHERE user_id = $user_id ORDER BY booking_date DESC");
+                    $getBookData = $db_conn->query("SELECT * FROM bookings WHERE user_id = $user_id ORDER BY booking_date DESC");
                     if ($getBookData->num_rows > 0) {
                         $counter = 1;
                         while ($row = $getBookData->fetch_assoc()) {

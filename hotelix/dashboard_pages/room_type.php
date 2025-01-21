@@ -15,12 +15,12 @@ if (isset($_POST['addRoomTypeBtn'])) {
     if (empty($errors)) {
         // Insert room type data into the database
         $insert = "INSERT INTO add_room_type (room_type) values('$room_type') ";
-        if (mysqli_query($db_root, $insert)) {
+        if (mysqli_query($db_conn, $insert)) {
             $success_message = "Room type added successfully!";
             header("location:main_dashboard.php?page=room_type&success_message=$success_message");
             exit; // Make sure the script stops after redirect
         } else {
-            echo "<p class='text-red-500'>Error: " . mysqli_error($db_root) . "</p>";
+            echo "<p class='text-red-500'>Error: " . mysqli_error($db_conn) . "</p>";
         }
     }
 }
@@ -29,13 +29,13 @@ if (isset($_POST['addRoomTypeBtn'])) {
 if (isset($_GET['deleteId'])) {
     $deletedId = $_GET['deleteId'];
     $isDeleted = "DELETE FROM add_room_type WHERE id = $deletedId";
-    if (mysqli_query($db_root, $isDeleted)) {
+    if (mysqli_query($db_conn, $isDeleted)) {
         $success_message = "Room type deleted successfully!";
         // Redirect after successful deletion
         header("location:main_dashboard.php?page=room_type&success_message=$success_message");
         exit; // Make sure the script stops after redirect
     } else {
-        echo "<p class='text-red-500'>Error: " . mysqli_error($db_root) . "</p>";
+        echo "<p class='text-red-500'>Error: " . mysqli_error($db_conn) . "</p>";
     }
 }
 ?>
@@ -142,7 +142,7 @@ if (isset($_GET['deleteId'])) {
                     </thead>
                     <tbody class="bg-[--primary-color]">
                         <?php
-                        $getroomTypes = $db_root->query("select * from add_room_type");
+                        $getroomTypes = $db_conn->query("select * from add_room_type");
                         if ($getroomTypes->num_rows > 0) {
                             $counter = 1;
                             while (list($id, $room_type_name) = $getroomTypes->fetch_row()) {

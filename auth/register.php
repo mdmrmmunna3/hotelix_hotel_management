@@ -74,7 +74,7 @@ if (isset($_POST['registerBtn'])) {
 
     if (empty($errors)) {
         // Check if email is already registered
-        $stmt = $db_root->prepare("SELECT id FROM users WHERE email = ?");
+        $stmt = $db_conn->prepare("SELECT id FROM users WHERE email = ?");
         $stmt->bind_param("s", $email);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -85,7 +85,7 @@ if (isset($_POST['registerBtn'])) {
             $hash_password = password_hash($password, PASSWORD_BCRYPT);
 
             // Insert user data into the database
-            $insert = $db_root->prepare("INSERT INTO users (name, email, role, phone, gender, photo, mime_type, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+            $insert = $db_conn->prepare("INSERT INTO users (name, email, role, phone, gender, photo, mime_type, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
             $insert->bind_param("ssssssss", $name, $email, $default_role, $phone, $gender, $photo_content, $mime_type, $hash_password);
 
             if ($insert->execute()) {

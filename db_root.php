@@ -1,3 +1,3 @@
 <?php
-$db_root = mysqli_connect('localhost', 'root', '', 'hotel_manage_db');
+$db_conn = mysqli_connect('localhost', 'root', '', 'hotel_manage_db');
 ?>

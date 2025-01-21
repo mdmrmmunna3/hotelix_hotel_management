@@ -5,7 +5,7 @@ if (isset($_GET['id'])) {
     $user_id = intval($_GET['id']); // Sanitize input
 
     // Fetch the photo binary data and the MIME type from the database
-    $stmt = $db_root->prepare("SELECT photo, mime_type FROM users WHERE id = ?");
+    $stmt = $db_conn->prepare("SELECT photo, mime_type FROM users WHERE id = ?");
     $stmt->bind_param("i", $user_id);
     $stmt->execute();
     $result = $stmt->get_result();

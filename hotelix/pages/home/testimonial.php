@@ -9,8 +9,6 @@
         .card_main {
             box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
         }
-
-       
     </style>
 </head>
 
@@ -25,158 +23,80 @@
             <div class="overflow-hidden text-center text-slate-500 md:mx-8 mx-4 py-6" data-glide-el="track">
                 <div
                     class="relative w-full overflow-hidden p-0 whitespace-no-wrap flex flex-no-wrap gap-5 [backface-visibility: hidden] [transform-style: preserve-3d] [touch-action: pan-Y] [will-change: transform]">
-                    <div class="w-full border rounded-lg border-blue-400">
-                        <!-- Start Testimonial -->
-                        <div class="overflow-hidden">
-                            <div class="relative p-5">
-                                <figure class="relative z-10">
-                                    <blockquote class="p-5 text-lg leading-loose lg:text-xl">
-                                        <p class="line-clamp-4">You can easily communicate with Wind-ui's team for
-                                            support
-                                            through their
-                                            discord
-                                            channel. They are responsive and ultra helpful guys!</p>
-                                    </blockquote>
-                                    <figcaption class="flex flex-col items-center gap-2 p-5 text-sm text-emerald-500">
-                                        <span class="flex gap-1 text-amber-400" role="img"
-                                            aria-label="Rating: 3 out of 5 stars">
-                                            <i class="fa-solid fa-star text-xl"></i>
-                                            <i class="fa-solid fa-star text-xl"></i>
-                                            <i class="fa-solid fa-star text-xl"></i>
-                                            <i class="fa-solid fa-star text-xl"></i>
-                                            <i class="fa-regular fa-star text-xl"></i>
-                                        </span>
-                                        <div class="flex items-center gap-4 pt-4 text-sm text-left text-emerald-500">
-                                            <img src="https://i.pravatar.cc/40?img=7" alt="user name" title="user name"
-                                                width="48" height="48" class="max-w-full rounded-full shrink-0" />
-                                            <div class="flex flex-col gap-1">
-                                                <span class="font-bold uppercase">Arnold Jones</span>
-                                                <cite class="not-italic"><a href="#">Software Engineer</a></cite>
-                                            </div>
-                                        </div>
-                                    </figcaption>
-                                </figure>
-                                <img src="<?php echo '/hotelix_hotel_management/assets/logo/quotes.png' ?>" alt="quta"
-                                    class="absolute z-0 h-16 left-6 top-6">
-                                </img>
-                            </div>
-                        </div>
-                    </div>
+                    <?php
+                    require_once('db_root.php');
+                    // Query to get all reviews from the database
+                    $getReviewData = $db_conn->query("SELECT * FROM reviews ORDER BY review_time DESC");
 
-                    <div class="w-full border rounded-lg border-blue-400">
-                        <!-- Start Testimonial -->
-                        <div class="overflow-hidden">
-                            <div class="relative p-5">
-                                <figure class="relative z-10">
-                                    <blockquote class="p-5 text-lg leading-loose lg:text-xl">
-                                        <p class="line-clamp-4">You can easily communicate with Wind-ui's team for
-                                            support
-                                            through their
-                                            discord
-                                            channel. They are responsive and ultra helpful guys!</p>
-                                    </blockquote>
-                                    <figcaption class="flex flex-col items-center gap-2 p-5 text-sm text-emerald-500">
-                                        <span class="flex gap-1 text-amber-400" role="img"
-                                            aria-label="Rating: 3 out of 5 stars">
-                                            <i class="fa-solid fa-star text-xl"></i>
-                                            <i class="fa-solid fa-star text-xl"></i>
-                                            <i class="fa-solid fa-star text-xl"></i>
-                                            <i class="fa-solid fa-star text-xl"></i>
-                                            <i class="fa-regular fa-star text-xl"></i>
-                                        </span>
-                                        <div class="flex items-center gap-4 pt-4 text-sm text-left text-emerald-500">
-                                            <img src="https://i.pravatar.cc/40?img=7" alt="user name" title="user name"
-                                                width="48" height="48" class="max-w-full rounded-full shrink-0" />
-                                            <div class="flex flex-col gap-1">
-                                                <span class="font-bold uppercase">Arnold Jones</span>
-                                                <cite class="not-italic"><a href="#">Software Engineer</a></cite>
-                                            </div>
-                                        </div>
-                                    </figcaption>
-                                </figure>
-                                <img src="<?php echo '/hotelix_hotel_management/assets/logo/quotes.png' ?>" alt="quta"
-                                    class="absolute z-0 h-16 left-6 top-6">
-                                </img>
-                            </div>
-                        </div>
-                    </div>
+                    if ($getReviewData->num_rows > 0) {
+                        // Loop through each review and display it
+                        while ($row = $getReviewData->fetch_assoc()) {
+                            $userId = $row['user_id'];
+                            $user_name = $row['name'];
+                            $rating = $row['rating'];
+                            $description = $row['description'];
+                            $review_time = $row['review_time'];
 
-                    <div class="w-full border rounded-lg border-blue-400">
-                        <!-- Start Testimonial -->
-                        <div class="overflow-hidden">
-                            <div class="relative p-5">
-                                <figure class="relative z-10">
-                                    <blockquote class="p-5 text-lg leading-loose lg:text-xl">
-                                        <p class="line-clamp-4">You can easily communicate with Wind-ui's team for
-                                            support
-                                            through their
-                                            discord
-                                            channel. They are responsive and ultra helpful guys!</p>
-                                    </blockquote>
-                                    <figcaption class="flex flex-col items-center gap-2 p-5 text-sm text-emerald-500">
-                                        <span class="flex gap-1 text-amber-400" role="img"
-                                            aria-label="Rating: 3 out of 5 stars">
-                                            <i class="fa-solid fa-star text-xl"></i>
-                                            <i class="fa-solid fa-star text-xl"></i>
-                                            <i class="fa-solid fa-star text-xl"></i>
-                                            <i class="fa-solid fa-star text-xl"></i>
-                                            <i class="fa-regular fa-star text-xl"></i>
-                                        </span>
-                                        <div class="flex items-center gap-4 pt-4 text-sm text-left text-emerald-500">
-                                            <img src="https://i.pravatar.cc/40?img=7" alt="user name" title="user name"
-                                                width="48" height="48" class="max-w-full rounded-full shrink-0" />
-                                            <div class="flex flex-col gap-1">
-                                                <span class="font-bold uppercase">Arnold Jones</span>
-                                                <cite class="not-italic"><a href="#">Software Engineer</a></cite>
-                                            </div>
-                                        </div>
-                                    </figcaption>
-                                </figure>
-                                <img src="<?php echo '/hotelix_hotel_management/assets/logo/quotes.png' ?>" alt="quta"
-                                    class="absolute z-0 h-16 left-6 top-6">
-                                </img>
+                            $sql = "SELECT * FROM users WHERE id = ?";
+                            $stmt = $db_conn->prepare($sql);
+                            $stmt->bind_param("i", $userId);
+                            $stmt->execute();
+                            $result = $stmt->get_result();
+                            if ($result->num_rows > 0) {
+                                $user = $result->fetch_assoc();
+                            } else {
+                                echo "User not found.";
+                                exit;
+                            }
+                            // Here, we display each review dynamically
+                            ?>
+                            <div class="w-full border rounded-lg border-blue-400">
+                                <!-- Start Testimonial -->
+                                <div class="overflow-hidden">
+                                    <div class="relative p-5">
+                                        <figure class="relative z-10">
+                                            <blockquote class="p-5 text-lg leading-loose lg:text-xl">
+                                                <p class="line-clamp-4"><?php echo $description; ?></p>
+                                            </blockquote>
+                                            <figcaption class="flex flex-col items-center gap-2 p-5 text-sm text-emerald-500">
+                                                <!-- Rating Display -->
+                                                <span class="flex gap-1 text-amber-400" role="img" aria-label="Rating">
+                                                    <?php
+                                                    // Generate the stars based on the rating
+                                                    for ($i = 1; $i <= 5; $i++) {
+                                                        if ($i <= $rating) {
+                                                            echo '<i class="fa-solid fa-star text-xl"></i>';
+                                                        } else {
+                                                            echo '<i class="fa-regular fa-star text-xl"></i>';
+                                                        }
+                                                    }
+                                                    ?>
+                                                </span>
+                                                <div class="flex items-center gap-4 pt-4 text-sm text-left text-emerald-500">
+                                                    <img src="get_photo.php?id=<?= htmlspecialchars($user['id']); ?>"
+                                                        alt="<?= htmlspecialchars($user['name']); ?>"
+                                                        title="<?= htmlspecialchars($user['name']); ?>"
+                                                        class="w-16 h-16 rounded-full" />
+                                                    <div class="flex flex-col gap-1">
+                                                        <span class="font-bold uppercase"><?php echo $user_name; ?></span>
+                                                        <cite class="not-italic"><a href="#">Software Engineer</a></cite>
+                                                        <p><?php echo $review_time; ?></p>
+                                                    </div>
+                                                </div>
+                                            </figcaption>
+                                        </figure>
+                                        <img src="<?php echo '/hotelix_hotel_management/assets/logo/quotes.png' ?>" alt="quote"
+                                            class="absolute z-0 h-16 left-6 top-6">
+                                        </img>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-
-                    <div class="w-full border rounded-lg border-blue-400">
-                        <!-- Start Testimonial -->
-                        <div class="overflow-hidden">
-                            <div class="relative p-5">
-                                <figure class="relative z-10">
-                                    <blockquote class="p-5 text-lg leading-loose lg:text-xl">
-                                        <p class="line-clamp-4">You can easily communicate with Wind-ui's team for
-                                            support
-                                            through their
-                                            discord
-                                            channel. They are responsive and ultra helpful guys!</p>
-                                    </blockquote>
-                                    <figcaption class="flex flex-col items-center gap-2 p-5 text-sm text-emerald-500">
-                                        <span class="flex gap-1 text-amber-400" role="img"
-                                            aria-label="Rating: 3 out of 5 stars">
-                                            <i class="fa-solid fa-star text-xl"></i>
-                                            <i class="fa-solid fa-star text-xl"></i>
-                                            <i class="fa-solid fa-star text-xl"></i>
-                                            <i class="fa-solid fa-star text-xl"></i>
-                                            <i class="fa-regular fa-star text-xl"></i>
-                                        </span>
-                                        <div class="flex items-center gap-4 pt-4 text-sm text-left text-emerald-500">
-                                            <img src="https://i.pravatar.cc/40?img=7" alt="user name" title="user name"
-                                                width="48" height="48" class="max-w-full rounded-full shrink-0" />
-                                            <div class="flex flex-col gap-1">
-                                                <span class="font-bold uppercase">Arnold Jones</span>
-                                                <cite class="not-italic"><a href="#">Software Engineer</a></cite>
-                                            </div>
-                                        </div>
-                                    </figcaption>
-                                </figure>
-                                <img src="<?php echo '/hotelix_hotel_management/assets/logo/quotes.png' ?>" alt="quta"
-                                    class="absolute z-0 h-16 left-6 top-6">
-                                </img>
-                            </div>
-                        </div>
-                    </div>
-
+                            <?php
+                        }
+                    } else {
+                        echo "<p>No reviews found!</p>";
+                    }
+                    ?>
                 </div>
             </div>
             <!-- Indicators -->
@@ -187,7 +107,7 @@
                         class="block w-2 h-2 transition-colors duration-300 rounded-full opacity-70 ring-1 ring-slate-700 bg-white/20 focus:outline-none"></span></button>
                 <button class="p-4 group" data-glide-dir="=2" aria-label="goto slide 3"><span
                         class="block w-2 h-2 transition-colors duration-300 rounded-full opacity-70 ring-1 ring-slate-700 bg-white/20 focus:outline-none"></span></button>
-                <button class="p-4 group" data-glide-dir="=2" aria-label="goto slide 3"><span
+                <button class="p-4 group" data-glide-dir="=3" aria-label="goto slide 4"><span
                         class="block w-2 h-2 transition-colors duration-300 rounded-full opacity-70 ring-1 ring-slate-700 bg-white/20 focus:outline-none"></span></button>
             </div>
         </div>
@@ -202,7 +122,6 @@
             focusAt: 1,
             animationDuration: 4000,
             autoplay: 4500,
-            autoplay: true,
             rewind: true,
             perView: 3,
             gap: 0,

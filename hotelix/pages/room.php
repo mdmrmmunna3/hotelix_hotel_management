@@ -56,7 +56,7 @@
     $checkinDate = isset($_POST['checkin']) ? $_POST['checkin'] : (isset($_GET['checkin']) ? $_GET['checkin'] : '');
     $checkoutDate = isset($_POST['checkout']) ? $_POST['checkout'] : (isset($_GET['checkout']) ? $_GET['checkout'] : '');
 
-    $getRoomsdata = $db_root->query("
+    $getRoomsdata = $db_conn->query("
     SELECT * 
     FROM rooms 
     WHERE id NOT IN (
@@ -134,7 +134,7 @@
                             <span class='absolute inset-0 bg-blue-500 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-out'></span>
                             <span class='relative z-10'>Book Room</span>
                         </button>";
-    
+
             echo "</form>
             </div>
         </div>"; // End of card
@@ -147,7 +147,7 @@
         <!-- Pagination -->
         <div class="flex justify-center">
             <?php
-            $result = $db_root->query("SELECT COUNT(id) AS total FROM rooms");
+            $result = $db_conn->query("SELECT COUNT(id) AS total FROM rooms");
             $row = $result->fetch_assoc();
             $total_records = $row['total'];
 

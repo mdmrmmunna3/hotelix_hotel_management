@@ -85,7 +85,7 @@ renderBanner($banner['bannerImage'], $banner['title'], $banner['subtitle']);
         include '../../db_root.php';
         $userId = $_SESSION['user_id'];
         $sql = "SELECT * FROM users WHERE id = ?";
-        $stmt = $db_root->prepare($sql);
+        $stmt = $db_conn->prepare($sql);
         $stmt->bind_param("i", $userId);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -147,12 +147,12 @@ renderBanner($banner['bannerImage'], $banner['title'], $banner['subtitle']);
             $sqlInsert = "INSERT INTO bookings (user_id, user_name, user_email, user_number, room_id, room_type, room_number, checkin_date, checkout_date, payment_status, per_amount, total_amount)
                       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-            $stmtInsert = $db_root->prepare($sqlInsert);
+            $stmtInsert = $db_conn->prepare($sqlInsert);
             $stmtInsert->bind_param("isssisssssdd", $userId, $userName, $userEmail, $number, $room_id, $room_type, $room_number, $checkinDate, $checkoutDate, $payment_status, $room_price, $amount);
             if ($stmtInsert->execute()) {
                 // update status after booking 
                 // $UpdateRoomStatus = "UPDATE rooms set av_status = 'booked' where id = ?";
-                // $stmtUpdateRoomStatus = $db_root->prepare("$UpdateRoomStatus");
+                // $stmtUpdateRoomStatus = $db_conn->prepare("$UpdateRoomStatus");
                 // $stmtUpdateRoomStatus->bind_param("i", $room_id);
                 // $stmtUpdateRoomStatus->execute();
         

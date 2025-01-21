@@ -18,12 +18,12 @@ $start_from = intval(($subpage - 1) * $results_per_page);
 if (isset($_GET['deleteId'])) {
     $deletedId = $_GET['deleteId'];
     $isDeleted = "DELETE FROM rooms WHERE id = $deletedId";
-    if (mysqli_query($db_root, $isDeleted)) {
+    if (mysqli_query($db_conn, $isDeleted)) {
         $success_message = "Room deleted successfully!";
         header("location:main_dashboard.php?page=room_list&success_message=$success_message");
         exit; // Ensure the script stops after the redirect
     } else {
-        echo "<p class='text-red-500'>Error: " . mysqli_error($db_root) . "</p>";
+        echo "<p class='text-red-500'>Error: " . mysqli_error($db_conn) . "</p>";
     }
 }
 ?>
@@ -95,7 +95,7 @@ if (isset($_GET['deleteId'])) {
                 <tbody class="bg-[--primary-color]">
                     <?php
                     // Fetch bookings with LIMIT for pagination
-                    $getBookData = $db_root->query("SELECT * FROM bookings ORDER BY booking_date DESC LIMIT $start_from, $results_per_page");
+                    $getBookData = $db_conn->query("SELECT * FROM bookings ORDER BY booking_date DESC LIMIT $start_from, $results_per_page");
                     if ($getBookData->num_rows > 0) {
                         $counter = $start_from + 1; // Adjust counter for the current page
                         while ($row = $getBookData->fetch_assoc()) {
@@ -136,7 +136,7 @@ if (isset($_GET['deleteId'])) {
             <!-- Pagination -->
             <div class="flex justify-center">
                 <?php
-                $result = $db_root->query("SELECT COUNT(id) AS total FROM bookings");
+                $result = $db_conn->query("SELECT COUNT(id) AS total FROM bookings");
                 $row = $result->fetch_assoc();
                 $total_records = $row['total'];
 

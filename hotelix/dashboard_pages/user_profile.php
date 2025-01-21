@@ -49,7 +49,7 @@ if (isset($_POST['updateBtn'])) {
         }
 
         // Prepare the SQL statement to avoid direct input in the query (for security)
-        if ($stmt = mysqli_prepare($db_root, $updateInfo)) {
+        if ($stmt = mysqli_prepare($db_conn, $updateInfo)) {
             if ($uploaded_photo['error'] !== UPLOAD_ERR_NO_FILE) {
                 // Bind the photo content and mime type only if a photo was uploaded
                 mysqli_stmt_bind_param($stmt, 'ss', $photo_content, $mime_type);
@@ -58,7 +58,7 @@ if (isset($_POST['updateBtn'])) {
             if (mysqli_stmt_execute($stmt)) {
                 echo "User info updated!";
             } else {
-                echo "Error: " . mysqli_error($db_root);
+                echo "Error: " . mysqli_error($db_conn);
             }
             mysqli_stmt_close($stmt);
         }

@@ -42,7 +42,7 @@ $user_id = $_SESSION['user_id'];
                 <span class="text-center mb-3"><i class="fa-solid fa-clipboard-list text-4xl"></i></span>
                 <h2 class="text-xl uppercase titel_content">Total Booking List</h2>
                 <?php
-                $getUsers = $db_root->query("SELECT * FROM bookings WHERE user_id = $user_id");
+                $getUsers = $db_conn->query("SELECT * FROM bookings WHERE user_id = $user_id");
                 echo "<p class='text-2xl titel_content'>" . $getUsers->num_rows . ' Bookings' . "</p>";
                 ?>
                 <a href="user_dashboard.php?page=display_booking"

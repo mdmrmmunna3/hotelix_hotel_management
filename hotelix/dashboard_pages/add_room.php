@@ -72,7 +72,7 @@ if (isset($_POST['addRoomBtn'])) {
     }
     if (empty($errors)) {
 
-        $insertRoom = $db_root->prepare("INSERT INTO rooms (room_type, room_number, price_per_night, av_status, room_size, view, floor_number, room_desc,room_mime_type,room_photo,bed_type,capacity) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?)");
+        $insertRoom = $db_conn->prepare("INSERT INTO rooms (room_type, room_number, price_per_night, av_status, room_size, view, floor_number, room_desc,room_mime_type,room_photo,bed_type,capacity) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?)");
 
         $insertRoom->bind_param("ssssssssssss", $room_name, $room_number, $price, $default_status, $room_size, $view, $floor_number, $desription, $mime_type, $photo_content, $bed_type, $capacity);
 
@@ -177,7 +177,7 @@ if (isset($_POST['addRoomBtn'])) {
                         class='w-full py-3 px-4 bg-transparent border-2 border-violet-300 rounded-lg focus:outline-none inStyle text-gray-700'>
                         <option value='' selected>Select Room Type</option>
                         <?php
-                        $getroomType = $db_root->query("select * from add_room_type");
+                        $getroomType = $db_conn->query("select * from add_room_type");
                         while (list($roomId, $room_type) = $getroomType->fetch_row()) {
                             echo "
                                     <option value='$room_type'>$room_type</option>
@@ -208,7 +208,7 @@ if (isset($_POST['addRoomBtn'])) {
                         class='w-full py-3 px-4 bg-transparent border-2 border-violet-300 rounded-lg focus:outline-none inStyle text-gray-700'>
                         <option value='' selected>Select Bed Type</option>
                         <?php
-                        $getbedType = $db_root->query("select * from add_bed_type");
+                        $getbedType = $db_conn->query("select * from add_bed_type");
                         while (list($bedId, $bed_type) = $getbedType->fetch_row()) {
                             echo "
                                     <option value='$bed_type'>$bed_type</option>

@@ -51,7 +51,7 @@ renderBanner($banner['bannerImage'], $banner['title'], $banner['subtitle']);
         include '../../db_root.php';
         $userId = $_SESSION['user_id'];
         $sql = "SELECT * FROM users WHERE id = ?";
-        $stmt = $db_root->prepare($sql);
+        $stmt = $db_conn->prepare($sql);
         $stmt->bind_param("i", $userId);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -77,7 +77,7 @@ renderBanner($banner['bannerImage'], $banner['title'], $banner['subtitle']);
         if (isset($_GET['roomId'])) {
             $roomId = $_GET['roomId'];
             $getroomInfo = "SELECT * FROM rooms WHERE id = $roomId";
-            $query = mysqli_query($db_root, $getroomInfo);
+            $query = mysqli_query($db_conn, $getroomInfo);
             $roomdata = mysqli_fetch_assoc($query);
             echo json_encode($roomdata);
         }

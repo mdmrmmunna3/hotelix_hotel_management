@@ -12,7 +12,7 @@ include 'db_root.php';
 
 $userId = $_SESSION['user_id'];
 $sql = "SELECT * FROM users WHERE id = ?";
-$stmt = $db_root->prepare($sql);
+$stmt = $db_conn->prepare($sql);
 $stmt->bind_param("i", $userId);
 $stmt->execute();
 $result = $stmt->get_result();

@@ -31,7 +31,7 @@ $start_from = intval(($subpage - 1) * $results_per_page);
                 </thead>
                 <tbody class="bg-[--primary-color]">
                     <?php
-                    $getroomsInfo = $db_root->query("SELECT * FROM rooms LIMIT $start_from, $results_per_page");
+                    $getroomsInfo = $db_conn->query("SELECT * FROM rooms LIMIT $start_from, $results_per_page");
                     if ($getroomsInfo->num_rows > 0) {
                         $counter = $start_from + 1;
                         while ($row = $getroomsInfo->fetch_assoc()) {
@@ -65,7 +65,7 @@ $start_from = intval(($subpage - 1) * $results_per_page);
             <!-- Pagination -->
             <div class="flex justify-center">
                 <?php
-                $result = $db_root->query("SELECT COUNT(id) AS total FROM rooms");
+                $result = $db_conn->query("SELECT COUNT(id) AS total FROM rooms");
                 $row = $result->fetch_assoc();
                 $total_records = $row['total'];
 

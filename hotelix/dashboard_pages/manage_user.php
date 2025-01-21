@@ -8,11 +8,11 @@ $start_from = intval(($subpage - 1) * $results_per_page);
 // Handle Role Update
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['updateUserBtn'])) {
-        $updateRole = $db_root->real_escape_string($_POST['role']);
-        $updateId = $db_root->real_escape_string($_POST['userId']);
+        $updateRole = $db_conn->real_escape_string($_POST['role']);
+        $updateId = $db_conn->real_escape_string($_POST['userId']);
 
         $update_user = "UPDATE users SET role = '$updateRole' WHERE id = '$updateId'";
-        if (mysqli_query($db_root, $update_user)) {
+        if (mysqli_query($db_conn, $update_user)) {
             $success_message = "User Update successfully!";
             header("Location:main_dashboard.php?page=manage_user&success_message=" . urlencode($success_message));
             exit();
@@ -23,9 +23,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Handle User Deletion
     if (isset($_POST['deleteUserBtn'])) {
-        $deleteId = $db_root->real_escape_string($_POST['userId']);
+        $deleteId = $db_conn->real_escape_string($_POST['userId']);
 
-        $delete_user = $db_root->query("DELETE FROM users WHERE id = '$deleteId'");
+        $delete_user = $db_conn->query("DELETE FROM users WHERE id = '$deleteId'");
         if ($delete_user) {
             $success_message = "User Deleted successfully!";
             header("Location:main_dashboard.php?page=manage_user&success_message=" . urlencode($success_message));
@@ -92,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </thead>
                 <tbody class="bg-[--primary-color]">
                     <?php
-                    $getUsers = $db_root->query("SELECT * FROM users LIMIT $start_from, $results_per_page");
+                    $getUsers = $db_conn->query("SELECT * FROM users LIMIT $start_from, $results_per_page");
                     if ($getUsers->num_rows > 0) {
                         $counter = $start_from + 1;
                         while ($row = $getUsers->fetch_assoc()) {
@@ -140,7 +140,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <!-- Pagination -->
             <div class="flex justify-center">
                 <?php
-                $result = $db_root->query("SELECT COUNT(id) AS total FROM users");
+                $result = $db_conn->query("SELECT COUNT(id) AS total FROM users");
                 $row = $result->fetch_assoc();
                 $total_records = $row['total'];
 

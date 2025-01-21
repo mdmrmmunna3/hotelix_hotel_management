@@ -45,7 +45,7 @@ $currentDate = date('Y-m-d');
                         LEFT JOIN bookings ON rooms.room_number = bookings.room_number
                         ORDER BY rooms.room_number ASC
                     ";
-                    $result = $db_root->query($query);
+                    $result = $db_conn->query($query);
 
                     if ($result->num_rows > 0) {
                         $counter = 1;
