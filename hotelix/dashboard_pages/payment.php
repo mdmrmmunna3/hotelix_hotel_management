@@ -8,19 +8,18 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 $user_id = $_SESSION['user_id'];
+$sql = "SELECT * FROM users WHERE id = ?";
+$stmt = $db_conn->prepare($sql);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
 
-// Delete Bed Type
-if (isset($_GET['deleteId'])) {
-    $deletedId = $_GET['deleteId'];
-    $isDeleted = "DELETE FROM bookings WHERE id = $deletedId";
-    if (mysqli_query($db_conn, $isDeleted)) {
-        $success_message = "Booking Cancle successfully!";
-        header("location:user_dashboard.php?page=display_booking&success_message=$success_message");
-        exit; // Ensure the script stops after the redirect
-    } else {
-        echo "<p class='text-red-500'>Error: " . mysqli_error($db_conn) . "</p>";
-    }
+if ($result->num_rows > 0) {
+    $user = $result->fetch_assoc();
+} else {
+    echo "User not found.";
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -67,23 +66,64 @@ if (isset($_GET['deleteId'])) {
             </div>
         </div>
     <?php } ?>
+
+    <section class="w-full py-20 min-h-[100vh] titel_content" id="form_container">
+        <form action="" method="post" enctype="multipart/form-data"
+            class="max-w-lg md:mx-auto mx-4 md:p-8 px-4 py-4 rounded-xl hover:shadow-2xl transition-shadow duration-300 main_form">
+
+            <!-- logo -->
+            <div class="flex justify-center mb-3">
+                <img src="assets/hotel_logo/hotelix.png" alt="Hotelix Logo" class="w-[170px]">
+            </div>
+
+            <h2 class="text-2xl font-bold text-center mb-4 uppercase">Payment</h2>
+
+            <!-- Name and Email Fields -->
+            <div class="grid md:grid-cols-2 gap-3 mb-4">
+                <div>
+                    <input type="text" name="u_name" id="u_name" placeholder="Name"
+                        class="py-3 px-4 text-xl bg-transparent border-2 border-violet-300 rounded-lg w-full focus:outline-none"
+                        value="<?php echo htmlspecialchars($user['name']); ?>" readonly required>
+                </div>
+                <div>
+                    <input type="email" name="email" id="email" placeholder="Email Address"
+                        class="py-3 px-4 text-xl bg-transparent border-2 border-violet-300 rounded-lg w-full focus:outline-none"
+                        value="<?php echo htmlspecialchars($user['email']); ?>" readonly required>
+                </div>
+            </div>
+
+            <!-- Review Description -->
+            <div>
+                <textarea name="describ" id="describ" placeholder="Review Description" cols="2" rows="3"
+                    class="py-3 px-4 bg-transparent border-2 border-violet-300 rounded-lg w-full focus:outline-none"></textarea>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="mt-3">
+                <button type="submit" name="paymentBtn" id="payment"
+                    class="relative flex justify-center items-center w-full py-3 border-2 rounded-lg border-blue-500 hover:text-white overflow-hidden group transition-transform duration-500">
+                    <span
+                        class="absolute inset-0 bg-blue-500 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500 ease-out"></span>
+                    <span class="relative z-10 uppercase">Pay</span>
+                </button>
+            </div>
+        </form>
+    </section>
+
     <!-- show details  -->
     <section class="py-20">
         <div class="overflow-x-auto">
             <table class="max-w-lg md:mx-auto mx-4 table table-xs md:table-md mb-20">
-                <caption class="text-3xl mb-3 uppercase titel_content">Booking List</caption>
+                <caption class="text-3xl mb-3 uppercase titel_content">Payment List</caption>
                 <thead>
                     <tr
                         class="bg-[--secondary-color] text-[--primary-color] border-b border-gray-200 text-center text-xs md:text-sm font-thin">
                         <th>SL</th>
+                        <th>Customer Id</th>
                         <th>Room Type</th>
                         <th>Room Number</th>
-                        <th>Booking Date</th>
-                        <th>Checkin Date</th>
-                        <th>Checkout Date</th>
-                        <th>Payment Status</th>
-                        <th>Total Amount</th>
-                        <th>Action</th>
+                        <th>Paid Amount</th>
+                        <th>Reciver Name</th>
                     </tr>
                 </thead>
                 <tbody class="bg-[--primary-color]">
@@ -127,7 +167,7 @@ if (isset($_GET['deleteId'])) {
                             $counter++;
                         }
                     } else {
-                        echo "<tr><td colspan='9' class='text-center'>No Booking found</td></tr>";
+                        echo "<tr><td colspan='9' class='text-center'>No Payment found</td></tr>";
                     }
                     ?>
                 </tbody>

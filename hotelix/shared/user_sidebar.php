@@ -103,7 +103,7 @@ if ($result->num_rows > 0) {
                             class="flex items-center w-full p-2 text-lg font-normal  transition duration-75 rounded-lg group hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 pl-11 ajax-link focus:text-emerald-500">
                             Manage Bookings
                         </a></li>
-                    <li><a href="user_dashboard.php?page=display_booking"
+                    <li><a href="user_dashboard.php?page=payment"
                             class="flex items-center w-full p-2 text-lg font-normal  transition duration-75 rounded-lg group hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 pl-11 ajax-link focus:text-emerald-500">Payment
                             History
                         </a></li>
