@@ -105,6 +105,14 @@ if (isset($_GET['deleteId'])) {
                 </thead>
                 <tbody class="bg-[--primary-color]">
                     <?php
+                    $getPaymentMethod = $db_conn->query("SELECT * FROM payment_history WHERE user_id = $user_id");
+                    if ($getPaymentMethod->num_rows > 0) {
+                        while ($row = $getPaymentMethod->fetch_assoc()) {
+                            $paymentId = $row['id'];
+                            $paymentMethod = $row['payment_method'];
+                        }
+                    }
+
                     // Automatically delete pending bookings older than 2 minutes
                     $currentTimestamp = date('Y-m-d H:i:s');
                     $sql = "SELECT id FROM bookings WHERE payment_status = 'pending' AND TIMESTAMPDIFF(MINUTE, booking_date, NOW()) >= 30";
@@ -146,21 +154,27 @@ if (isset($_GET['deleteId'])) {
                             <td>$booking_date</td>
                             <td>$checkin_date</td>
                             <td>$checkout_date</td>
-                            <td>$payment_status</td>
+                            <td>$payment_status</td> 
                             <td>$total_amount</td>
-                            <td class='flex gap-3'>
-                             <a href='user_dashboard.php?page=payment_history' class='px-3 py-1 rounded-md text-xs md:text-sm border border-blue-500 font-medium hover:text-white hover:bg-blue-500 transition duration-150 flex gap-2 justify-center items-center tooltip' data-tip='Payment'>
-                                    <i class='fa-solid fa-money-check-dollar'></i>
-                                </a>
-                             <a class='px-3 py-1 rounded-md text-xs md:text-sm border border-blue-500 font-medium hover:text-white hover:bg-blue-500 transition duration-150 flex gap-2 justify-center items-center tooltip' data-tip='Invoice' onclick=\"openInvoiceModal($id, '$user_name', '$user_email', '$user_number', '$checkin_date', '$checkout_date', '$booking_date', '$per_nights', '$total_amount', '$room_type', '$room_number')\">
+                            <td class='flex gap-3'>";
+                            if ($payment_status != 'paid') {
+                                echo "<a href='user_dashboard.php?page=payment&bookId=$id' class='px-3 py-1 rounded-md text-xs md:text-sm border border-blue-500 font-medium hover:text-white hover:bg-blue-500 transition duration-150 flex gap-2 justify-center items-center tooltip' data-tip='Payment'>
+                                        <i class='fa-solid fa-money-check-dollar'></i>
+                                      </a>";
+                            }
+                            echo "<a class='px-3 py-1 rounded-md text-xs md:text-sm border border-blue-500 font-medium hover:text-white hover:bg-blue-500 transition duration-150 flex gap-2 justify-center items-center tooltip' data-tip='Invoice' 
+                                      onclick=\"openInvoiceModal($id, '$user_name', '$user_email', '$user_number', '$checkin_date', '$checkout_date', '$booking_date', '$per_nights', '$total_amount', '$room_type', '$room_number')\">
                                     <i class='fa-solid fa-receipt'></i>
-                                </a>
-                             <a href='user_dashboard.php?page=display_booking&deleteId=$id' class='px-3 py-1 rounded-md text-xs md:text-sm border border-red-500 font-medium hover:text-white hover:bg-red-500 transition duration-150 flex gap-2 justify-center items-center tooltip' data-tip='Cancle'>
-                                    <i class='fa-solid fa-store-slash'></i>
-                                </a>
-                            </td>
-                        </tr>
-                    ";
+                                  </a>";
+
+                            if ($payment_status != 'paid') {
+                                echo "<a href='user_dashboard.php?page=display_booking&deleteId=$id' class='px-3 py-1 rounded-md text-xs md:text-sm border border-red-500 font-medium hover:text-white hover:bg-red-500 transition duration-150 flex gap-2 justify-center items-center tooltip' data-tip='Cancel'>
+                                        <i class='fa-solid fa-store-slash'></i>
+                                      </a>";
+                            }
+
+                            // Close the row
+                            echo "</td></tr>";
                             $counter++;
                         }
                     } else {

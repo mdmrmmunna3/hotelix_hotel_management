@@ -20,7 +20,69 @@ if ($result->num_rows > 0) {
     echo "User not found.";
 }
 
+if (isset($_GET['bookId'])) {
+    $paymentId = $_GET['bookId'];
+}
+
+// Fetch booking data for the user
+$getBookData = $db_conn->prepare("SELECT * FROM bookings WHERE id = ?");
+$getBookData->bind_param("i", $paymentId);
+$getBookData->execute();
+$bookResult = $getBookData->get_result();
+if ($bookResult->num_rows > 0) {
+    $booking = $bookResult->fetch_assoc();
+} else {
+    echo "No bookings found.";
+    exit;
+}
+
+$is_admin = $user;
+$receiver_name = "";
+if ($is_admin) {
+    // Fetch admin name from users table
+    $admin_sql = "SELECT name FROM users WHERE role = 'admin' LIMIT 1";
+    $admin_result = $db_conn->query($admin_sql);
+    if ($admin_result->num_rows > 0) {
+        $admin = $admin_result->fetch_assoc();
+        $receiver_name = $admin['name'];
+    }
+}
+
+if (isset($_POST['paymentBtn'])) {
+    $providerId = $_POST['userId'];
+    $providerName = $_POST['u_name'];
+    $providerEmail = $_POST['email'];
+    $room_type = $_POST['room_type'];
+    $room_number = $_POST['room_number'];
+    $paid_total_price = $_POST['total_price'];
+    $payment_method = $_POST['payment_method'];
+    $receiver_name = $_POST['reciver_name'];
+
+    // Insert payment into payment_history
+    $insertPayment = "INSERT INTO payment_history (user_id, name, email, room_type, room_number, paid_amount, payment_method, reciver_name) 
+                      VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    $stmt = $db_conn->prepare($insertPayment);
+    $stmt->bind_param("isssidss", $providerId, $providerName, $providerEmail, $room_type, $room_number, $paid_total_price, $payment_method, $receiver_name);
+
+    if ($stmt->execute()) {
+        // Update booking payment status
+        $updateBooking = "UPDATE bookings SET payment_status = 'paid' WHERE user_id = ? AND room_number = ?";
+        $updateStmt = $db_conn->prepare($updateBooking);
+        $updateStmt->bind_param("ii", $providerId, $room_number);
+
+        if ($updateStmt->execute()) {
+            $success_message = "Payment Paid successfully!";
+            header("location:user_dashboard.php?page=payment&success_message=$success_message");
+            exit;
+        } else {
+            echo "<p class='text-red-500'>Error updating booking: " . $updateStmt->error . "</p>";
+        }
+    } else {
+        echo "<p class='text-red-500'>Error inserting payment: " . $stmt->error . "</p>";
+    }
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,6 +104,10 @@ if ($result->num_rows > 0) {
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../style.css">
     <style>
+        .main_form {
+            box-shadow: rgba(0, 0, 0, 0.45) 0px 2px 8px;
+        }
+
         .toast {
             transition: opacity 2s ease-in-out;
         }
@@ -77,7 +143,7 @@ if ($result->num_rows > 0) {
             </div>
 
             <h2 class="text-2xl font-bold text-center mb-4 uppercase">Payment</h2>
-
+            <input type="hidden" name="userId" id="userId" value="<?php echo htmlspecialchars($user['id']) ?>">
             <!-- Name and Email Fields -->
             <div class="grid md:grid-cols-2 gap-3 mb-4">
                 <div>
@@ -92,10 +158,39 @@ if ($result->num_rows > 0) {
                 </div>
             </div>
 
-            <!-- Review Description -->
+            <div class="grid md:grid-cols-2 gap-3 mb-4">
+                <div>
+                    <input type="text" name="room_type" id="room_type" placeholder="Room Type"
+                        class="py-3 px-4 text-xl bg-transparent border-2 border-violet-300 rounded-lg w-full focus:outline-none"
+                        value="<?php echo htmlspecialchars($booking['room_type']); ?>" readonly required>
+                </div>
+                <div>
+                    <input type="text" name="room_number" id="room_number" placeholder="Room Number"
+                        class="py-3 px-4 text-xl bg-transparent border-2 border-violet-300 rounded-lg w-full focus:outline-none"
+                        value="<?php echo htmlspecialchars($booking['room_number']); ?>" readonly required>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-3 mb-4">
+                <div>
+                    <input type="text" name="total_price" id="total_price" placeholder="Room Total Price"
+                        class="py-3 px-4 text-xl bg-transparent border-2 border-violet-300 rounded-lg w-full focus:outline-none"
+                        value="<?php echo htmlspecialchars($booking['total_amount']); ?>" readonly required>
+                </div>
+                <div>
+                    <input type="text" name="reciver_name" id="reciver_name" placeholder="Receiver Name"
+                        class="py-3 px-4 text-xl bg-transparent border-2 border-violet-300 rounded-lg w-full focus:outline-none"
+                        value="<?php echo htmlspecialchars($receiver_name); ?>" readonly required>
+                </div>
+            </div>
+
             <div>
-                <textarea name="describ" id="describ" placeholder="Review Description" cols="2" rows="3"
-                    class="py-3 px-4 bg-transparent border-2 border-violet-300 rounded-lg w-full focus:outline-none"></textarea>
+                <select name="payment_method" id="payment_method" placeholder="Payment Method"
+                    class="py-3 px-4 text-xl bg-transparent border-2 border-violet-300 rounded-lg w-full focus:outline-none">
+                    <option value="" selected>Choose Payment Method</option>
+                    <option value="ssl">SSL</option>
+                    <option value="paypal">PayPal</option>
+                </select>
             </div>
 
             <!-- Submit Button -->
@@ -111,7 +206,7 @@ if ($result->num_rows > 0) {
     </section>
 
     <!-- show details  -->
-    <section class="py-20">
+    <section class="py-10">
         <div class="overflow-x-auto">
             <table class="max-w-lg md:mx-auto mx-4 table table-xs md:table-md mb-20">
                 <caption class="text-3xl mb-3 uppercase titel_content">Payment List</caption>
@@ -128,40 +223,22 @@ if ($result->num_rows > 0) {
                 </thead>
                 <tbody class="bg-[--primary-color]">
                     <?php
-                    $getBookData = $db_conn->query("SELECT * FROM bookings WHERE user_id = $user_id ORDER BY booking_date DESC");
-                    if ($getBookData->num_rows > 0) {
+                    if ($bookResult->num_rows > 0) {
                         $counter = 1;
-                        while ($row = $getBookData->fetch_assoc()) {
+                        while ($row = $bookResult->fetch_assoc()) {
                             $id = $row['id'];
                             $room_type = $row['room_type'];
                             $room_number = $row['room_number'];
-                            $booking_date = $row['booking_date'];
-                            $checkin_date = $row['checkin_date'];
-                            $checkout_date = $row['checkout_date'];
-                            $payment_status = $row['payment_status'];
-                            $total_amount = $row['amount'];
+                            $total_amount = $row['total_amount'];
 
                             echo "
                         <tr class=' text-xs md:text-sm text-center'>
                             <td>$counter</td>
+                            <td>$id</td>
                             <td>$room_type</td>
                             <td>$room_number</td>
-                            <td>$booking_date</td>
-                            <td>$checkin_date</td>
-                            <td>$checkout_date</td>
-                            <td>$payment_status</td>
-                            <td>$total_amount</td>
-                            <td class='flex gap-3'>
-                             <a href='user_dashboard.php?page=payment_history' class='px-3 py-1 rounded-md text-xs md:text-sm border border-blue-500 font-medium hover:text-white hover:bg-blue-500 transition duration-150 flex gap-2 justify-center items-center tooltip' data-tip='Payment'>
-                                    <i class='fa-solid fa-money-check-dollar'></i>
-                                </a>
-                             <a href='user_dashboard.php?page=payment_history' class='px-3 py-1 rounded-md text-xs md:text-sm border border-blue-500 font-medium hover:text-white hover:bg-blue-500 transition duration-150 flex gap-2 justify-center items-center tooltip' data-tip='Invoice'>
-                                    <i class='fa-solid fa-receipt'></i>
-                                </a>
-                             <a href='user_dashboard.php?page=display_booking&deleteId=$id' class='px-3 py-1 rounded-md text-xs md:text-sm border border-red-500 font-medium hover:text-white hover:bg-red-500 transition duration-150 flex gap-2 justify-center items-center tooltip' data-tip='Cancle'>
-                                    <i class='fa-solid fa-store-slash'></i>
-                                </a>
-                            </td>
+                            <td>$$total_amount</td>
+                            
                         </tr>
                     ";
                             $counter++;
