@@ -1,6 +1,7 @@
 <?php
 require_once "db_root.php";
 $success_message = '';
+$errors = [];
 if (!isset($_SESSION['user_id'])) {
     // Redirect to login page if no user is logged in
     header("Location: auth/login.php");
@@ -57,29 +58,36 @@ if (isset($_POST['paymentBtn'])) {
     $paid_total_price = $_POST['total_price'];
     $payment_method = $_POST['payment_method'];
     $receiver_name = $_POST['reciver_name'];
+    $booking_id = $_POST['booking_id'];
 
-    // Insert payment into payment_history
-    $insertPayment = "INSERT INTO payment_history (user_id, name, email, room_type, room_number, paid_amount, payment_method, reciver_name) 
-                      VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-    $stmt = $db_conn->prepare($insertPayment);
-    $stmt->bind_param("isssidss", $providerId, $providerName, $providerEmail, $room_type, $room_number, $paid_total_price, $payment_method, $receiver_name);
+    if (empty($payment_method)) {
+        $errors['payment_method'] = "Payment Method are required.";
+    }
+    if (empty($errors)) {
+        // Insert payment into payment_history
+        $insertPayment = "INSERT INTO payment_history (booking_id, user_id, name, email, room_type, room_number, paid_amount, payment_method, reciver_name) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?,?)";
+        $stmt = $db_conn->prepare($insertPayment);
+        $stmt->bind_param("iisssidss", $booking_id, $providerId, $providerName, $providerEmail, $room_type, $room_number, $paid_total_price, $payment_method, $receiver_name);
 
-    if ($stmt->execute()) {
+        if ($stmt->execute()) {
         // Update booking payment status
         $updateBooking = "UPDATE bookings SET payment_status = 'paid' WHERE user_id = ? AND room_number = ?";
         $updateStmt = $db_conn->prepare($updateBooking);
         $updateStmt->bind_param("ii", $providerId, $room_number);
 
         if ($updateStmt->execute()) {
-            $success_message = "Payment Paid successfully!";
-            header("location:user_dashboard.php?page=payment&success_message=$success_message");
-            exit;
+        $success_message = "Payment Paid successfully!";
+        header("location:user_dashboard.php?page=payment_history&success_message=$success_message");
+        exit;
         } else {
-            echo "<p class='text-red-500'>Error updating booking: " . $updateStmt->error . "</p>";
+        echo "<p class='text-red-500'>Error updating booking: " . $updateStmt->error . "</p>";
         }
-    } else {
+        } else {
         echo "<p class='text-red-500'>Error inserting payment: " . $stmt->error . "</p>";
+        }
     }
+    
 }
 ?>
 
@@ -144,6 +152,7 @@ if (isset($_POST['paymentBtn'])) {
 
             <h2 class="text-2xl font-bold text-center mb-4 uppercase">Payment</h2>
             <input type="hidden" name="userId" id="userId" value="<?php echo htmlspecialchars($user['id']) ?>">
+            <input type="hidden" name="booking_id" id="booking_id" value="<?php echo htmlspecialchars($booking['id']) ?>">
             <!-- Name and Email Fields -->
             <div class="grid md:grid-cols-2 gap-3 mb-4">
                 <div>
@@ -188,9 +197,10 @@ if (isset($_POST['paymentBtn'])) {
                 <select name="payment_method" id="payment_method" placeholder="Payment Method"
                     class="py-3 px-4 text-xl bg-transparent border-2 border-violet-300 rounded-lg w-full focus:outline-none">
                     <option value="" selected>Choose Payment Method</option>
-                    <option value="ssl">SSL</option>
-                    <option value="paypal">PayPal</option>
+                    <option value="SSL">SSL</option>
+                    <option value="PayPal">PayPal</option>
                 </select>
+                <small class="text-red-500"><?= $errors['payment_method'] ?? '' ?></small>
             </div>
 
             <!-- Submit Button -->
@@ -205,52 +215,7 @@ if (isset($_POST['paymentBtn'])) {
         </form>
     </section>
 
-    <!-- show details  -->
-    <section class="py-10">
-        <div class="overflow-x-auto">
-            <table class="max-w-lg md:mx-auto mx-4 table table-xs md:table-md mb-20">
-                <caption class="text-3xl mb-3 uppercase titel_content">Payment List</caption>
-                <thead>
-                    <tr
-                        class="bg-[--secondary-color] text-[--primary-color] border-b border-gray-200 text-center text-xs md:text-sm font-thin">
-                        <th>SL</th>
-                        <th>Customer Id</th>
-                        <th>Room Type</th>
-                        <th>Room Number</th>
-                        <th>Paid Amount</th>
-                        <th>Reciver Name</th>
-                    </tr>
-                </thead>
-                <tbody class="bg-[--primary-color]">
-                    <?php
-                    if ($bookResult->num_rows > 0) {
-                        $counter = 1;
-                        while ($row = $bookResult->fetch_assoc()) {
-                            $id = $row['id'];
-                            $room_type = $row['room_type'];
-                            $room_number = $row['room_number'];
-                            $total_amount = $row['total_amount'];
-
-                            echo "
-                        <tr class=' text-xs md:text-sm text-center'>
-                            <td>$counter</td>
-                            <td>$id</td>
-                            <td>$room_type</td>
-                            <td>$room_number</td>
-                            <td>$$total_amount</td>
-                            
-                        </tr>
-                    ";
-                            $counter++;
-                        }
-                    } else {
-                        echo "<tr><td colspan='9' class='text-center'>No Payment found</td></tr>";
-                    }
-                    ?>
-                </tbody>
-            </table>
-        </div>
-    </section>
+   
     <script>
         // Automatically hide the success message after 2 seconds
         setTimeout(function () {
