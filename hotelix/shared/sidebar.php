@@ -1,8 +1,10 @@
 <?php
 ob_start();
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 if (!isset($_SESSION['user_id'])) {
-    header("Location: auth/login.php"); // Redirect to login page
+    header("Location: auth/login.php");
     exit;
 }
 require_once 'db_root.php';
@@ -148,7 +150,7 @@ if ($result->num_rows > 0) {
                 </ul>
 
                 <!-- transition  -->
-                <a href="main_dashboard.php?page=hotel"
+                <a href="main_dashboard.php?page=transaction"
                     class="block py-3 px-4 rounded transition-colors hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 text-lg ajax-link focus:text-emerald-500">
                     <i class="fa-solid fa-money-check-dollar"></i>
                     Transaction
@@ -289,7 +291,7 @@ if ($result->num_rows > 0) {
                 </ul>
 
                 <!-- transition  -->
-                <a href="main_dashboard.php?page=hotel"
+                <a href="main_dashboard.php?page=transaction"
                     class="block py-3 px-4 rounded transition-colors hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 text-lg ajax-link focus:text-emerald-500">
                     <i class="fa-solid fa-money-check-dollar"></i>
                     Transaction
@@ -347,3 +349,7 @@ if ($result->num_rows > 0) {
 </body>
 
 </html>
+
+<?php
+ob_end_flush();
+?>

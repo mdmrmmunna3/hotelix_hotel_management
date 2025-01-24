@@ -1,5 +1,13 @@
 <?php
 require_once "db_root.php";
+if (!isset($_SESSION['user_id'])) {
+  // Redirect to login page if no user is logged in
+  header("Location: auth/login.php");
+  exit;
+}
+
+
+$user = $_SESSION['user'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,12 +35,13 @@ require_once "db_root.php";
 </head>
 
 <body>
-  <section class="py-16">
-    <h3 class="titel_content text-3xl mb-2">Hello Dashboard!</h3>
-    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+  <section class="py-20">
+    <h3 class="titel_content text-3xl mb-2">Hello <?= $user['name'] ?></h3>
+    <h3 class="titel_content text-3xl mb-2">Welcome to Admin Dashboard!</h3>
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 titel_content">
       <div class="card border border-blue-500 p-4 rounded-lg text-center">
         <span class="text-center mb-3"><i class="fa-solid fa-users text-4xl"></i></span>
-        <h2 class="text-xl uppercase">Total Register Users</h2>
+        <h2 class="text-xl uppercase">Total Users</h2>
         <?php
         $getUsers = $db_conn->query("select * from users");
         echo "<p class='text-2xl'>" . $getUsers->num_rows . ' Users' . "</p>";
@@ -66,8 +75,15 @@ require_once "db_root.php";
 
       <div class="card border border-blue-500 p-4 rounded-lg text-center">
         <span class="text-center mb-3"><i class="fa-solid fa-hand-holding-dollar text-4xl"></i></span>
-        <h2 class="text-xl uppercase">Total Amount</h2>
-        <p class="text-2xl font-bold">$2,258</p>
+        <h2 class="text-xl uppercase">Total Paid Amount</h2>
+        <?php
+        $sum = 0;
+        $getPaymentData = $db_conn->query("SELECT paid_amount FROM payment_history");
+        while ($row = $getPaymentData->fetch_assoc()) {
+          $sum += $row['paid_amount'];
+        }
+        echo "<p class='text-2xl titel_content'>" . '$' . $sum . "</p>";
+        ?>
         <a href=""
           class="border border-blue-600 text-center rounded-md py-3 mt-3 font-medium hover:bg-blue-600 hover:text-white transition-all">View
           More</a>

@@ -1,8 +1,8 @@
 <?php
-// Ensure no whitespace before this line
 ob_start();
-session_start();
-
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 if (!isset($_SESSION['user_id'])) {
     header("Location: auth/login.php"); // Redirect to login page
     exit;
@@ -107,7 +107,8 @@ if ($result->num_rows > 0) {
                             class="flex items-center w-full p-2 text-lg font-normal  transition duration-75 rounded-lg group hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 pl-11 ajax-link focus:text-emerald-500">Payment
                         </a></li>
                     <li><a href="user_dashboard.php?page=payment_history"
-                            class="flex items-center w-full p-2 text-lg font-normal  transition duration-75 rounded-lg group hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 pl-11 ajax-link focus:text-emerald-500">Payment History
+                            class="flex items-center w-full p-2 text-lg font-normal  transition duration-75 rounded-lg group hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 pl-11 ajax-link focus:text-emerald-500">Payment
+                            History
                         </a></li>
                 </ul>
 
@@ -229,3 +230,7 @@ if ($result->num_rows > 0) {
 </body>
 
 </html>
+
+<?php
+ob_end_flush();
+?>

@@ -31,7 +31,8 @@
             </main>
         </div>
         <div class="flex items-center justify-center bg-gray-800 text-white py-5">
-            <span>Copyright © <?php echo date('Y'); ?> Hotelix. All Rights Reserved.</span>
+            <span>Copyright © <?php echo date('Y'); ?> Hotelix. All Rights Reserved.Develop by Md Mustafijur Rahman
+                Munna</span>
         </div>
     </section>
     <script>

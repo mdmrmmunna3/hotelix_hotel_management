@@ -110,8 +110,9 @@
                 <span class="relative z-10">Contact</span>
             </a>
         </div>
-        <div class="flex items-center md:justify-end justify-center">
-            <span>Copyright © <?php echo date('Y'); ?> Hotelix. All Rights Reserved.</span>
+        <div class="flex items-center md:justify-end justify-center titel_content">
+            <span>Copyright © <?php echo date('Y'); ?> Hotelix. All Rights Reserved. Develop by Md Mustafijur Rahman
+                Munna</span>
         </div>
     </div>
 </body>

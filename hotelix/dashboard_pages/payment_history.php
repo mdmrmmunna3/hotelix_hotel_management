@@ -68,8 +68,8 @@ $user_id = $_SESSION['user_id'];
             </div>
         </div>
     <?php } ?>
-     <!-- show details  -->
-     <section class="py-20">
+    <!-- show details  -->
+    <section class="py-20">
         <div class="overflow-x-auto">
             <table class="max-w-lg md:mx-auto mx-4 table table-xs md:table-md mb-20">
                 <caption class="text-3xl mb-3 uppercase titel_content">Payment List</caption>

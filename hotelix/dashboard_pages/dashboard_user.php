@@ -35,7 +35,8 @@ $user_id = $_SESSION['user_id'];
 
 <body>
     <section class="py-16">
-        <h3 class="titel_content text-3xl mb-2">Hello Dashboard!</h3>
+        <h3 class="titel_content text-3xl mb-2">Hello <?= $user['name'] ?></h3>
+        <h3 class="titel_content text-3xl mb-2">Welcome to Dashboard!</h3>
         <div class="grid md:grid-cols-2 gap-4">
 
             <div class="card border border-blue-500 p-4 rounded-lg text-center">
@@ -52,9 +53,12 @@ $user_id = $_SESSION['user_id'];
 
             <div class="card border border-blue-500 p-4 rounded-lg text-center">
                 <span class="text-center mb-3"><i class="fa-solid fa-hand-holding-dollar text-4xl"></i></span>
-                <h2 class="text-xl uppercase titel_content">Total Amount</h2>
-                <p class="text-2xl font-bold titel_content">$2,258</p>
-                <a href=""
+                <h2 class="text-xl uppercase titel_content">Payment Hitory</h2>
+                <?php
+                $getPaymentData = $db_conn->query("SELECT * FROM payment_history WHERE user_id = $user_id");
+                echo "<p class='text-2xl titel_content'>" . $getPaymentData->num_rows . ' Payment' . "</p>";
+                ?>
+                <a href="user_dashboard.php?page=payment_history"
                     class="border border-blue-600 text-center rounded-md py-3 mt-3 font-medium hover:bg-blue-600 hover:text-white transition-all titel_content">View
                     More</a>
             </div>

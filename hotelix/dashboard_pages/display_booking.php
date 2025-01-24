@@ -1,16 +1,16 @@
 <?php
+ob_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 require_once "db_root.php";
 $success_message = '';
-
 if (!isset($_SESSION['user_id'])) {
     // Redirect to login page if no user is logged in
     header("Location: auth/login.php");
     exit;
 }
-
-
 $user_id = $_SESSION['user_id'];
-
 // Delete Bed Type
 if (isset($_GET['deleteId'])) {
     $deletedId = $_GET['deleteId'];
@@ -173,7 +173,7 @@ if (isset($_GET['deleteId'])) {
                                         <i class='fa-solid fa-money-check-dollar'></i>
                                       </a>";
                             }
-                                echo "<a class='px-3 py-1 rounded-md text-xs md:text-sm border border-blue-500 font-medium hover:text-white hover:bg-blue-500 transition duration-150 flex gap-2 justify-center items-center tooltip' data-tip='Invoice' 
+                            echo "<a class='px-3 py-1 rounded-md text-xs md:text-sm border border-blue-500 font-medium hover:text-white hover:bg-blue-500 transition duration-150 flex gap-2 justify-center items-center tooltip' data-tip='Invoice' 
                                 onclick=\"openInvoiceModal($id, '$user_name', '$user_email', '$user_number', '$checkin_date', '$checkout_date', '$booking_date', '$per_nights', '$total_amount', '$room_type', '$room_number', '$paymentMethod')\">
                                         <i class='fa-solid fa-receipt'></i>
                                         </a>";
@@ -336,8 +336,11 @@ if (isset($_GET['deleteId'])) {
                                         class="rounded-sm w-full bg-gray-50 py-1 text-black" readonly>
                                 </div>
                                 <div class="mb-4">
-                                    <label for="payment_met" class="flex justify-start titel_content text-gray-600">Payment Method</label>
-                                    <input type="text" name="payment_method" id="payment_method" placeholder="Payment Method" class="rounded-sm w-full bg-gray-50 py-1 text-black" readonly>
+                                    <label for="payment_met"
+                                        class="flex justify-start titel_content text-gray-600">Payment Method</label>
+                                    <input type="text" name="payment_method" id="payment_method"
+                                        placeholder="Payment Method"
+                                        class="rounded-sm w-full bg-gray-50 py-1 text-black" readonly>
                                 </div>
 
 
@@ -366,7 +369,7 @@ if (isset($_GET['deleteId'])) {
             document.body.classList.remove('overflow-y-hidden');
         }
 
-        function openInvoiceModal(bookingId, userName, userEmail, userPhone, checkinDate, checkoutDate, bookingDate, perNights, totalAmount, room_type, room_number,paymentMethod) {
+        function openInvoiceModal(bookingId, userName, userEmail, userPhone, checkinDate, checkoutDate, bookingDate, perNights, totalAmount, room_type, room_number, paymentMethod) {
             // console.log(paymentMethod)
             document.getElementById('bookingId').value = bookingId;
             document.getElementById('g_name').value = userName;
@@ -424,3 +427,6 @@ if (isset($_GET['deleteId'])) {
 </body>
 
 </html>
+<?php
+ob_end_flush();
+?>

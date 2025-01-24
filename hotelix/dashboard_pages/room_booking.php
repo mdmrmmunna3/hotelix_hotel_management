@@ -155,7 +155,13 @@ renderBanner($banner['bannerImage'], $banner['title'], $banner['subtitle']);
                 // $stmtUpdateRoomStatus = $db_conn->prepare("$UpdateRoomStatus");
                 // $stmtUpdateRoomStatus->bind_param("i", $room_id);
                 // $stmtUpdateRoomStatus->execute();
-        
+                $status = 'unread';
+                $message = "New booking for room: $room_number, Type: $room_type, from $userName, Email: $userEmail.";
+                $sqlNotifyAdmin = "INSERT INTO notifications (user_id, message,status) VALUES (?,?,?)";
+                $stmtNotify = $db_conn->prepare($sqlNotifyAdmin);
+                $stmtNotify->bind_param("iss", $userId, $message, $status);
+                $stmtNotify->execute();
+
                 $success_message = "Room Booking successfully!";
                 header('location: ../../user_dashboard.php?page=display_booking&success_message=' . urlencode($success_message));
             } else {

@@ -71,23 +71,23 @@ if (isset($_POST['paymentBtn'])) {
         $stmt->bind_param("iisssidss", $booking_id, $providerId, $providerName, $providerEmail, $room_type, $room_number, $paid_total_price, $payment_method, $receiver_name);
 
         if ($stmt->execute()) {
-        // Update booking payment status
-        $updateBooking = "UPDATE bookings SET payment_status = 'paid' WHERE user_id = ? AND room_number = ?";
-        $updateStmt = $db_conn->prepare($updateBooking);
-        $updateStmt->bind_param("ii", $providerId, $room_number);
+            // Update booking payment status
+            $updateBooking = "UPDATE bookings SET payment_status = 'paid' WHERE user_id = ? AND room_number = ?";
+            $updateStmt = $db_conn->prepare($updateBooking);
+            $updateStmt->bind_param("ii", $providerId, $room_number);
 
-        if ($updateStmt->execute()) {
-        $success_message = "Payment Paid successfully!";
-        header("location:user_dashboard.php?page=payment_history&success_message=$success_message");
-        exit;
+            if ($updateStmt->execute()) {
+                $success_message = "Payment Paid successfully!";
+                header("location:user_dashboard.php?page=payment_history&success_message=$success_message");
+                exit;
+            } else {
+                echo "<p class='text-red-500'>Error updating booking: " . $updateStmt->error . "</p>";
+            }
         } else {
-        echo "<p class='text-red-500'>Error updating booking: " . $updateStmt->error . "</p>";
-        }
-        } else {
-        echo "<p class='text-red-500'>Error inserting payment: " . $stmt->error . "</p>";
+            echo "<p class='text-red-500'>Error inserting payment: " . $stmt->error . "</p>";
         }
     }
-    
+
 }
 ?>
 
@@ -152,7 +152,8 @@ if (isset($_POST['paymentBtn'])) {
 
             <h2 class="text-2xl font-bold text-center mb-4 uppercase">Payment</h2>
             <input type="hidden" name="userId" id="userId" value="<?php echo htmlspecialchars($user['id']) ?>">
-            <input type="hidden" name="booking_id" id="booking_id" value="<?php echo htmlspecialchars($booking['id']) ?>">
+            <input type="hidden" name="booking_id" id="booking_id"
+                value="<?php echo htmlspecialchars($booking['id']) ?>">
             <!-- Name and Email Fields -->
             <div class="grid md:grid-cols-2 gap-3 mb-4">
                 <div>
@@ -215,7 +216,7 @@ if (isset($_POST['paymentBtn'])) {
         </form>
     </section>
 
-   
+
     <script>
         // Automatically hide the success message after 2 seconds
         setTimeout(function () {
