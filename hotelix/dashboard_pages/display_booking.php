@@ -110,19 +110,23 @@ if (isset($_GET['deleteId'])) {
 
                     // Automatically delete pending bookings older than 2 minutes
                     $currentTimestamp = date('Y-m-d H:i:s');
-                    $sql = "SELECT id FROM bookings WHERE payment_status = 'pending' AND TIMESTAMPDIFF(MINUTE, booking_date, NOW()) >= 30";
+                    $sql = "SELECT id FROM bookings WHERE payment_status = 'pending' AND TIMESTAMPDIFF(MINUTE, booking_date, NOW()) >= 2";
                     $stmt = $db_conn->prepare($sql);
                     $stmt->execute();
                     $result = $stmt->get_result();
                     $paymentMethod = '';
                     while ($row = $result->fetch_assoc()) {
                         $bookingId = $row['id'];
-                        $paymentStatus = $row['payment_status'];
+                        // $paymentStatus = $row['payment_status'];
+                        if (!$row['payment_status']) {
+                            $row['payment_status'] = '';
+                        }
                         // Delete the booking after 2 minutes if not paid
                         $deleteBookingSql = "DELETE FROM bookings WHERE id = ?";
                         $deleteStmt = $db_conn->prepare($deleteBookingSql);
                         $deleteStmt->bind_param("i", $bookingId);
                         $deleteStmt->execute();
+
 
                     }
 

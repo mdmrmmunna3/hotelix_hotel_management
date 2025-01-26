@@ -108,7 +108,7 @@ if (isset($_GET['notification_id'])) {
 
             <?php if ($is_admin): ?>
                 <details class="dropdown">
-                    <summary class="btn bg-transparent border-0 hover:bg-transparent m-1">
+                    <summary class="btn bg-transparent border-none hover:bg-transparent m-1">
                         <a class="text-[--secondary-color]">
                             <i class="fas fa-bell text-xl"></i>
                             <span id="notification-count"

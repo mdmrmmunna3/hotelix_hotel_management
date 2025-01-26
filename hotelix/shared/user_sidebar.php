@@ -55,7 +55,7 @@ if ($result->num_rows > 0) {
 
 <body>
     <section>
-        <div class=" p-4 h-screen hidden bg-[--primary-color] lg:block w-64 mt-18 sidebar_main pt-16">
+        <div class=" p-4 h-full hidden bg-[--primary-color] lg:block w-64 mt-18 sidebar_main pt-16">
             <div class="flex flex-col items-center gap-4 p-6 border-b ">
                 <div class="shrink-0">
                     <a href="user_dashboard.php?page=user_profile"

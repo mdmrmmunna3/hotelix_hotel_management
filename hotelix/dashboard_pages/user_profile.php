@@ -1,6 +1,7 @@
 <?php
 require_once('hotelix/shared/get_indi_data.php');
 $errors = [];
+$success_message = '';
 if (isset($_POST['updateBtn'])) {
     $name = $_POST['name'];
     $email = $_POST['email'];
@@ -41,11 +42,13 @@ if (isset($_POST['updateBtn'])) {
         if ($uploaded_photo['error'] === UPLOAD_ERR_NO_FILE) {
             // If no new photo was uploaded, exclude photo and mime_type from the query
             $updateInfo = "UPDATE users SET name = '$name', email = '$email', phone = '$phone' WHERE id = '$userId'";
-            header('location:user_dashboard.php?page=user_profile');
+            $success_message = "Profile Update successfully!";
+            header("location:user_dashboard.php?page=user_profile&success_message=$success_message");
         } else {
             // If a photo was uploaded, include photo and mime_type in the query
             $updateInfo = "UPDATE users SET name = '$name', email = '$email', phone = '$phone', photo = ?, mime_type = ? WHERE id = '$userId'";
-            header('location:user_dashboard.php?page=user_profile');
+            $success_message = "Profile Update successfully!";
+            header("location:user_dashboard.php?page=user_profile&success_message=$success_message");
         }
 
         // Prepare the SQL statement to avoid direct input in the query (for security)
@@ -74,6 +77,16 @@ if (isset($_POST['updateBtn'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Profile</title>
+    <!-- Tailwind CSS plugin CDN link (DaisyUI) -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui/dist/full.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- Font Awesome link -->
+    <script src="https://kit.fontawesome.com/9ce82b2c02.js" crossorigin="anonymous"></script>
+    <!-- Tailwind CSS CDN link -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Swiper CDN link CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
     <style>
         .main_form {
             box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -85,10 +98,31 @@ if (isset($_POST['updateBtn'])) {
             border-image: linear-gradient(to right, #3b82f6, #9333ea) 1;
             border-radius: 5px;
         }
+
+        .toast {
+            transition: opacity 2s ease-in-out;
+        }
+
+        .toast-hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .toast-visible {
+            opacity: 1;
+            visibility: visible;
+        }
     </style>
 </head>
 
 <body>
+    <?php if (isset($_GET['success_message'])) { ?>
+        <div id="successMessage" class="toast toast-top toast-center toast-visible z-30">
+            <div class="alert alert-success">
+                <span class="text-white"><?= htmlspecialchars($_GET['success_message']) ?></span>
+            </div>
+        </div>
+    <?php } ?>
     <section class="pt-20">
 
         <form action="" method="post" enctype="multipart/form-data"
@@ -139,6 +173,17 @@ if (isset($_POST['updateBtn'])) {
             </div>
         </form>
     </section>
+
+    <script>
+        // Automatically hide the success message after 2 seconds
+        setTimeout(function () {
+            const successMessage = document.getElementById('successMessage');
+            if (successMessage) {
+                successMessage.classList.remove('toast-visible');
+                successMessage.classList.add('toast-hidden');
+            }
+        }, 2000);
+    </script>
 </body>
 
 </html>
