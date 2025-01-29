@@ -143,6 +143,9 @@ if ($result->num_rows > 0) {
                 <ul id="dropdown-room-book" class="hidden py-2 space-y-2 ">
                     <li><a href="main_dashboard.php?page=all_booking_list"
                             class="flex items-center w-full p-2 text-lg font-normal  transition duration-75 rounded-lg group hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 pl-11 ajax-link focus:text-emerald-500">Booking
+                            List</a></li>
+                    <li><a href="main_dashboard.php?page=monthly_booking"
+                            class="flex items-center w-full p-2 text-lg font-normal  transition duration-75 rounded-lg group hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 pl-11 ajax-link focus:text-emerald-500">Booking
                             Report</a></li>
                     <li><a href="main_dashboard.php?page=room_status"
                             class="flex items-center w-full p-2 text-lg font-normal  transition duration-75 rounded-lg group hover:text-emerald-500 hover:bg-emerald-50 focus:bg-emerald-50 aria-[current=page]:text-emerald-500 aria-[current=page]:bg-emerald-50 pl-11 ajax-link focus:text-emerald-500">Room
